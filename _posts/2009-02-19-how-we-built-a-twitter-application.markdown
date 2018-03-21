@@ -2,7 +2,7 @@
 layout: post
 title:  "How we built a Twitter Application"
 date:   2009-02-19 13:50:52+05:30
-categories: web2.0
+tags: web2.0
 author: lakshman
 ---
 Twitter, just like many other Web2.0 sites, has an excellent API. So much so, writing a twitter app is considered to be "Hello World" of Web2.0 Programming.

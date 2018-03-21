@@ -2,7 +2,7 @@
 layout: post
 title:  "Popularising Django - Part 2"
 date:   2008-05-12 12:33:21+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: shabda
 ---
 If you would have read my [Popularizing Django](http://www.42topics.com/blog/2008/05/popularizing-django-or-reusable-apps-considered-harmful/) post, you might know that I consider building a killer **packaged** app to be the best way to popularize Django. This is a post about what that app must be.

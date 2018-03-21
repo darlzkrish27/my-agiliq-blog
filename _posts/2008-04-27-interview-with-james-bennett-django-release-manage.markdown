@@ -2,7 +2,7 @@
 layout: post
 title:  "Interview with James Bennett - Django release manager"
 date:   2008-04-27 11:54:11+05:30
-categories: interviews
+tags: interviews
 author: shabda
 ---
 <img src="http://uswaretech.com/blog/wp-content/uploads/2008/04/james_photo-20080210.jpg" alt="" title="james_photo-20080210" width="250" height="188" class="frame right" />

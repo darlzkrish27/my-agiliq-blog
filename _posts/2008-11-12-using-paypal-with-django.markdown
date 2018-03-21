@@ -2,7 +2,7 @@
 layout: post
 title:  "Using Paypal with Django"
 date:   2008-11-12 01:40:22+05:30
-categories: paypal
+tags: paypal
 author: shabda
 ---
 Paypal has a comprehensive API to use their services programatically. The ExpressCheckout API allows you to get the user's details and then process the payments on your servers. They include a SOAP

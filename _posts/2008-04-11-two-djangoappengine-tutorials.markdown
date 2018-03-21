@@ -2,7 +2,6 @@
 layout: post
 title:  "Two Django+Appengine Tutorials"
 date:   2008-04-11 01:06:13+05:30
-categories: python
 tags:	python
 author: shabda
 ---
