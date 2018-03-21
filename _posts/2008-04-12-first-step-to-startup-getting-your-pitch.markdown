@@ -3,6 +3,7 @@ layout: post
 title:  "First step to startup - Getting your pitch"
 date:   2008-04-12 12:41:54+05:30
 categories: startup
+tags:	startup
 author: shabda
 ---
 With launch of Google Appengine, there has never been a better time to start a startup. Let not the lack of a business plan or a pitch hold you back. Go to our <a href="http://startuppitch.appspot.com/">web 2.0 startup pitch generator</a>, and get your own, custom, startup pitch. Hurry only <acronym title="len(plangen.adjectives) * len(plangen.topics) * len(plangen.products) * len(plangen.leverages)">24192</acronym> available.
