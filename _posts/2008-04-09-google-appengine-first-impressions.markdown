@@ -4,6 +4,7 @@ title:  "Google Appengine - First Impressions"
 date:   2008-04-09 14:32:57+05:30
 tags:	python
 categories: python
+tags: python
 author: shabda
 ---
 Google launched their EC2 competitor, Appengine yesterday, and all hell broke loose. And in about 24 hours, <a href="http://groups.google.com/group/google-appengine/browse_thread/thread/c5bf4ab38d93910d">the 10,000 accounts were used up</a>. Currently it is tied to only working with python, and Django 0.96.1 works out of the box.
