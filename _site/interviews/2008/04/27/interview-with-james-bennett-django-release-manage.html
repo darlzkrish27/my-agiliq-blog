@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Interview with James Bennett - Django release manager | Agiliq Blogs</title>
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Interview with James Bennett - Django release manager" />
@@ -18,37 +20,837 @@
 <script type="application/ld+json">
 {"description":"James Bennett is the release manager of Django, and a long time contributor. He works on Ellington, a CMS designed for news organizations. His book, Practical Django Projects, is being published by Apress, and is scheduled to hit bookshelves in June 2008. He graciously agreed to be interviewed at the 42topics.com blog. His blog, The B-List, can be found here. Shabda: Would you tell something about yourself, how did you get started with Django, and what other OSS projects are you involved with? James: I got into Django fairly soon after the initial public release; I’d been doing PHP and Perl work (mostly Textpattern on the PHP side, Scoop on the Perl side), and I was working on teaching myself Ruby and Rails because it looked interesting. But I’d always liked Python; it was just that there weren’t a whole lot of good options for Python web development at that point. You could do Zope, or you could do Twisted, but they both had pretty steep learning curves when compared to the type of work I was doing, so it just wasn’t worth it. Django changed that; I think I did the tutorial the day it was released, and I just fell in love. These days most of my open-source time is devoted to Django, and to various Django-based apps I’ve written and released. Back in the day I used to do the occasional bit of PHP hacking, and I wrote some plugins for blogging engines, but none of that stuff’s maintained anymore. Shabda: What are your responsibilities as the release manager of Django? Who are the other core contributors of Django, and what are their current areas of focus? James: My responsibility is largely bureaucracy. Within the project, I keep an eye on the various branches and their progress, try to stay on top of active/problem areas in the ticket tracker, and maintain a list of things that have to happen before 1.0. Outside the project itself, I also stay in touch with people who are distributing Django – Linux distros which package it, etc. – and watch their Django-related bug reports. When there’s a security fix, I also send out an advance notice to them that we’re going to roll a release, and do the initial disclosure so they have some lead time to respond to that. Outside of that, I also contribute to the documentation, as well as the occasional code patch, and I maintain the 0.91-bugfixes branch, which provides legacy support and security updates for some of the really ancient Django installs out there (our policy is to support the current release and two prior releases with security updates, which means 0.91, 0.95 and 0.96 right now). The rest of the core team is just people everybody knows if they watch the developers’ list or the Trac timeline: Adrian and Jacob are the lead guys, obviously. Then there’s Malcolm, who you interviewed the other day, and who’s carved out a pretty big niche for himself: he did the bulk of the Unicode work and he’s doing queryset-refactor, he does a lot of maintenance on the i18n system, and he somehow still finds time to have a day job. I don’t know how he does that. Then there’s Russell Keith-Magee, (russelm in Trac), who’s contributed all sorts of useful stuff. He’s the go-to guy for testing and serialization, and just an all-around brilliant guy who fixes things left and right. Gary Wilson and Joseph Kocherhans are also both big names you’ll recognize from commit messages; Joseph used to work at the next desk over at World Online, but now he’s up in Chicago with Adrian, working on EveryBlock. He’s done a lot of the grunt work on newforms and on laying groundwork for newforms-admin. Ian Kelly and Matt Boersma keep our Oracle support working, and do an amazing job of helping to track down and solve obscure problems with that. And rounding out the core commit bits are Simon Willison and Luke Plant, who aren’t as active these days but can still be seen popping up every so often. Out on the branches, we’ve had a lot of work done on newforms-admin lately by Brian Rosner, who’s been stepping up and helping to really get that sorted out, and there’s been a lot of unsung UI work by Christian Metts, who’s a designer at World Online but also a not-bad JavaScript programmer and can flaunt some Python when he feels like it. And then there’s the “gis” branch, GeoDjango, which is adding support for GIS – spatial querying – to the Django ORM. Justin Bronn and Jeremy Dunck really kick-started that, Justin gave a nice demo of some of their work at PyCon this year. And recently we’ve also been giving commit access to some of the translators, so they don’t have to go through as much bureaucracy to submit updated translation files; that’s sped some things up on the i18n front, because we’re blessed with a large number of people who are willing to pitch in and do that work. Oh, and I can’t forget Wilson Miner; he doesn’t flaunt it that often, but he’s the guy who originally designed the Django admin, and he’s been known to make the occasional tweak to fix CSS stuff. (hope I didn’t forget anybody there) Shabda: Would GeoDjango be sometime merged with the trunk, or is it forever going to be a parallel branch to trunk? James: The goal is that the GIS branch will merge, sometime after queryset-refactor lands, and it’s going to provide an application – django.contrib.gis – that you can use to enable spatial queries for your models. There’s a pretty good writeup on the wiki page of how that works, and they’ve been tracking queryset-refactor because it helps make some of the custom query construction easier. I don’t know for certain if it’ll hit trunk before Django 1.0, but it will not be a branch forever; they’ve put in a ton of work on that, and I’m looking forward to getting to use it :) Shabda: Once Django hits 1.0, would 0.91 be end of lifed, but support for .96 and .95 continue? James: Like I said, the policy is we provide security fixes for the current release plus the previous two, so 0.91 would sort of fall off there after Django 1.0. But there are a lot of legacy installs out there that are perfectly happy for now, and I wouldn’t be surprised to see people unofficially continuing to submit patches and keep that maintained for as long as there are people who want to use 0.91. Shabda: A little about you. You have majored in philosophy. I can think of one other, Paul Graham. Would you say, what you learnt from philosophy help with programming? James: Well, I wouldn’t say there’s anything specific necessarily. But I think there’s a big place for people with liberal-arts backgrounds to come to programming, and I think philosophy’s a good path to do that. If you look at a typical philosophy program, you’re doing a lot of logic, a lot of critical analysis, a lot of abstract reasoning. You have to get comfortable sooner or later with all sorts of formalisms that don’t necessarily have any practical meaning, and that’s very similar in a lot of ways to programming :) And when you get right down to it, as programmers, about 90% of what we’re paid to do is think: our job is to take a problem, analyze it, break it down into pieces and solve them. And that’s not terribly different from what you spend four years doing in a philosophy program. I’ve actually joked about that a bit with some of my former professors, that I still get to argue as much as when I was doing philosophy, but the programming pays a lot better. I do think, though, that there’s a big need for that sort of thing; we don’t really teach critical thinking anymore, and while it’s a vital skill to have no matter what you do for a living, it’s absolutely crucial to programming. So if you can get a good liberal-arts background where you’ve been taught how to look at things and pick them apart and analyze them, you can definitely do well as a programmer. Though it’d also be a good idea to take at least a few elective math courses… Shabda: You have been working on Ellington, how is Ellington CMS different from, say, a customized version of Drupal? James: Well, they have some things in common: both are modular CMS-style products, both are meant to be extensible. But Ellington is really targeted from the ground up at news operations. There’s all sorts of specialized stuff in there that’s really optimized for the way a newsroom works, most of it culled from our experience as a newspaper, and of working with other papers. So where with Drupal you’d really have to do a lot of customization because nobody’s really done this kind of “news all the way through” version of Drupal, with Ellington it’s there out of the box, and you hit the ground running. I think we also have a very unique position because we are a news company, we’ve got a bunch of newspapers, some periodicals, TV news, etc. And we work with those folks every day, we see how they do stuff, we hear about it when they run into problems, and so we’re in a good spot to see just what a newsroom staff really needs out of their online platform. Shabda: Wordpress is PHP’s killer app, arguably Basecamp is ROR’s. What would you say Django’s killer app is? James: Honestly I don’t know right now; I think the thing that Django wins on is that there doesn’t have to be the One Big App that everybody uses, instead there’s this huge blooming ecosystem of applications. In a way, it’s like asking what the “killer library” of the Python stdlib is; the killer feature is that you’ve got all that stuff available. Though there are definitely some cool Django apps out there right now, and a lot more on the way. I think there’s a different mentality, though, because in general Python people seem to keep their heads down and just get stuff done. So it may be you don’t hear about some project until maybe they decide to do an open-space talk at PyCon or OSCON, and then you just get blown away. There was a guy at PyCon who came up and showed me an app he’s been developing, and I won’t spoil it and give away what it is, but it made my jaw drop. He’d taken something that’s a really common software niche that’s been dominated by these abominable products because it’s not really a sexy thing to be doing, and just absolutely nailed it. Guy’s probably gonna make millions. But I don’t know if there is a general-purpose “killer app” for Django right now, and I’m not really sure I want there to be one; people can see that sort of thing and think “oh, that’s all it does”. They look at, say, Ellington, and think “oh, this is only good for a newspaper-style CMS”, or they see Rails and Basecamp and think “oh, this is no good for me, I’m not doing a Web 2.0 thing”. So in a way I’m kind of glad we don’t have a “killer app” hanging over us and pigeonholing Django. Though I should definitely give a shout out to Review Board; of the public Django apps I’ve seen, it’s probably the coolest, and again takes something that’s not usually sexy in terms of software and really nails it. Shabda: As you said, “Python people seem to keep their heads down and just get stuff done”, do you think Django needs to a better job marketing itself. For example, I have pitched Django to a fair number of people, and I always have to start with with “Django what?”, as compared to say ROR, or PHP which seems to have a good brand recall. James: Well, to some extent Django hasn’t done a whole lot of explicit marketing because we’re not at 1.0 yet, and I expect that after 1.0 it’ll both be a lot easier to do marketing and that there will be more of it going on. But at the same time, Django’s doing pretty well as it is; Google’s doing their App Engine stuff with Django bundled, there are startups using it to build the next big thing, and it’s even been quietly sneaking its way into some huge corporations. Plus it seems like every time I turn around there’s another book coming out. I saw one yesterday at the bookstore downtown; I hadn’t heard about it until that moment, but I think that makes five or six books that’ll be out by the end of this year. So I think that’ll help. Digital Web magazine did a feature article on Django just recently, and I did an article for Sitepoint a while back as well. I like to view this as the phase where we build up momentum until eventually Django is an unstoppable juggernaut and everybody’s listening to gypsy jazz music ;). Shabda: Everyone is pretty excited about your coming book. When can we have it in book stores? Would you give a brief overviews of what’s in it? James: The book will, I think (and hope) be shipping around the end of June. It’s very much a hands-on introduction to Django: walking through building three applications, picking up progressively more advanced bits of Django as you go, and seeing some best practices in action. So you start out with just simple stuff, using the contrib apps and learning the basics of getting Django running. Then you do some simple customizations of admin templates, then start building some models and views, then on into building full-on applications. There’s not room to cover every single thing you can do with Django, but I think it handles a pretty good spectrum of techniques from basics up to some advanced things that let you poke around and really get a feel for how stuff works. And of course, you get periodic bouts of me up on my soapbox yelling at people about how to write reusable applications, because that’s what I do. Shabda: You talk a little about App Engine in Batteries sold separately. What effect do you see of App Engine on python hosting ecosystem, on Python web applications, and on Django? James: I honestly don’t know what to expect from App Engine. It’s a very different kind of thing from what anybody outside Google is used to, and it’ll probably be a while before it’s really shaken out and we get an idea of the impact it’ll have. I fully expect that Google’s going to start supporting other languages, so there won’t be this effect where you’ll always have to use Python to use App Engine. And the way they’ve sandboxed it is going to make it feel weird to Python people, I think. And that’s on top of getting used to the fact that you’re not using an RDBMS; I’ve been watching the blog flamewars about that, and that seems to be the big takeaway. If I had to make a prediction now, I’d say that App Engine will bring some people to Python, but probably not in hordes, and that its big long-term effect is going to be to point out to a lot of folks that they’re not really using the “R” in “RDBMS”, and so maybe it’s OK to think about their applications in a different way. And that’s not Python-specific at all. Shabda: What were the focus areas of the newforms-admin branch. How far have they been achieved. About when would the newforms-admin branch be merged? How backwards incompatible is this going to be? James: Well, there are a couple goals running parallel. The first thing, obviously, is that with the oldforms package deprecated we’ve got to get stuff migrated to newforms, and the admin’s got to make that jump. And because the admin does a lot of tricky and complex stuff with forms, it’s also been a fertile proving ground for designing some advanced newforms features that’ll find their way back into trunk and make it easier to do that tricky stuff on your own. Another big thing is cleaning out the coupling issue where you declare a class inside a model to activate the admin interface; there’s no reason for that to happen, so instead there’s a class you’ll subclass and override stuff on to customize the behavior, and then you’ll register a model to have the admin interface you’ve set up that way. Finally, there’s been a lot of stuff abstracted in newforms-admin; while I don’t think it’s really an official design goal, there’s been a lot of opportunity to provide hooks where people can go in and customize stuff. I looked at the code a couple months ago, and it was about 95% of the way to being able to run completely without django.contrib.auth, for example, because there are enough hooks where you can override something and replace defaults to make it use something else. And that’s a huge deal, because it means you could do stuff like run the admin on HTTP auth, or run it in a corporate environment against an LDAP database, and you barely have to touch anything; you can already do an auth backend that handles most of the work, then you tweak a few things for the admin and you’re good to go with no hacking directly on Django code. Plus, a lot of people will be happy to see that the methods you can go in and override all get the HttpRequest object as an argument, so even though it’s bad workflow a lot of the time you’ll be able to have the admin do stuff like automatically fill in a foreign key with the current user. And along the way there’ve been huge numbers of bug fixes; there’s a lot of stuff that’s always just been really fragile in the admin, like edit_inline, and newforms-admin is a good opportunity to just yank out all the things that made them troublesome and do it right. Shabda: Time for a meme. What is the one think you absolutely love about Django, and one thing which Django should have done differently? James: I love contrib.localflavor, and I want people to go look at it and adore it and use it. There’s so much useful stuff in there, you can validate checksums on Scandinavian social-security numbers, you can get lists of all the state in Brazil, it’s just this great gigantic resource for localizing your apps, and it kicks so much ass. Something to do differently… I’d probably rewrite the tutorial to not do the apps-inside-projects thing. That trips a lot of people up because they come away thinking they have to do it that way, and so they really miss out on the benefits of being able to write an app once and just use it over and over and over. Shabda: Before we leave, would you like to give a quick tip, or hard to find information about Django to our readers? James: The best tip I can give is not to be afraid to look at code. We do our best to document all the useful stuff, but that’s a pretty huge area to cover, so there are always going to be neat little things hidden away that you either won’t see unless you read the code, or won’t see until some date in the far future when somebody gets time to document it. Plus, if you find something cool you can write up a little tutorial and post it, and then people will start reading your blog. That’s pretty much what happened to me, where my blog was for a long time just me writing up these little articles to remind myself of stuff I’d learned. And especially if you’re learning Python as you go, reading a significant piece of code like Django can really help to improve your understanding of the language. There’s really nothing better than that for assimilating the way a language works, and I think Django’s around the right size – it’s small enough you can carry a solid understanding of it around in your head, but it’s big enough that there’s lots of stuff, and lots of different kinds of stuff, that you can look at and learn from. Shabda: Thanks a ton for this interview, and for sharing these useful information. James: Sure. This was James Bennett’s interview. I plan to be interviewing a few more leaders from Django community, so if you would like me to ask any question, write them in the comments.","author":{"@type":"Person","name":"shabda"},"@type":"BlogPosting","url":"http://localhost:4000/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html","headline":"Interview with James Bennett - Django release manager","dateModified":"2008-04-27T11:54:11+05:30","datePublished":"2008-04-27T11:54:11+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Agiliq Blogs" /></head>
-<body><header class="site-header" role="banner">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Agiliq Blogs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/assets/js/respond.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script>
+    	function onPageLoad() {
+    		var element = document.getElementById("content");
+    		var childNodes = element.childElementCount;
+    		if(childNodes > 0) {
+    		 	element.scrollIntoView(); 
+    	 	}
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/forms.html">Forms</a><a class="page-link" href="/categories/interviews.html">Interviews</a><a class="page-link" href="/categories/marketing.html">Marketing</a><a class="page-link" href="/categories/paypal.html">Paypal</a><a class="page-link" href="/categories/python.html">Python</a><a class="page-link" href="/categories/search.html">Search</a><a class="page-link" href="/categories/startup.html">Startup</a><a class="page-link" href="/categories/uncategorized.html">Uncategorized</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    	}
+    </script>
+    
+  </head>
+  <body onload="onPageLoad()"> 
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="">View On GitHub</a></li>
+          <!-- 
+            <li class="downloads"><a href="">ZIP</a></li>
+            <li class="downloads"><a href="">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+           -->
+        </nav>
+      </div><!-- end header -->
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Interview with James Bennett - Django release manager</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2008-04-27T11:54:11+05:30" itemprop="datePublished">Apr 27, 2008
-      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">shabda</span></span></p>
-  </header>
+    <div class="wrapper">
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p><img src="http://uswaretech.com/blog/wp-content/uploads/2008/04/james_photo-20080210.jpg" alt="" title="james_photo-20080210" width="250" height="188" class="frame right" />
+      <section>
+        <div id="title">
+          <h1>Agiliq Blogs</h1>
+          <!-- <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p> -->
+          <hr>
+          <span class="credits left">Project maintained by <a href="">Agiliq</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          <ul>
+		  
+		  <li>
+		    <a href="/python/2018/01/21/prime-number-binary-trex.html" >Finding a prime number whose binary representation is a giraffe (or a T-Rex)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-listview.html" >When and how to use Django ListView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-templateview.html" >When and how to use Django TemplateView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/11/adventures-in-advanced-django-orm-with-hyperloglog.html" >Adventures in advanced Django ORM with HyperLogLog</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/06/django-20-window-expressions-tutorial.html" >Django 2.0 Window expressions tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/02/configure-django-log-exceptions-production.html" >Configure Django to log exceptions in production</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2017/11/15/how-performant-your-python-web-application.html" >How performant is your Python web application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/11/01/how-python-generators-are-similar-iterators.html" >How Python generators are similar to iterators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/18/real-world-usage-iterators-and-iterables.html" >Real world usage of __iter__ and next</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/12/iterators-and-iterables.html" >Iterators and Iterables</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/appengine/2017/09/04/getting-started-webapp2-and-gae.html" >Getting started with webapp2 and GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/30/why-angularjs-services-arent-available-configurati.html" >Why AngularJS services aren't available in configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/27/what-when-and-how-angularjs-configuration-blocks.html" >What, when and how of AngularJS configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2017/04/26/trsfer-files-amzon-s3-using-browser-instead-server.html" >Transfer files to amazon s3 using browser instead of server</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/25/angularjs-injectors-internals.html" >AngularJS injectors internals</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/21/how-script-ordering-works-angular-app.html" >How script ordering works in an Angular app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/scrapy/2016/04/02/getting-started-with-python-scrapy.html" >Getting started with python scrapy</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/celery/2015/08/03/retrying-celery-failed-tasks.html" >Retrying celery failed tasks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/profiling-django-middlewares.html" >Profiling Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/understanding-django-middlewares.html" >Understanding Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/07/06/getting-started-with-celery-and-redis.html" >Getting started with Celery and Redis</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/29/tastypie-with-foreignkey.html" >Tastypie with ForeignKey</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/03/26/getting-started-with-redis-py.html" >Getting started with redis-py</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/23/getting-started-with-django-tastypie.html" >Getting started with Django tastypie</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2015/03/04/building-chrome-extensions.html" >Building Chrome Extensions</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2015/01/16/importing-your-old-comments-to-disqus-site.html" >Importing your old comments to Disqus site</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/how-not-knowing-encoding-can-trip-you.html" >How not knowing encoding can trip you</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/understanding-python-unicode-str-unicodeencodeerro.html" >Understanding Python unicode, str, UnicodeEncodeError and UnicodeDecodeError</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2014/12/04/building-a-restful-api-with-django-rest-framework.html" >Building a RESTful API with Django-rest-framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/encoding/2014/11/19/character-encoding-and-unicode.html" >Character encoding and Unicode</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2014/11/17/disqus-and-disqus-sso.html" >Disqus and Disqus SSO</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/http/client/2014/09/08/using-postman.html" >Using a Postman http client for efficient HTTP testing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/02/advanced-functional-testing-with-selenium.html" >Advanced functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/01/selenium-testing.html" >Introduction to functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coveralls.io/2014/08/22/travis-and-coveralls-for-private-repo.html" >Travis and coveralls for private repo</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/20/django-timezones.html" >Django timezones</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/app/deployment/2014/08/06/deploying-a-django-app-on-amazon-ec2-instance.html" >Deploying a Django app on Amazon EC2 instance.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/05/passing-parameters-to-django-admin-action.html" >Passing parameters to Django admin action</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/07/15/method-decorators-in-python.html" >Method decorators in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2014/06/05/minimal-gunicorn-configuration.html" >Minimal Gunicorn configuration</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/heroku/2014/06/05/heroku-django-s3-for-serving-media-files.html" >Heroku Django S3 for serving Media files</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysqltopostgres/2014/05/27/migrating-django-app-from-mysql-to-postgres.html" >Migrating django app from MySQL to Postgres</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2014/05/09/google-diff-match-patch-library.html" >Google diff match patch library</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/supervisor/2014/05/09/supervisor-with-django-and-gunicorn.html" >Supervisor with Django and Gunicorn</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/05/python-requests.html" >Python-requests</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/01/three-underutilized-python-commands.html" >Three underutilized python commands</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/travis/2014/05/01/continuous-integration-with-travis-and-coverallsio.html" >Continuous integration with travis and coveralls.io for Django apps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/04/28/django-backward-relationship-lookup.html" >Django backward relationship lookup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/10/17/producer-consumer-problem-in-python.html" >Producer-consumer problem in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/design/pattern/2013/10/14/state-pattern-with-ui-code.html" >State pattern with UI Code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/09/17/understanding-threads-in-python.html" >Understanding Threads in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/process/2013/09/11/process-and-threads-for-beginners.html" >Process and Threads for Beginners</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/nginx/2013/08/26/minimal-nginx-and-gunicorn-configuration-for-djang.html" >Minimal Nginx and Gunicorn configuration for Django projects</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/08/21/writing-thread-safe-django-code.html" >Writing thread-safe django - get_or_create</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/12/accept-bitcoins-using-python.html" >Accept bitcoins using python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/01/basics-wsgi.html" >Basics of WSGI</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/28/self-testing-fabfile-using-docker.html" >Self-testing fabfile using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/14/deploying-django-using-docker.html" >Deploying django using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/testing/2013/04/28/common-testing-scenarios-for-django-app.html" >Common testing scenarios for Django app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/static/2013/03/21/serving-static-files-in-django.html" >Serving static files in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2013/02/11/two-scoops-of-django-review.html" >Two Scoops of Django: Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/training/2013/02/08/introduction-to-python-workshop-on-february-15th-2.html" >Introduction to Python Workshop on February 15th, 2013</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2013/02/07/easy-client-side-form-validations-for-django-djang.html" >Easy client side form validations for Django: Django Parsley</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/21/moreapps-android-library-project-open-sourced.html" >MoreApps - Android Library Project: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/15/password-generetor-app-open-sourced.html" >Password Generator App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/14/todo-list-app-open-sourced.html" >Todo List App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2013/01/01/android-fragments-101.html" >Android Fragments 101</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/function/as/objects/2012/11/17/understanding-decorators-2.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2012/11/07/not-exactly-not-exactly-tim-the-enchanter.html" >Not exactly, not exactly tim the enchanter</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/internals/2012/11/01/the-missing-documentation-for-djangoutilsdatastruc.html" >The missing documentation for django.utils.datastructures</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2012/09/06/dissecting-phonegaps-architecture.html" >Dissecting Phonegaps Architecture</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2012/07/17/dropbox-file-upload-handler-for-django.html" >Dropbox file upload handler for django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/07/16/using-ubuntu-cloud-images-in-kvm.html" >Using Ubuntu cloud images in KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/metaclass/2012/07/02/metaclass-python.html" >Metaclass in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/06/25/libvirt-and-kvm.html" >Libvirt and KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/__new__/2012/06/10/__new__-python.html" >__new__() in python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/kwargs/2012/06/03/understanding-args-and-kwargs.html" >Understanding '*', '*args', '**' and '**kwargs'</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/provisioning/2012/05/29/provisioning-made-easy-with-chef.html" >Provisioning Made Easy With Chef</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/development/2012/05/02/test-driven-development-python.html" >Test Driven Development in Python </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/terminal/2012/03/20/developing-android-applications-from-command-line.html" >Developing android applications from command line</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vps/2012/02/23/deploy-django-app-5-easy-steps.html" >Deploy Django App in 5 Easy Steps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/22/deploying-django-apps-on-heroku.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/site_id/prefix/2012/02/05/dynamically-attaching-site_id-django-caching.html" > Dynamically attaching SITE_ID to Django Caching</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/04/deploying-django-apps-on-heroku-2.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/03/how-to-use-pep8py-to-write-better-django-code.html" >How to use pep8.py to write better Django code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/02/how-and-why-to-use-pyflakes-to-write-better-python.html" >How and why to use pyflakes to write better Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/south/2012/01/09/south.html" >Getting started with South for Django DB migrations</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2012/01/06/writing-jquery-plugins-using-coffeescript.html" >Writing jQuery plugins using Coffeescript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/response/2012/01/02/behind-the-scenes-request-to-response.html" >Request to Response</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/12/28/using-sqlite-database-with-android.html" >Using SQLite Database with Android</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2011/12/25/haml-for-django-developers.html" >Haml for Django developers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2011/12/24/coffeescript-for-python-programmers.html" >Coffeescript for Python programmers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/treeview/2011/10/12/how-use-jstree.html" >How to use jsTree</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2011/09/21/behind-the-scenes-from-html-form-to-storage.html" >From HTML Form to Storage</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2011/07/01/setting-your-system-start-django-development-ubunt.html" >Setting up your system to start with Django development on Ubuntu:</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/05/writing-an-e-mail-application-with-lamson-ii.html" >Writing an e-mail application with Lamson - II</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/01/writing-an-e-mail-application-with-lamson-i.html" >Writing an e-mail application with Lamson - I</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/jobs/2011/03/15/jobs.html" >Jobs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/08/comparision-iphone-android-phonegap-titanium.html" >Comparison of mobile app frameworks: Iphone, Java, Phonegap and Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/iphone/2011/02/08/getting-started-with-titanium-development.html" >Getting started with Titanium development for Android and Iphone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2011/02/06/getting-started-with-phonegap-using-xcode-for-mobi.html" >Getting started with PhoneGap using Xcode for Mobile app development</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/06/starting-android-app-developement-from-zero-to-app.html" >Starting Android app developement: From zero to app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mobile/applications/2011/02/03/iphoneandroid-application-development-using-titani.html" >iPhone and Android application development using Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/21/link-roundup-10.html" >Link roundup 10</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/07/link-roundup-9.html" >Link roundup 9</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/31/book-review-the-principles-of-beautiful-web-design.html" >Book Review: The Principles Of Beautiful Web Design</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/31/link-roundup-8.html" >Link roundup 8</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/emacs/2010/12/27/django-emacs-setup.html" >Django emacs setup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/26/book-review-pragmatic-guide-to-javascript.html" >Book Review: Pragmatic Guide to JavaScript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/25/the-principles-of-successful-freelancing.html" >Book review: The Principles of Successful Freelancing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-the-principles-of-project-management.html" >Book review: The Principles of Project Management</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-outsourcing-web-projects.html" >Book Review: Outsourcing Web Projects.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/23/link-roundup-for-week-ending-24122010.html" >Link roundup for week ending 24/12/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/%0A2010-12-22-real-time-applications-with-django-xmpp-and-stroph.markdown/xmpp/2010/12/22/real-time-applications-with-django-xmpp-and-stroph.html" >Real time applications with Django, XMPP and StropheJS</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2010/12/04/the-unfuddle-tutorial.html" >The Unfuddle Tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/12/04/experiments-in-url-design.html" >Experiments in URL design.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/26/link-roundup-for-week-ending-26112010.html" >Link roundup for week ending 26/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/19/link-roundup-for-week-ending-19112010.html" >Link Roundup for week ending 19/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/12/link-roundup-for-week-ending-12112010.html" >Link Roundup for week ending 12/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2010/11/07/i-am-so-starving-same-web-app-in-various-python-we.html" >I am so starving: Web app in python frameworks.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vim/2010/11/03/seven-reasons-why-you-should-switch-to-vim-for-dja.html" >Seven reasons why you should switch to Vim</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/03/link-roundup-for-week-ending-5112011.html" >Link Roundup for week ending 5/11/2011</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/wordpress/2010/10/28/importing-wordpress.html" >Importing wordpress</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2010/10/25/getting-trending-github-projects-via.html" >Getting trending Github projects via YQL</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/22/link-roundup-for-week-ending-2.html" >Link Roundup for week ending 22/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2010/10/18/essential-web-apps-to-run-a.html" >Essential web-apps to run a software business.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/opinion/2010/10/17/django-is-not-flexible.html" >Django is not flexible</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/15/link-roundup-for-week-ending.html" >Link Roundup for week ending 15/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/06/08/moving-home.html" >Moving home</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2010/03/20/rails-and-django-commands-comparison-and-conversio.html" >Rails and Django commands : comparison  and conversion</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rails/2010/03/20/the-rails-and-django-models-layer-rosseta-stone.html" >The Rails and Django models layer Rosseta stone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/models/2010/01/18/doing-things-with-django-models-aka-django-models.html" >Doing things with Django models - aka - Django models tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/01/17/wordpress-and-django-best-buddies.html" >Wordpress and Django: best buddies</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2010/01/14/doing-things-with-django-forms.html" >Doing things with Django forms</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/01/07/django-forum.html" >django-forum</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/12/13/django-buzz.html" >Django-buzz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/12/using-bpython-shell-with-django-and-some-ipython-f.html" >Using bpython shell with django (and some Ipython features you should know)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/india/2009/12/10/fossin-2009-the-best-fossin-ever.html" >Foss.in 2009: The best foss.in. Ever. </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/03/python-metaclasses-and-how-django-uses-them.html" >Python metaclasses and how Django uses them</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/12/03/django-quiz.html" >Django quiz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/11/26/django-for-a-rails-developer.html" >Django for a Rails Developer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/11/21/the-magic-of-metaclasses-in-python.html" >The magic of metaclasses in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/21/writing-your-own-template-loaders.html" >Writing your own template loaders</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/11/django-gotchas.html" >Django gotchas </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/10/02/pycon-india-2009-a-review.html" >Pycon India 2009 : A Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/09/18/beginning-python.html" >Beginning python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/08/27/django-socialauth-login-via-twitter-facebook-openi.html" >Django-SocialAuth - Login via twitter, facebook, openid, yahoo, google using a single app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rambling/2009/08/20/a-response-to-dropping-django.html" >A response to Dropping Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/aggreagtion/2009/08/18/django-aggregation-tutorial.html" >Django aggregation tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2009/07/16/on-captcha.html" >On Captcha</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2009/07/03/django-design-patterns.html" >Django design patterns</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/07/02/remote-debugging-debugging-pesky-server-only-bugs.html" >Remote debugging - debugging pesky server only bugs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/06/25/django-request-response-processing.html" >Django Request Response processing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/24/better-python-package-management-using-source-and.html" >Better Python package management using source and version control systems</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/23/understanding-decorators.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/06/16/generating-pseudo-random-text-with-markov-chains-u.html" >Generating pseudo random text with Markov chains using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/06/14/yahoo-boss-python-api.html" >Yahoo BOSS python api</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2009/06/10/python-wrapper-on-bing-api.html" >Python Wrapper on Bing API</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/ecommerce/2009/03/31/exploring-authorizenet-payment-gateway-options-and.html" >Exploring Authorize.net Payment Gateway Options and integrating it with django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/satchmo/2009/03/26/create-your-own-online-store-in-few-hours-using-sa.html" >Create your own online store in few hours using satchmo (django)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/pinax/2009/03/18/create-a-new-social-networking-site-in-few-hours-u.html" >Create a new social networking site in few hours using pinax platform (django).</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/03/11/uswaretech-whitepapers.html" >Uswaretech whitepapers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/products/2009/03/11/django-subdomains-easily-create-subscription-based.html" >Django-subdomains - Easily create subscription based subdomains enabled webapps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/09/finding-keywords-using-python.html" >Finding keywords using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2009/03/09/web-development-companies-working-with-django.html" >Web development companies working with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/presentations/2009/03/08/developing-a-web-application-live-in-15-min-in-dja.html" > Developing a Web Application Live in 15 min, in django framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/06/constraint-programming-in-python.html" >Constraint programming in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2009/03/06/django-with-mysql-and-apache-on-ec2.html" >Django with Mysql and Apache on EC2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/facebook/2009/02/20/how-to-build-a-facebook-app-in-django.html" >How to build a Facebook app in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/web2.0/2009/02/19/how-we-built-a-twitter-application.html" >How we built a Twitter Application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/paypal/2008/11/12/using-paypal-with-django.html" >Using Paypal with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/10/using-subdomains-with-django.html" >Using subdomains with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2008/10/10/dynamic-forms-with-django.html" >Dynamic forms with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/07/generating-pdfs-with-django.html" >Generating PDFs with Django </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html" >An Interview with Adrian Holovaty - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/05/30/an-interview-with-jacob-kaplan-moss-creator-of-dja.html" >An Interview with Jacob Kaplan-Moss - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/14/an-idea-a-day-a-geographical-wiki.html" >An idea a day - A geographical wiki</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/13/an-idea-a-day-alternative-to-gae.html" >An idea a day - Alternative to GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/12/an-idea-a-day-remotely-hosted-analytics-solution.html" >An idea a day - Remotely hosted Analytics solution</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2008/05/12/popularising-django-part-2.html" >Popularising Django - Part 2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/11/an-idea-a-day-recomendation-system-based-ad-networ.html" >An idea a day - Recomendation system based ad network</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/10/an-idea-a-day-an-automated-adwords-optimizer.html" >An idea a day - An automated Adwords optimizer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/05/08/parable-of-the-single-sheep-or-how-google-is-destr.html" >Parable of the single sheep - Or How Google is destroying the internet, and nobody seems to know.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/an-interview-with-michael-trier.html" >An interview with Michael Trier</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/popularizing-django-or-reusable-apps-considered-ha.html" >Popularizing Django -- Or Reusable apps considered harmful.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html" >Interview with James Bennett - Django release manager</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/04/22/parable-of-the-nofollow.html" >Parable of the nofollow</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/22/why-people-start-startups.html" >Why people start startups.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/04/21/marketing-lessons-from-google.html" >Marketing lessons from Google</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/18/five-things-i-hate-about-django.html" >Five Things I Hate About Django.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/12/first-step-to-startup-getting-your-pitch.html" >First step to startup - Getting your pitch</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/11/two-djangoappengine-tutorials.html" >Two Django+Appengine Tutorials</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/using-appengine-with-django-why-it-is-pretty-much.html" >Using Appengine with Django, why it is pretty much unusable</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/google-appengine-first-impressions.html" >Google Appengine - First Impressions</a>
+		  </li>
+		  
+		</ul>
+        </div>
+        
+        
+        
+      </section>
+      <div id="content">
+     	<p><img src="http://uswaretech.com/blog/wp-content/uploads/2008/04/james_photo-20080210.jpg" alt="" title="james_photo-20080210" width="250" height="188" class="frame right" />
 <a href="http://www.b-list.org/about/">James Bennett</a> is the release manager of Django, and a long time contributor. He works on <a href="http://www.ellingtoncms.com/">Ellington</a>, a <acronym title="content management system">CMS</acronym> designed for news organizations. His book, <a href="http://www.amazon.com/Practical-Django-Projects-Pratical/dp/1590599969">Practical Django Projects</a>, is being published by Apress, and is scheduled to hit bookshelves in June 2008. He graciously agreed to be interviewed at the 42topics.com blog. His blog, The B-List, can be found <a href="http://www.b-list.org/">here</a>.</p>
 
 <p><strong>Shabda</strong>: Would you tell something about yourself, how did you get started with Django, and what other OSS projects are you involved with?</p>
@@ -164,34 +966,10 @@ And especially if you’re learning Python as you go, reading a significant piec
 <p>This was James Bennett’s interview. I plan to be interviewing a few more leaders from Django community, so if you would like me to ask any question, write them in the comments.</p>
 
 
-  </div><a class="u-url" href="/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Agiliq Blogs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Agiliq Blogs</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-      </div>
+       </div>
     </div>
 
-  </div>
-
-</footer>
-</body>
-
+    
+  </body>
 </html>
+

@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Agiliq Blogs | Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</title>
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Agiliq Blogs" />
@@ -15,57 +17,49 @@
 <script type="application/ld+json">
 {"description":"Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.","@type":"WebPage","url":"http://localhost:4000/understanding-datetime-tzinfo-timedelta-amp-timezo.html","headline":"Agiliq Blogs","@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Agiliq Blogs" /></head>
-<body><header class="site-header" role="banner">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Agiliq Blogs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/assets/js/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/forms.html">Forms</a><a class="page-link" href="/categories/interviews.html">Interviews</a><a class="page-link" href="/categories/marketing.html">Marketing</a><a class="page-link" href="/categories/paypal.html">Paypal</a><a class="page-link" href="/categories/python.html">Python</a><a class="page-link" href="/categories/search.html">Search</a><a class="page-link" href="/categories/startup.html">Startup</a><a class="page-link" href="/categories/uncategorized.html">Uncategorized</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="">View On GitHub</a></li>
+          
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Agiliq Blogs</h1>
+          <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href=""></a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
         <html><head><title>Understanding DateTime, tzinfo, timedelta &amp; TimeZone Conversions in python</title>
 <meta name="tags" content="datetime"/><meta name="date" content="2009-02-18 22:24:06"/><meta name="modified" content="2009-02-19 09:54:06+05:30" /><meta name="authors" content="rama"/><meta name="summary" content="<p><a href="http://uswaretech.com/blog/wp-content/uploads/2009/02/pythonlogo.png"><img title="python-logo" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" height="71" alt="python-logo" src="http://uswaretech.com/blog/wp-content/uploads/2009/02/pythonlogo-thumb.png" width="211" align="right" border="0" /></a> <a href="http://uswaretech.com/blog/wp-content/uploads/2009/02/3289799486-fd7df39a73.jpg"><img title="3289799486_fd7df39a73" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" height="180" alt="3289799486_fd7df39a73" src="http://uswaretech.com/blog/wp-content/uploads/2009/02/3289799486-fd7df39a73-thumb.jpg" width="240" align="right" border="0" /></a></p> <p>In this post we will look at the common operations that are being performed on dates &amp; time ,&#160; converting&#160; a datetime from one timzone to another timezone.</p> <p><strong>Common Operations:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Ho</strong><strong>w to get the present datetime? </strong></p> <p><code>In [189]: cdatetime = datetime.now() <br />In [190]: cdatetime <br />Out[190]: datetime.datetime(2009, 2, 17, 17,"/>
 <link rel="stylesheet" href="/main.css">
 <body><p><a href="http://uswaretech.com/blog/wp-content/uploads/2009/02/pythonlogo.png"><img title="python-logo" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" height="71" alt="python-logo" src="http://uswaretech.com/blog/wp-content/uploads/2009/02/pythonlogo-thumb.png" width="211" align="right" border="0" /></a> <a href="http://uswaretech.com/blog/wp-content/uploads/2009/02/3289799486-fd7df39a73.jpg"><img title="3289799486_fd7df39a73" style="border-top-width: 0px; display: inline; border-left-width: 0px; border-bottom-width: 0px; margin-left: 0px; margin-right: 0px; border-right-width: 0px" height="180" alt="3289799486_fd7df39a73" src="http://uswaretech.com/blog/wp-content/uploads/2009/02/3289799486-fd7df39a73-thumb.jpg" width="240" align="right" border="0" /></a></p>  <p>In this post we will look at the common operations that are being performed on dates &amp; time ,&#160; converting&#160; a datetime from one timzone to another timezone.</p>  <p><strong>Common Operations:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Ho</strong><strong>w to get the present datetime? </strong></p>  <p><code>In [189]: cdatetime = datetime.now()      <br />In [190]: cdatetime       <br />Out[190]: datetime.datetime(2009, 2, 17, 17, 34, 58, 407806)<strong> </strong>      <br /></code>It returns the current localdate and time.When i print cdatetime it&#160; printed as a tuple of nine elements     <br />(2009=year, 2=month, 17=day, 17=hour, 34=minutes, 58=seconds, 407806=microseconds, tzinfo is None and is not printed)     <br />what each element in tuple represents is mentioned adjacent to that number.9-tuple is the basic&#160; notation in python using which we create datetime objects as     <br />dt = datetime(2009, 2, 17, 17, 34, 58, 407806).MOre details     <br /><a href="http://docs.python.org/library/datetime.html#datetime.datetime">http://docs.python.org/library/datetime.html#datetime.datetime</a></p>  <p><strong>How to convert datetime into a well formatted string? </strong></p>  <p><strong></strong><code>In [194]:&#160; curdate.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)      <br />.....:       <br />Out[194]: '17 Feb 2009 05:18:27 PM' </code>    <br />printing the date in tuple format is not a good idea because it is not understood by most of the people.we want to convert that into a readable string.     <br /><strong>strftime()</strong> is function we need to use to format the datetime into string.     <br /><strong>&quot;%d %b %Y %I:%M:%S %p&quot;&#160; is the format string each { %character} mentions how to print the repective components of datetime.      <br />%M in format string specifies </strong>Localeâ€™s abbreviated month name     <br />(means print Feb instead of 2)     <br /><strong>%I in format string specifies</strong> Hour (12-hour clock) as a decimal number     <br />(means print the time in 12hour format instead of 24 hr format)     <br />you can find out various other directives ({character} is called a directive) at the bottom of datetime module docs. <a href="http://docs.python.org/library/datetime.html">http://docs.python.org/library/datetime.html</a></p>  <p><strong>How to convert string to datetime object? </strong></p>  <p><strong></strong><code>In [195]: dt = datetime.<strong>strptime</strong>('17 Feb 2009 04:22:11 PM','%d %b %Y %I:%M:%S %p')       <br />In [196]: dt       <br />Out[196]: datetime.datetime(2009, 2, 17, 16, 22, 11)       <br />In [197]: dt.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)       <br />Out[197]: '17 Feb 2009 04:22:11 PM' </code></p>  <p>most of time we recieve datetime ( '17 Feb 2009 04:22:11 PM') as a string&#160; from the user we need to make datetime object from that string.    <br /><strong>strptime</strong>() is the function which does this task of converting string into datetime.     <br />Format String &quot;%d %b %Y %I:%M:%S %p&quot; specifies the order in which the components of datetime will appear&#160; and way in which they appear (i.e first day will appear as decimal representing day of the month,second month&#160; will appear as&#160; Localeâ€™s abbreviated month name etc...)</p>  <p><strong>How to convert a tuple into datetime object? </strong></p>  <p><strong></strong><code>Out[87]: k =&#160; (2009, 2, 17, 16, 22, 11)      <br />In [89]: dt = datetime.datetime(*k[0:6])       <br />In [206]: dt       <br />Out[206]: datetime.datetime(2009, 2, 17, 16, 22, 11)       <br />In [207]: dt.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)       <br />Out[207]: '17 Feb 2009 04:22:11 PM' </code></p>  <p>Many times you encounter a situation where you need to form a datetime object from a tuple as shown above&#160; (2009, 2, 17, 16, 22, 11).For example Universal feed parser gets blog entry date in 9 tuple format.    <br />we use the&#160; code dt = datetime.datetime(*k[0:6]) to convert it into datetime object.</p>  <p><strong>Airthmetic with datetime: </strong><strong>How to get two days back/after datetime from now ? </strong></p>  <p><strong></strong><code>In [3]: curdate = datetime.now()      <br />In [5]: curdate.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)       <br />Out[5]: '18 Feb 2009 09:56:59 AM'       <br />#gives you the two days back date       <br />In [14]: curdate = curdate-timedelta(days=2)       <br />In [15]: curdate.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)       <br />Out[15]: '16 Feb 2009 09:56:59 AM'       <br />#gives you the date after 3 days etc..       <br />In [17]: curdate = curdate+timedelta(days=3,hours=5,minutes=5,milliseconds=1000)       <br />In [18]: curdate.strftime(&quot;%d %b %Y %I:%M:%S %p&quot;)       <br />Out[18]: '20 Feb 2009 03:07:51 PM' </code>    <br />1) timedelta object is being used to represent the duration. please&#160; see in[14],in[17] for the various ways in which you can intialize timedelta objects.     <br />MOre details at : http://docs.python.org/library/datetime.html#datetime.timedelta     <br />2) use this timedelta object in airthmetic wih datetime <strong>(in[14]) to get the datetime before and after specified duration.)      <br /></strong>With this timdelta object you can such answer questions such as 1) get the datetime after 45 days,before 1month etc..</p>  <p><strong>How to check the timezone associated with datetime object? </strong></p>  <p>The timezones in python are represented through an abstract base class called tzinfo. To assign a timezone to a datetime object&#160; we need to create a subclass of <a href="http://docs.python.org/library/datetime.html#datetime.tzinfo">tzinfo</a> and attach this object to the datetime.tzinfo attribute as shown in the below examples.<strong> </strong></p>  <p><strong></strong><code>In [211]: curdate = datetime.now()      <br />In [212]:print&#160; curdate.tzinfo       <br />None </code></p>  <p>For the above object the timezone is null/None.These datetime objects are called naive datetime objects (i.e datetime objects who do not know their own timzone).We can't perform timezone related operations on such naive objects.    <br />if tzinfo is not null those objects are called Timezone aware objects we can perform timzone related operations on such objects.Below i will show you an example which clearly illustrates the process.     <br /><code>In [162]: class GMT5(tzinfo):      <br />.....:&#160;&#160;&#160;&#160; def utcoffset(self,dt):       <br /><strong>#51/2 hours ahead of GMT</strong>       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return timedelta(hours=5,minutes=30)       <br />.....:&#160;&#160;&#160;&#160; def tzname(self,dt):       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return &quot;GMT +5&quot;       <br />.....:&#160;&#160;&#160;&#160; def dst(self,dt):       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return timedelta(0)       <br />In [171]: gmt5 = GMT5()       <br />In [220]: curdate = datetime(2009,2,17,19,10,2,tzinfo=gmt5)       <br />In [221]: curdate.tzinfo       <br />Out[221]: &lt;__main__.GMT5 object at 0x8a4b7cc&gt;       <br />In [222]: </code></p>  <p>Please follow the above code where i have shown you the&#160; way to assign timzone object (tzinfo) to datetime object.    <br />1) create an object which is a subclass of tzinfo.     <br />2) overide the tzname,utcoffset,dst (Daylight Saving Time) methods to provide the offset,dst that this time zone has from GMT.(Every timezone is represented as an offset from Greenwhich mean time)     <br />As the tzinfo is not null for the curdate.It is&#160; timezone aware object.we can perform operations on such objects.     <br />Below is another way to assign the timezone to datetime object.</p>  <p><code>In [172]: curdate = datetime.now()      <br />In [173]: curdate = curdate.replace(tzinfo=gmt5)       <br />In [174]: curdate       <br />Out[174]: datetime.datetime(2009, 2, 17, 17, 18, 27, 593447, tzinfo=&lt;__main__.GMT5 object at 0x8a4b7cc&gt;)       <br />In [176]: curdate.utcoffset()       <br />Out[176]: datetime.timedelta(0, 19800) </code></p>  <p>curdate.utcoffset&#160; will give you the&#160; offset from GMT in seconds.THis method general used to intialize local timezone to naive datetime object which represents the local datetime.</p>  <p><strong>Converting from one timezone to another timezone</strong></p>  <p>Suppose we want to convert a datetime whose timezone&#160; is +5:30 ahead of GMT (India) to another timezone whose timezone is ( -3:30 ) 3 1/2 hours behind GMT.    <br />Below is the code which does this.</p>  <p><code>In [162]: class GMT5(tzinfo):      <br />.....:&#160;&#160;&#160;&#160; def utcoffset(self,dt):       <br /><strong>#51/2 hours ahead of GMT</strong>       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return timedelta(hours=5,minutes=30)       <br />.....:&#160;&#160;&#160;&#160; def tzname(self,dt):       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return &quot;GMT +5&quot;       <br />.....:&#160;&#160;&#160;&#160; def dst(self,dt):       <br />.....:&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return timedelta(0)       <br />In [171]: gmt5 = GMT5()       <br />In [220]: curdate = datetime(2009,2,18,10,21,58,tzinfo=gmt5)       <br />In [69]: curdate.strftime(&quot;%d %b %Y %I:%M:%S %p %Z&quot;)       <br />Out[69]: '18 Feb 2009 10:21:58 AM GMT +5'       <br />In [57]: class GMT3(tzinfo):       <br />def utcoffset(self,dt):       <br />#31/2 hours behind&#160; GMT       <br />return timedelta(hours=-3,minutes=30)       <br />def tzname(self,dt):       <br />return &quot;GMT -3&quot;       <br />def dst(self,dt):       <br />return timedelta(0)       <br />....:       <br />In [66]: gmt_3 = GMT3()       <br />In [67]: newdate = curdate.astimezone(gmt_3)       <br />In [70]: newdate.strftime(&quot;%d %b %Y %I:%M:%S %p %Z&quot;)       <br />Out[70]: '18 Feb 2009 02:21:58 AM GMT -3' </code></p>  <p>1.create a timezone object (tzinfo) represeting the GMT-3 timezone.    <br />2.use astimezone() function to convert the present locatime datetime(GMT+5:30) to (GMT-3:30)     <br />as shown above. In next post we will discuss some more tips and tricks associated with dates and time.</p>  <p><strong>Do you know?</strong>     <br />Do you know any important tips and tricks which are helpful when working with dates and time? if yes please mention&#160; in the comments.</p>  <p>Resources:    <br />------------------     <br /><a href="http://docs.python.org/library/datetime.html#datetime.datetime">http://docs.python.org/library/datetime.html#datetime.datetime</a>     <br /><a href="http://www.saltycrane.com/blog/2008/11/python-datetime-time-conversions/">http://www.saltycrane.com/blog/2008/11/python-datetime-time-conversions/</a></p></body>
 </html>
 
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
 
-  <div class="wrapper">
+      </section>
 
-    <h2 class="footer-heading">Agiliq Blogs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Agiliq Blogs</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-      </div>
     </div>
 
-  </div>
-
-</footer>
-</body>
-
+    
+  </body>
 </html>

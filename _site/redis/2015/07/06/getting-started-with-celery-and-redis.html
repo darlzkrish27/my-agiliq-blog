@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Getting started with Celery and Redis | Agiliq Blogs</title>
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Getting started with Celery and Redis" />
@@ -18,37 +20,837 @@
 <script type="application/ld+json">
 {"description":"Agenda When to use Celery. Why to use Celery. A simple celery program. Having a slow script and making it faster using celery. Celery configuration and code in different files. Using celery with tasks spanned across multiple modules Using celery with a package. Redis and celery on separate machine Web-application/script and celery on separate machines. When to use Celery Celery is a task processing system. It is useful in a lot of web applications. It can be used in following scenarios. To do any network call in a request-response cycle. Server should respond immediately to any web request it receives. If some network call is required during a request-response cycle, it should be done outside of request-response cycle. eg: An activation email needs to be sent when user signs up on a site. Sending the email is a network call and might take 2-3 seconds. User should not be made to wait for these 2-3 seconds. So sending activation email should be done outside of request-response cycle. It can be achieved using celery. Breaking a large task consisting of several independent parts into smaller tasks. eg: Consider you want to read a user’s FB timeline. FB provides different endpoints to get different kind of things. FB provides one endpoint to get pictures on a user’s timelines, another endpoint to get posts on a user’s timelines, another endpoint to get likes of a user etc. If you write a single function to sequentially hit 5 endpoints provided by FB and if network calls take 2 seconds at an average, then your function will take 10 seconds to complete. So you can split your work in 5 individual tasks(it’s very easy to do as we will soon see), and let Celery handle the tasks. Celery can hit these 5 endpoints parallely and you can get the response from all the endpoints within first 2 seconds. Why to use Celery We want web responses to be fast. So on user signup, server should send the response immediately and the actual job of sending the email should be sent to celery. Celery would be running in background, outside of request-response cycle and it can send the actual email. We can use celery to make our scripts faster and to make better utilization of cpu. In the FB example I described earlier, we can go from 10 seconds to 2 seconds and also our cpu utilization would be higher if we use celery. We can use celery to make our tasks more manageable. In our FB example, if everything were in a single function being executed sequentially and if an error occurred during fetching the second url, then other 3 urls wouldn’t be hit. If all 5 urls were being executed in a different process, then getting an error in one process, wouldn’t affect others. So tasks become more manageable if we use celery properly. Simple celery example Suppose we have a function which gets a list of urls and it has to get response from all the urls. Without celery import requests import time def func(urls): start = time.time() for url in urls: resp = requests.get(url) print resp.status_code print &quot;It took&quot;, time.time() - start, &quot;seconds&quot; if __name__ == &quot;__main__&quot;: func([&quot;http://google.com&quot;, &quot;https://amazon.in&quot;, &quot;https://facebook.com&quot;, &quot;https://twitter.com&quot;, &quot;https://alexa.com&quot;]) Run this program python celery_blog.py Output is (hack)~/Play/Python/hack $ python celery_blog.py 200 200 200 200 200 It took 7.58989787102 seconds With celery The main component of a celery enabled program or a celery setup is the celery worker. In our web app signup example, celery worker would do the job of sending the emails. In our FB example, celery worker would do the job of fetching the different urls. Similary in our celery_blog.py example, celery worker would do the job of fetching the urls. Celery worker and your application/script are different processes and run independent of each other. So your application/script and celery need some way to communicate with each other. That’s where a message queue comes into picture. Application code needs to put the task somewhere from where celery worker can fetch it and execute. Application code puts the task on a message queue. Celery worker fetches the task from message queue and exectues the task. We will use redis as the message queue. Make sure you have redis installed and you are able to run redis-server Make sure you have celery installed. Change your file celery_blog.py, so it looks like: from celery import Celery app = Celery(&#39;celery_blog&#39;, broker=&#39;redis://localhost:6379/0&#39;) @app.task def fetch_url(url): resp = requests.get(url) print resp.status_code def func(urls): for url in urls: fetch_url.delay(url) if __name__ == &quot;__main__&quot;: func([&quot;http://google.com&quot;, &quot;https://amazon.in&quot;, &quot;https://facebook.com&quot;, &quot;https://twitter.com&quot;, &quot;https://alexa.com&quot;]) Explanation of code We need a celery instace for proper celery setup. We created a celery instance called app. Quoting celery docs from here. The first argument to Celery is the name of the current module, this is needed so that names can be automatically generated, the second argument is the broker keyword argument which specifies the URL of the message broker you want to use Message queue and message broker are synonymous term for our basic discussion. A celery worker can run multiple processes parallely. We want to hit all our urls parallely and not sequentially. So we need a function which can act on one url and we will run 5 of these functions parallely. So we wrote a celery task called fetch_url and this task can work with a single url. A celery task is just a function with decorator “app.task” applied to it. From our old function, we called the task 5 times, each time passing a different url. When we say “fetch_url.delay(url)”, the code is serialized and put in the message queue, which in our case is redis. Celery worker when running will read the serialized thing from queue, then deserialize it and then execute it. Start three terminals On first terminal, run redis using redis-server. On second terminal, run celery worker using celery worker -A celery_blog -l info -c 5. By seeing the output, you will be able to tell that celery is running. On third terminal, run your script, python celery_blog.py. Unlike last execution of your script, you will not see any output on “python celery_blog.py” terminal. It is because the actual work of hitting the url isn’t being done by your script anymore, it will be done by celery. Switch to the terminal where “celery worker” is running. You would see output lines like [2015-07-05 12:57:44,705: INFO/Worker-2] Starting new HTTPS connection (1): facebook.com [2015-07-05 12:57:44,711: INFO/Worker-4] Starting new HTTPS connection (1): twitter.com [2015-07-05 12:57:44,716: INFO/Worker-3] Starting new HTTPS connection (1): alexa.com [2015-07-05 12:57:44,791: INFO/Worker-1] Starting new HTTP connection (1): www.google.co.in [2015-07-05 12:57:45,063: WARNING/Worker-1] 200 [2015-07-05 12:57:45,376: INFO/Worker-5] Starting new HTTPS connection (1): www.amazon.in [2015-07-05 12:57:46,179: WARNING/Worker-2] 200 [2015-07-05 12:57:46,185: INFO/MainProcess] Task celery_blog.fetch_url[2809a803-00b2-44c7-85e5-3f6f71d3f5e3] succeeded in 1.48678409203s: None [2015-07-05 12:57:46,218: INFO/MainProcess] Task celery_blog.fetch_url[9d011563-67f9-4961-a61f-19956bf0cf0a] succeeded in 1.50805259595s: None .... ..... Your output might not match this. First thing to notice is the entire output of celery would have been printed in much less than 8 seconds. Earlier it took around 8 seconds to fetch 5 urls. With celery, it would have taken around 3 seconds or even lesser. Understanding celery worker -A celery_blog -l info -c 5 “-c 5” means that we set the concurrency as 5. So celery can run 5 parallel sub-processes. Each sub-process can act on a single task. “-l info” means we want celery to be verbose with its output. “-A celery_blog” tells that celery configuration, which includes the app and the tasks celery worker should be aware of, is kept in module celery_blog.py Understanding the output Celery worker is running 5 sub-processes simulataneously which it calls Worker-1, Worker-2 and so on. It’s not necessary that tasks’ will be fetched in exactly the same order as they were in list. When we ran python celery_blog.py, tasks were created and put in the message queue i.e redis. celery worker running on another terminal, talked with redis and fetched the tasks from queue. celery worker deserialized each individual task and made each individual task run within a sub-process. celery worker did not wait for first task/sub-process to finish before acting on second task. While first task is still being executed in a sub-process, celery worker fetched second task, deserialized it and gave it to another sub-process. That’s why our output is mixed up, i.e four tasks have started. But before 5th task could start, we got the result from 1st task, i.e the “200” you are seeing. Keeping celery code and configuration in different files. In last example, we only wrote one celery task. Your project might span multiple modules and you might want to have different tasks in different modules. So let’s move our celery configuration to a separate file. Create a file celery_config.py from celery import Celery app = Celery(&#39;celery_config&#39;, broker=&#39;redis://localhost:6379/0&#39;, include=[&#39;celery_blog&#39;]) Modify celery_blog.py so it looks like import requests from celery_config import app @app.task def fetch_url(url): resp = requests.get(url) print resp.status_code def func(urls): for url in urls: fetch_url.delay(url) if __name__ == &quot;__main__&quot;: func([&quot;http://google.com&quot;, &quot;https://amazon.in&quot;, &quot;https://facebook.com&quot;, &quot;https://twitter.com&quot;, &quot;https://alexa.com&quot;]) Stop old celery worker, and run “celery worker -A celery_config -l info -c 5” Start ipython and issue “func” from celery_blog import func func([&#39;https://google.com&#39;, &#39;https://facebook.com&#39;]) Output [2015-07-05 14:52:02,522: INFO/Worker-1] Starting new HTTPS connection (1): google.com [2015-07-05 14:52:02,522: INFO/Worker-5] Starting new HTTPS connection (1): facebook.com [2015-07-05 14:52:03,168: INFO/Worker-1] Starting new HTTPS connection (1): www.google.co.in [2015-07-05 14:52:03,959: INFO/Worker-5] Starting new HTTPS connection (1): www.facebook.com [2015-07-05 14:52:03,966: WARNING/Worker-1] 200 [2015-07-05 14:52:03,972: INFO/MainProcess] Task celery_blog.fetch_url[7dbf6870-987b-460e-b5f1-ca17af88bc0a] succeeded in 1.45625397097s: None [2015-07-05 14:52:04,915: WARNING/Worker-5] 200 [2015-07-05 14:52:04,922: INFO/MainProcess] Task celery_blog.fetch_url[d836a878-823f-4ca2-b918-a6ab0622a157] succeeded in 2.40576425701s: None Adding another task in a different file You can add another module and define a task in that module. Create a module celery_add.py with following content. from celery_config import app @app.task def add(a, b): return a + b Change celery_config.py to include the new module celery_add.py too. So celery_config.py becomes. from celery import Celery app = Celery(&#39;celery_config&#39;, broker=&#39;redis://localhost:6379/0&#39;, include=[&#39;celery_blog&#39;, &#39;celery_add&#39;]) Use the new task add from celery_add import add add.delay(4, 5) Output [2015-07-05 15:06:28,533: INFO/MainProcess] Received task: celery_add.add[0e8752a6-1d2f-4f8f-b003-656311beadd9] [2015-07-05 15:06:28,537: INFO/MainProcess] Task celery_add.add[0e8752a6-1d2f-4f8f-b003-656311beadd9] succeeded in 0.00138387701008s: 9 Using celery with a package. We will keep working with celery_config.py. Consider the folder containing celery_config.py is the root directory of your project. Create a package called pack at the same level as celery_config.py. Since you are creating a package make sure there is a pack/init.py file. Create a file pack/celery_fetch.py with following content. import requests from celery_config import app @app.task def fetch_url(url): resp = requests.get(url) print resp.status_code def func(urls): for url in urls: fetch_url.delay(url) Change celery_config.py so it looks like from celery import Celery app = Celery(&#39;celery_config&#39;, broker=&#39;redis://localhost:6379/0&#39;, include=[&#39;pack.celery_fetch&#39;]) Start celery worker from same level as celery_config.py celery worker -A celery_config -l info -c 5 Make sure you see the following in output. [tasks] . pack.celery_fetch.fetch_url Now use func from ipython. from pack.celery_fetch import func func([&#39;https://google.com&#39;, &#39;https://facebook.com&#39;]) Redis and celery on separate machines Till now our script, celery worker and redis were running on the same machine. But there is no such necessity. Three of them can be on separate machines. Celery tasks need to make network calls. So having celery worker on a network optimized machine would make the tasks run faster. Redis is an in-memory database, so very often you’ll want redis running on a memory-optimized machine. In this example let’s run redis on a separate machine and keep running script and celery worker on local system. I have a server at 54.69.176.94 where I have redis running. So change “broker” in the celery_config.py so it becomes. app = Celery(&#39;celery_config&#39;, broker=&#39;redis://54.69.176.94:6379/0&#39;, include=[&#39;celery_blog&#39;]) Now if I run any task, our script will serialize it and put it on redis running at 54.69.176.94. Celery worker will also communicate with 54.69.176.94, get the task from redis on this server and execute it. Note: You will have to use your own server address where redis-server is running. I have stopped redis on my server and so you will not be able to connect to redis. Celery and script/web-application on separate machines. As I told earlier, celery worker and your program are separate processes and are independent of each other. We can run them on different machines. Suppose you have a server at 54.69.176.94 where you want to run celery but you want to keep running your script on local machine. So you can copy all the files, in our case celery_config.py and celery_blog.py to the server. And run celery worker -A celery_config -l info on the server. Call any task on the local machine, it will be enqueued wherever the broker points. Celery worker on 54.69.176.94 is also connected with same broker, so it will fetch the task from this broker and can execute it. Gotchas In the simplest celery example, i.e where we have configuration and task fetch_url in the same file. Change app name from celery_blog to celery_blo. Run the worker, celery -A celery_blog worker -l info The output tells that task is registered as celery_blog.fetch_url Now try putting a task in queue. python celery_blog.py A KeyError is raised. Some lines of error: [2015-07-05 16:59:22,956: ERROR/MainProcess] Received unregistered task of type &#39;celery_blo.fetch_url&#39;. KeyError: &#39;celery_blo.fetch_url&#39; So when putting the task on queue, celery uses the app name i.e celery_blo. But worker i.e celery worker -A celery_blog registers the task using the module name i.e celery_blog and not using the app name i.e celery_bio.","author":{"@type":"Person","name":"akshar"},"@type":"BlogPosting","url":"http://localhost:4000/redis/2015/07/06/getting-started-with-celery-and-redis.html","headline":"Getting started with Celery and Redis","dateModified":"2015-07-06T10:54:44+05:30","datePublished":"2015-07-06T10:54:44+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/redis/2015/07/06/getting-started-with-celery-and-redis.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Agiliq Blogs" /></head>
-<body><header class="site-header" role="banner">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Agiliq Blogs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/assets/js/respond.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script>
+    	function onPageLoad() {
+    		var element = document.getElementById("content");
+    		var childNodes = element.childElementCount;
+    		if(childNodes > 0) {
+    		 	element.scrollIntoView(); 
+    	 	}
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/forms.html">Forms</a><a class="page-link" href="/categories/interviews.html">Interviews</a><a class="page-link" href="/categories/marketing.html">Marketing</a><a class="page-link" href="/categories/paypal.html">Paypal</a><a class="page-link" href="/categories/python.html">Python</a><a class="page-link" href="/categories/search.html">Search</a><a class="page-link" href="/categories/startup.html">Startup</a><a class="page-link" href="/categories/uncategorized.html">Uncategorized</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    	}
+    </script>
+    
+  </head>
+  <body onload="onPageLoad()"> 
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="">View On GitHub</a></li>
+          <!-- 
+            <li class="downloads"><a href="">ZIP</a></li>
+            <li class="downloads"><a href="">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+           -->
+        </nav>
+      </div><!-- end header -->
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Getting started with Celery and Redis</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2015-07-06T10:54:44+05:30" itemprop="datePublished">Jul 6, 2015
-      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">akshar</span></span></p>
-  </header>
+    <div class="wrapper">
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <h3 id="agenda">Agenda</h3>
+      <section>
+        <div id="title">
+          <h1>Agiliq Blogs</h1>
+          <!-- <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p> -->
+          <hr>
+          <span class="credits left">Project maintained by <a href="">Agiliq</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          <ul>
+		  
+		  <li>
+		    <a href="/python/2018/01/21/prime-number-binary-trex.html" >Finding a prime number whose binary representation is a giraffe (or a T-Rex)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-listview.html" >When and how to use Django ListView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-templateview.html" >When and how to use Django TemplateView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/11/adventures-in-advanced-django-orm-with-hyperloglog.html" >Adventures in advanced Django ORM with HyperLogLog</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/06/django-20-window-expressions-tutorial.html" >Django 2.0 Window expressions tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/02/configure-django-log-exceptions-production.html" >Configure Django to log exceptions in production</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2017/11/15/how-performant-your-python-web-application.html" >How performant is your Python web application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/11/01/how-python-generators-are-similar-iterators.html" >How Python generators are similar to iterators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/18/real-world-usage-iterators-and-iterables.html" >Real world usage of __iter__ and next</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/12/iterators-and-iterables.html" >Iterators and Iterables</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/appengine/2017/09/04/getting-started-webapp2-and-gae.html" >Getting started with webapp2 and GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/30/why-angularjs-services-arent-available-configurati.html" >Why AngularJS services aren't available in configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/27/what-when-and-how-angularjs-configuration-blocks.html" >What, when and how of AngularJS configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2017/04/26/trsfer-files-amzon-s3-using-browser-instead-server.html" >Transfer files to amazon s3 using browser instead of server</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/25/angularjs-injectors-internals.html" >AngularJS injectors internals</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/21/how-script-ordering-works-angular-app.html" >How script ordering works in an Angular app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/scrapy/2016/04/02/getting-started-with-python-scrapy.html" >Getting started with python scrapy</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/celery/2015/08/03/retrying-celery-failed-tasks.html" >Retrying celery failed tasks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/profiling-django-middlewares.html" >Profiling Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/understanding-django-middlewares.html" >Understanding Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/07/06/getting-started-with-celery-and-redis.html" >Getting started with Celery and Redis</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/29/tastypie-with-foreignkey.html" >Tastypie with ForeignKey</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/03/26/getting-started-with-redis-py.html" >Getting started with redis-py</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/23/getting-started-with-django-tastypie.html" >Getting started with Django tastypie</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2015/03/04/building-chrome-extensions.html" >Building Chrome Extensions</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2015/01/16/importing-your-old-comments-to-disqus-site.html" >Importing your old comments to Disqus site</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/how-not-knowing-encoding-can-trip-you.html" >How not knowing encoding can trip you</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/understanding-python-unicode-str-unicodeencodeerro.html" >Understanding Python unicode, str, UnicodeEncodeError and UnicodeDecodeError</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2014/12/04/building-a-restful-api-with-django-rest-framework.html" >Building a RESTful API with Django-rest-framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/encoding/2014/11/19/character-encoding-and-unicode.html" >Character encoding and Unicode</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2014/11/17/disqus-and-disqus-sso.html" >Disqus and Disqus SSO</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/http/client/2014/09/08/using-postman.html" >Using a Postman http client for efficient HTTP testing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/02/advanced-functional-testing-with-selenium.html" >Advanced functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/01/selenium-testing.html" >Introduction to functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coveralls.io/2014/08/22/travis-and-coveralls-for-private-repo.html" >Travis and coveralls for private repo</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/20/django-timezones.html" >Django timezones</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/app/deployment/2014/08/06/deploying-a-django-app-on-amazon-ec2-instance.html" >Deploying a Django app on Amazon EC2 instance.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/05/passing-parameters-to-django-admin-action.html" >Passing parameters to Django admin action</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/07/15/method-decorators-in-python.html" >Method decorators in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2014/06/05/minimal-gunicorn-configuration.html" >Minimal Gunicorn configuration</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/heroku/2014/06/05/heroku-django-s3-for-serving-media-files.html" >Heroku Django S3 for serving Media files</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysqltopostgres/2014/05/27/migrating-django-app-from-mysql-to-postgres.html" >Migrating django app from MySQL to Postgres</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2014/05/09/google-diff-match-patch-library.html" >Google diff match patch library</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/supervisor/2014/05/09/supervisor-with-django-and-gunicorn.html" >Supervisor with Django and Gunicorn</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/05/python-requests.html" >Python-requests</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/01/three-underutilized-python-commands.html" >Three underutilized python commands</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/travis/2014/05/01/continuous-integration-with-travis-and-coverallsio.html" >Continuous integration with travis and coveralls.io for Django apps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/04/28/django-backward-relationship-lookup.html" >Django backward relationship lookup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/10/17/producer-consumer-problem-in-python.html" >Producer-consumer problem in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/design/pattern/2013/10/14/state-pattern-with-ui-code.html" >State pattern with UI Code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/09/17/understanding-threads-in-python.html" >Understanding Threads in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/process/2013/09/11/process-and-threads-for-beginners.html" >Process and Threads for Beginners</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/nginx/2013/08/26/minimal-nginx-and-gunicorn-configuration-for-djang.html" >Minimal Nginx and Gunicorn configuration for Django projects</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/08/21/writing-thread-safe-django-code.html" >Writing thread-safe django - get_or_create</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/12/accept-bitcoins-using-python.html" >Accept bitcoins using python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/01/basics-wsgi.html" >Basics of WSGI</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/28/self-testing-fabfile-using-docker.html" >Self-testing fabfile using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/14/deploying-django-using-docker.html" >Deploying django using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/testing/2013/04/28/common-testing-scenarios-for-django-app.html" >Common testing scenarios for Django app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/static/2013/03/21/serving-static-files-in-django.html" >Serving static files in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2013/02/11/two-scoops-of-django-review.html" >Two Scoops of Django: Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/training/2013/02/08/introduction-to-python-workshop-on-february-15th-2.html" >Introduction to Python Workshop on February 15th, 2013</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2013/02/07/easy-client-side-form-validations-for-django-djang.html" >Easy client side form validations for Django: Django Parsley</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/21/moreapps-android-library-project-open-sourced.html" >MoreApps - Android Library Project: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/15/password-generetor-app-open-sourced.html" >Password Generator App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/14/todo-list-app-open-sourced.html" >Todo List App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2013/01/01/android-fragments-101.html" >Android Fragments 101</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/function/as/objects/2012/11/17/understanding-decorators-2.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2012/11/07/not-exactly-not-exactly-tim-the-enchanter.html" >Not exactly, not exactly tim the enchanter</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/internals/2012/11/01/the-missing-documentation-for-djangoutilsdatastruc.html" >The missing documentation for django.utils.datastructures</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2012/09/06/dissecting-phonegaps-architecture.html" >Dissecting Phonegaps Architecture</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2012/07/17/dropbox-file-upload-handler-for-django.html" >Dropbox file upload handler for django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/07/16/using-ubuntu-cloud-images-in-kvm.html" >Using Ubuntu cloud images in KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/metaclass/2012/07/02/metaclass-python.html" >Metaclass in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/06/25/libvirt-and-kvm.html" >Libvirt and KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/__new__/2012/06/10/__new__-python.html" >__new__() in python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/kwargs/2012/06/03/understanding-args-and-kwargs.html" >Understanding '*', '*args', '**' and '**kwargs'</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/provisioning/2012/05/29/provisioning-made-easy-with-chef.html" >Provisioning Made Easy With Chef</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/development/2012/05/02/test-driven-development-python.html" >Test Driven Development in Python </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/terminal/2012/03/20/developing-android-applications-from-command-line.html" >Developing android applications from command line</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vps/2012/02/23/deploy-django-app-5-easy-steps.html" >Deploy Django App in 5 Easy Steps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/22/deploying-django-apps-on-heroku.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/site_id/prefix/2012/02/05/dynamically-attaching-site_id-django-caching.html" > Dynamically attaching SITE_ID to Django Caching</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/04/deploying-django-apps-on-heroku-2.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/03/how-to-use-pep8py-to-write-better-django-code.html" >How to use pep8.py to write better Django code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/02/how-and-why-to-use-pyflakes-to-write-better-python.html" >How and why to use pyflakes to write better Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/south/2012/01/09/south.html" >Getting started with South for Django DB migrations</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2012/01/06/writing-jquery-plugins-using-coffeescript.html" >Writing jQuery plugins using Coffeescript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/response/2012/01/02/behind-the-scenes-request-to-response.html" >Request to Response</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/12/28/using-sqlite-database-with-android.html" >Using SQLite Database with Android</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2011/12/25/haml-for-django-developers.html" >Haml for Django developers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2011/12/24/coffeescript-for-python-programmers.html" >Coffeescript for Python programmers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/treeview/2011/10/12/how-use-jstree.html" >How to use jsTree</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2011/09/21/behind-the-scenes-from-html-form-to-storage.html" >From HTML Form to Storage</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2011/07/01/setting-your-system-start-django-development-ubunt.html" >Setting up your system to start with Django development on Ubuntu:</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/05/writing-an-e-mail-application-with-lamson-ii.html" >Writing an e-mail application with Lamson - II</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/01/writing-an-e-mail-application-with-lamson-i.html" >Writing an e-mail application with Lamson - I</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/jobs/2011/03/15/jobs.html" >Jobs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/08/comparision-iphone-android-phonegap-titanium.html" >Comparison of mobile app frameworks: Iphone, Java, Phonegap and Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/iphone/2011/02/08/getting-started-with-titanium-development.html" >Getting started with Titanium development for Android and Iphone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2011/02/06/getting-started-with-phonegap-using-xcode-for-mobi.html" >Getting started with PhoneGap using Xcode for Mobile app development</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/06/starting-android-app-developement-from-zero-to-app.html" >Starting Android app developement: From zero to app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mobile/applications/2011/02/03/iphoneandroid-application-development-using-titani.html" >iPhone and Android application development using Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/21/link-roundup-10.html" >Link roundup 10</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/07/link-roundup-9.html" >Link roundup 9</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/31/book-review-the-principles-of-beautiful-web-design.html" >Book Review: The Principles Of Beautiful Web Design</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/31/link-roundup-8.html" >Link roundup 8</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/emacs/2010/12/27/django-emacs-setup.html" >Django emacs setup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/26/book-review-pragmatic-guide-to-javascript.html" >Book Review: Pragmatic Guide to JavaScript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/25/the-principles-of-successful-freelancing.html" >Book review: The Principles of Successful Freelancing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-the-principles-of-project-management.html" >Book review: The Principles of Project Management</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-outsourcing-web-projects.html" >Book Review: Outsourcing Web Projects.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/23/link-roundup-for-week-ending-24122010.html" >Link roundup for week ending 24/12/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/%0A2010-12-22-real-time-applications-with-django-xmpp-and-stroph.markdown/xmpp/2010/12/22/real-time-applications-with-django-xmpp-and-stroph.html" >Real time applications with Django, XMPP and StropheJS</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2010/12/04/the-unfuddle-tutorial.html" >The Unfuddle Tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/12/04/experiments-in-url-design.html" >Experiments in URL design.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/26/link-roundup-for-week-ending-26112010.html" >Link roundup for week ending 26/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/19/link-roundup-for-week-ending-19112010.html" >Link Roundup for week ending 19/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/12/link-roundup-for-week-ending-12112010.html" >Link Roundup for week ending 12/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2010/11/07/i-am-so-starving-same-web-app-in-various-python-we.html" >I am so starving: Web app in python frameworks.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vim/2010/11/03/seven-reasons-why-you-should-switch-to-vim-for-dja.html" >Seven reasons why you should switch to Vim</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/03/link-roundup-for-week-ending-5112011.html" >Link Roundup for week ending 5/11/2011</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/wordpress/2010/10/28/importing-wordpress.html" >Importing wordpress</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2010/10/25/getting-trending-github-projects-via.html" >Getting trending Github projects via YQL</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/22/link-roundup-for-week-ending-2.html" >Link Roundup for week ending 22/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2010/10/18/essential-web-apps-to-run-a.html" >Essential web-apps to run a software business.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/opinion/2010/10/17/django-is-not-flexible.html" >Django is not flexible</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/15/link-roundup-for-week-ending.html" >Link Roundup for week ending 15/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/06/08/moving-home.html" >Moving home</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2010/03/20/rails-and-django-commands-comparison-and-conversio.html" >Rails and Django commands : comparison  and conversion</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rails/2010/03/20/the-rails-and-django-models-layer-rosseta-stone.html" >The Rails and Django models layer Rosseta stone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/models/2010/01/18/doing-things-with-django-models-aka-django-models.html" >Doing things with Django models - aka - Django models tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/01/17/wordpress-and-django-best-buddies.html" >Wordpress and Django: best buddies</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2010/01/14/doing-things-with-django-forms.html" >Doing things with Django forms</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/01/07/django-forum.html" >django-forum</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/12/13/django-buzz.html" >Django-buzz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/12/using-bpython-shell-with-django-and-some-ipython-f.html" >Using bpython shell with django (and some Ipython features you should know)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/india/2009/12/10/fossin-2009-the-best-fossin-ever.html" >Foss.in 2009: The best foss.in. Ever. </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/03/python-metaclasses-and-how-django-uses-them.html" >Python metaclasses and how Django uses them</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/12/03/django-quiz.html" >Django quiz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/11/26/django-for-a-rails-developer.html" >Django for a Rails Developer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/11/21/the-magic-of-metaclasses-in-python.html" >The magic of metaclasses in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/21/writing-your-own-template-loaders.html" >Writing your own template loaders</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/11/django-gotchas.html" >Django gotchas </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/10/02/pycon-india-2009-a-review.html" >Pycon India 2009 : A Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/09/18/beginning-python.html" >Beginning python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/08/27/django-socialauth-login-via-twitter-facebook-openi.html" >Django-SocialAuth - Login via twitter, facebook, openid, yahoo, google using a single app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rambling/2009/08/20/a-response-to-dropping-django.html" >A response to Dropping Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/aggreagtion/2009/08/18/django-aggregation-tutorial.html" >Django aggregation tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2009/07/16/on-captcha.html" >On Captcha</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2009/07/03/django-design-patterns.html" >Django design patterns</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/07/02/remote-debugging-debugging-pesky-server-only-bugs.html" >Remote debugging - debugging pesky server only bugs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/06/25/django-request-response-processing.html" >Django Request Response processing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/24/better-python-package-management-using-source-and.html" >Better Python package management using source and version control systems</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/23/understanding-decorators.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/06/16/generating-pseudo-random-text-with-markov-chains-u.html" >Generating pseudo random text with Markov chains using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/06/14/yahoo-boss-python-api.html" >Yahoo BOSS python api</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2009/06/10/python-wrapper-on-bing-api.html" >Python Wrapper on Bing API</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/ecommerce/2009/03/31/exploring-authorizenet-payment-gateway-options-and.html" >Exploring Authorize.net Payment Gateway Options and integrating it with django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/satchmo/2009/03/26/create-your-own-online-store-in-few-hours-using-sa.html" >Create your own online store in few hours using satchmo (django)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/pinax/2009/03/18/create-a-new-social-networking-site-in-few-hours-u.html" >Create a new social networking site in few hours using pinax platform (django).</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/03/11/uswaretech-whitepapers.html" >Uswaretech whitepapers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/products/2009/03/11/django-subdomains-easily-create-subscription-based.html" >Django-subdomains - Easily create subscription based subdomains enabled webapps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/09/finding-keywords-using-python.html" >Finding keywords using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2009/03/09/web-development-companies-working-with-django.html" >Web development companies working with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/presentations/2009/03/08/developing-a-web-application-live-in-15-min-in-dja.html" > Developing a Web Application Live in 15 min, in django framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/06/constraint-programming-in-python.html" >Constraint programming in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2009/03/06/django-with-mysql-and-apache-on-ec2.html" >Django with Mysql and Apache on EC2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/facebook/2009/02/20/how-to-build-a-facebook-app-in-django.html" >How to build a Facebook app in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/web2.0/2009/02/19/how-we-built-a-twitter-application.html" >How we built a Twitter Application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/paypal/2008/11/12/using-paypal-with-django.html" >Using Paypal with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/10/using-subdomains-with-django.html" >Using subdomains with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2008/10/10/dynamic-forms-with-django.html" >Dynamic forms with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/07/generating-pdfs-with-django.html" >Generating PDFs with Django </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html" >An Interview with Adrian Holovaty - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/05/30/an-interview-with-jacob-kaplan-moss-creator-of-dja.html" >An Interview with Jacob Kaplan-Moss - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/14/an-idea-a-day-a-geographical-wiki.html" >An idea a day - A geographical wiki</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/13/an-idea-a-day-alternative-to-gae.html" >An idea a day - Alternative to GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/12/an-idea-a-day-remotely-hosted-analytics-solution.html" >An idea a day - Remotely hosted Analytics solution</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2008/05/12/popularising-django-part-2.html" >Popularising Django - Part 2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/11/an-idea-a-day-recomendation-system-based-ad-networ.html" >An idea a day - Recomendation system based ad network</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/10/an-idea-a-day-an-automated-adwords-optimizer.html" >An idea a day - An automated Adwords optimizer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/05/08/parable-of-the-single-sheep-or-how-google-is-destr.html" >Parable of the single sheep - Or How Google is destroying the internet, and nobody seems to know.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/an-interview-with-michael-trier.html" >An interview with Michael Trier</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/popularizing-django-or-reusable-apps-considered-ha.html" >Popularizing Django -- Or Reusable apps considered harmful.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html" >Interview with James Bennett - Django release manager</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/04/22/parable-of-the-nofollow.html" >Parable of the nofollow</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/22/why-people-start-startups.html" >Why people start startups.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/04/21/marketing-lessons-from-google.html" >Marketing lessons from Google</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/18/five-things-i-hate-about-django.html" >Five Things I Hate About Django.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/12/first-step-to-startup-getting-your-pitch.html" >First step to startup - Getting your pitch</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/11/two-djangoappengine-tutorials.html" >Two Django+Appengine Tutorials</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/using-appengine-with-django-why-it-is-pretty-much.html" >Using Appengine with Django, why it is pretty much unusable</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/google-appengine-first-impressions.html" >Google Appengine - First Impressions</a>
+		  </li>
+		  
+		</ul>
+        </div>
+        
+        
+        
+      </section>
+      <div id="content">
+     	<h3 id="agenda">Agenda</h3>
 
 <ul>
   <li>When to use Celery.</li>
@@ -408,34 +1210,10 @@ KeyError: 'celery_blo.fetch_url'
 <p>So when putting the task on queue, celery uses the app name i.e <code class="highlighter-rouge">celery_blo</code>. But worker i.e <code class="highlighter-rouge">celery worker -A celery_blog</code> registers the task using the module name i.e <code class="highlighter-rouge">celery_blog</code> and not using the app name i.e <code class="highlighter-rouge">celery_bio</code>.</p>
 
 
-  </div><a class="u-url" href="/redis/2015/07/06/getting-started-with-celery-and-redis.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Agiliq Blogs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Agiliq Blogs</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-      </div>
+       </div>
     </div>
 
-  </div>
-
-</footer>
-</body>
-
+    
+  </body>
 </html>
+

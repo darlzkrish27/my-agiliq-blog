@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Metaclass in Python | Agiliq Blogs</title>
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="Metaclass in Python" />
@@ -18,37 +20,837 @@
 <script type="application/ld+json">
 {"description":"In this post we will be talking about Metaclass in python. If you are reading some code which uses metaclass, you will probably come across __new__. If you are not familiar with what __new__ does, i suggest you first read about __new__. You can read about __new__ in our last to last post Throughout this post we will be talking about new style classes. Things might differ in old-style classes. As we go, i will be trying everything on IPython and suggest you as well to try everything on IPython. Let’s see a little bit about normal Objects in Python. &gt;&gt;&gt; class A(object): ... pass ... We created a class named A. A extends from class object (Here by object we mean class named object from which all new style classes extend). Hereafter if we use lowercase ‘o’ in object, it means we want to refer to the class named object. If we use an Object with uppercase ‘O’, we mean an instance of some class i.e an instance created by calling the class. Let’s create an instance of A. &gt;&gt;&gt; obj=A() Let’s print ‘obj’ to see what it is. &gt;&gt;&gt; print obj &lt;__main__.A object at 0x1e34e50&gt; #output Output tells that obj is an instance of A. Or, we can say obj is an Object(Pay attention to the capital ‘O’ we used in Object). Let’s check the type of obj. ###What is type of an Object? Roughly speaking, by type of an Object, we mean the class of the concerned Object. By knowing the type of an Object/instance, we know what class was used to create the concerned instance. It is like knowing concerned Object is an instance of which class. ###How do we know the type of an Object/instance? There is a built-in function named type() which tells the type/class of the Object. Method signature of type is: type(some_object) This method returns the class of the passed argument. So, it tells the class which was used to create the passed argument. Documentation of type() says that type() takes an Object as the argument and returns the class of that Object. It means that if you pass some argument to type() and type() executes successfully without raising an error, it means that the argument you passed is an Object. You can consider it as a test of being an Object. Let’s check type of obj now. &gt;&gt;&gt; type(obj) &lt;class &#39;__main__.A&#39;&gt; #output Output tells that class of obj is A which means that obj is an instance of A. As we know, A is a class. But is A an Object? In other words, is A an instance of something? Let’s try finding out using type(). &gt;&gt;&gt; type(A) &lt;type &#39;type&#39;&gt; #output We passed a class, class A, as an argument to type(). Since type() executed successfully and did not raise any error, it confirms A is an Object. It means even classes are Objects in Python. Actually, everything is an Object in Python. Classes are Objects, Functions are Objects, Methods are Objects, Literals are Objects. Anything you can define in Python is an Object. We can verify this by passing anything we can define in Python as an argument to type() and we will see that type() will execute successfully without raising any error. &gt;&gt;&gt; type(A) &lt;type &#39;type&#39;&gt; #classes are Objects &gt;&gt;&gt; type(2) &lt;type &#39;int&#39;&gt; #integer is an Object &gt;&gt;&gt; def met(arg): ... return arg ... &gt;&gt;&gt; type(met) &lt;type &#39;function&#39;&gt; #functions are Objects ###What is a Metaclass? We verified that classes are Objects in Python. But Object mean instance. So, a class must be an instance of some other class i.e class itself must be an instance of some other class. In our example, class A must be an instance of some other class. Let’s assume the name of that class is SomeClass. SomeClass is a metaclass. So, the class of a class is known as Metaclass. Might be a little confusing, Keep reading, it will be clear with the explanation to follow. ####Explanation: In our earlier examples, class of obj was A which means obj is an instance of A. But, we could even execute type(A) which must have returned the class of A. Or in other words, we can say it told us A was an instance of which class. Let’ see it once more. &gt;&gt;&gt; type(A) &lt;type &#39;type&#39;&gt; #output Output means that A is an instance of a class named type. In other words, class of A is type. Don’t get confused when we are saying that type is a class and earlier we said that type() is a builtin function. We have the explanation in next few lines. obj was an instance of A and we created it like “obj=A()”. A is an instance of type. So, under the hood, A would have got created something like “A=type()”. This call to class type for creating class A was taken care by the interepreter when interpreter saw the class definition for A. Actually, call to class type is a little different than this, some arguments are also passed while calling type which we will see soon. A is a class. And A’s class is type. So, here type is a metaclass because it is a class of a class. ###Earlier we said that type() is a builtin function. Now we are saying that type is a class. How? Yes, there is a built-in function named type() in Python as well as there is a class named type in Python. How the interpreter interprets it depends on how we use it. If we pass a single argument to type(), it is interpreted as a function and we get the class of the passed argument. type is also a class and it can be used to create instance. Infact it must have been used to create class A as we described in last to last paragraph, though it was used under the hood. Since it was used under the hood, we could not see how class type was used to create class A. Instances of class type turn out to be classes. eg: A is an instance of class type but it is a class as well. Till here we know that type is the metaclass used for creating class A. Remember type is the default metaclass which is used to create classes. We can override this default behaviour. We can specify an attribute named __metaclass__ on the class we want to be created and the required class will be created using the metaclass that we specify. If you understood that type is the default metaclass that was used here, you need not worry about other metaclass stuff that we wrote in this para, it will be clear with next few lines. ####Before we go further, a para about __new__. We know that instance of a class is created by calling that class. Calling that class in turns calls the __new__ method of that class where actual instance creation happens. As we know, a class is an instance of the metaclass. So a class must be getting created by calling the metaclass which in turn would be invoking __new__ of the metaclass where actual class creation would be happening. ###How was class A created? Interpreter sees the class definition which was class A in our case. Interpreter checks whether an attribute named __metaclass__ has been defined for this class. If not then it considers class type as the metaclass and uses it to create the required class. In our class definition for class A, there was no attribute named __metaclass__ defined on A. So, class type was used as the metaclass and was used to create A. As we know a class is an instance of the Metaclass. So it must be getting created in __new__ of the Metaclass. So for our case, class A must have got created inside __new__ of class type. For creating a class, metaclass is called by the interpreter passing three arguments to the metaclass. Three arguments are : name : This will be the name of the class that needs to be created. For our case, it would be string ‘A’. bases : it is a tuple containing all the bases for the class that needs to be created. For our case, it would be a tuple containing only one class which is class object. So, it is (object,) attrs : It is a dictionary containing all the attributes defined for the class plus one additional key which is __module__. Here we did not define any attribute for A, so dictionary will only have one key value pair. So, attrs is {‘__module__’:’__main__’} So, for creating class A, interpreter would have made the following call under the hood on seeing the class definition of A. type(‘A’, (object,), {‘__module__’:’__main__’}) Remember, interpreter will call the metaclass and will pass it three arguments described above whenever interpreter needs to create a class. This in turn would have called method __new__ on class type to create an instance of class type which turns out to be class A. And thus class A was created. ###Using class type explicitly to create a class. In the previous section we saw that class type was used under the hood to create class A. Also we saw that three arguments were passed while calling type. We can create a class by explicitly using class type and without writing the class definition. Try the next statement in your shell. &gt;&gt;&gt; A=type(&#39;A&#39;, (object,), {}) We called class type and pass it the required arguments to create a class. Pay attention that we passed three arguments to type. First argument is a string which is the name we want for the class. Second argument is a tuple containing the base classes we want for our class. Since we wanted to create a new style class, we want our class to extend from object and hence tuple contains object. If you want your class to extend from some more classes, you can add those classes to the tuple. Third argument is a dictionary containing the attributes that we want to set on the class. Here we did not want to set any attribute on the class, so dictionary is empty. Remember three arguments need to be passed while calling class type if we are using class type explicitly. Also, the arguments need to be passed in the same order that we described earlier i.e first argument should be the name we want for the class, second argument should be a tuple of bases for the class and third argument must be a dictionary containing the attributes we want on the class. However, interpreter takes care of adding one key value pair to this dictionary which specifies the module for the class. So, interpreter would have changed our call to class type to: A = type(‘A’, (object,) {‘__module__’ : ‘__main__’}) ####Why three arguments need to be passed when calling class type? class type has a method __new__ where actual class creation happens. But method __new__ of class type has been defined to expect four arguments. As you must be knowing, __new__ receives all the arguments passed while calling the class plus one extra argument, which is the class itself, as the first argument. In total, __new__ of type expects four arguments to be passed to it, so we need to call class type passing it three arguments. One extra argument will be added by the interpreter and hence four arguments will be passed to __new__ of class type. Try printing A and type of A. &gt;&gt;&gt; A &lt;class &#39;__main__.A&#39;&gt; This confirms that class A was created by our explicit call to class type. &gt;&gt;&gt; type(A) &lt;type &#39;type&#39;&gt; This confirms that A is an instance of type or the metaclass used to create class A is class type. So in this section we explicitly used class type to create class A. We did not use the class definition to create the class. This was just to demonstrate that type creates our class under the hood and we could use type explicitly to create our class. Till here we only talked about the default metaclass type. Let’s write our own Metaclass now. ###Some points about Metaclass to keep in mind. class type is the default metaclass used for class creation. Metaclass is just a class which has the capability to create a class. Like a normal class has the capability to create an instance of that class, similarly Metaclass has the capability to create a class. The created class is an instance of Metaclass. Remember, a class is an instance of Metaclass. So we can treat a class similar to how we treat an instance and in that case don’t get confused. Since type is the default metaclass which knows how to create a class, so if we want to write a metaclass we must extend class type. Let’s write the Metaclass named MyMeta. &gt;&gt;&gt; class MyMeta(type): ... def __new__(cls, name, bases, attrs): ... return super(MyMeta, cls).__new__(cls, name, bases, attrs) ... Name of our metaclass is MyMeta. Our Metaclass extends from class type. We override method __new__ of class type in MyMeta. Interpreter would call our metaclass with three arguments and hence __new__ of metaclass would be receiving four arguments. So we take care that __new__ of metaclass expects four arguments. Inside __new__ of MyMeta we use __new__ of superclass which turns out to be __new__ of class type. As we discussed earlier, actual class creation happens inside __new__ of type if no metaclass is used. It means __new__ of class type knows how class creation works at low level. So if we are writing a metaclass, we must inherit from class type so that we can inherit the class creation capability of class type. And we must overide __new__ of type and must use __new__ of superclass type in the overridden __new__ for class creation. Let’s use the metaclass we wrote to create some class. &gt;&gt;&gt; class B(object): ... __metaclass__ = MyMeta ... We defined a class named B and set an attribute __metaclass__ on this class. Attribute __metaclass__ was set as MyMeta, the metaclass we just wrote. Let’s check class of B. Or we can say let’s check B is an instance of which class. &gt;&gt;&gt; type(B) &lt;class &#39;__main__.MyMeta&#39;&gt; #output Output tells that B is an instance of MyMeta. So, MyMeta was used to create class B. ####How was class B created? Interpreter sees the class definition. Interpreter sees that there is an attribute __metaclass__ defined on B. So now interpreter knows that default metaclass type must not be used to create B. Instead MyMeta must be used to create B. So, interpreter makes a call to MyMeta to create class B. Internally interpreter makes the following call. MyMeta(‘B’, (object,), {‘__module__’:’__main__’, ‘__metaclass__‘:MyMeta}) When MyMeta is called, __new__ of MyMeta is invoked. __new__ of MyMeta gets passed three arguments that were passed while calling MyMeta. Additionally, it also gets passed an extra argument as the first argument. This extra argument is the class in which __new__ is defined. So, __new__ of MyMeta gets passed four arguments. We have defined __new__ of MyMeta to expect four arguments. Inside __new__ of MyMeta, we use __new__ of superclass type to create the instance of MyMeta. This instance of MyMeta turns out to be class B. This is the reason our metaclass should extend from type. So that we could use __new__ of superclass i.e __new__ of type in the overridden __new__ . We want to use __new__ of type for actual class creation because it already knows how to do it and we don’t need to bother about how actual class creation works at low level. We return this created instance of MyMeta i.e class B from __new__ of MyMeta. We can print everything inside __new__ of MyMeta to verify what all is received by __new__ of MyMeta for creating class B. Let’s redefine MyMeta. &gt;&gt;&gt; class MyMeta(type): ... def __new__(cls, name, bases, attrs): ... print &quot;cls is&quot;, cls ... print &quot;name is&quot;, name ... print &quot;attrs is&quot;, attrs ... return type.__new__(cls, name, bases, attrs) ... Let’s again define class B and set its __metaclass__ as MyMeta. &gt;&gt;&gt; class B(object): ... __metaclass__ = MyMeta ... cls is &lt;class &#39;__main__.MyMeta&#39;&gt; #output name is B #output attrs is {&#39;__module__&#39;: &#39;__main__&#39;, &#39;__metaclass__&#39;: &lt;class &#39;__main__.MyMeta&#39;&gt;} #output ####What happened here? Interpreter saw the class definition. It sees that there is an attribute named __metaclass__. Its uses this __metaclass__ to create class B. So, it makes the following call: MyMeta(‘B’, (object,), {‘__module__’:’__main__’, ‘__metaclass__‘:MyMeta}) This call in turn would invoke __new__ of MyMeta. First argument received by __new__ of any class is the class itself. So, in __new__ of MyMeta, first argument received is class MyMeta itself. We can verify this by the output of first print statement. Second argument received by __new__ of MyMeta is the name of the class that need to be created. From the output, we verify that it is ‘B’. In the last statement in __new__ of MyMeta, we pass all the received arguments to __new___ of type where actual class creation happens. Earlier when we were not using any metaclass, default metaclass type was being used. At that time __new__ of type was used and the first argument being passed to __new__ of type was class type itself. So, the class created used to be an instance of class type. But now, in our call to __new__ of class type from inside __new__ of MyMeta, we are passing cls as the first argument. As we verified by printing cls, cls refers to class MyMeta. So now our created class is an instance of MyMeta. Remember our last post about __new__ where we override __new__ of class object, and used __new__ of object in overridden __new__. The created instance was an instance of the class that we passed as first argument to __new__. That’s why here the created instance which is class B is an instance of MyMeta since the first argument passed to __new__ of class type is MyMeta. Till this point, we did not do anything special in our Metaclass. If we don’t use any metaclass, our class would be an instance of class type. When we set a metaclass attribute on our class, the class turns out to be an instance of the metaclass that we set. But apart from it we did not do any special operation on our class. Let’s perform some operation during class creation. Let’s consider a weird example. This example is only for illustration purpose. This example is in part taken from how class Meta is implemented in Django models. Let’s consider that we are writing some framework. People would be writing classes in that framework. We want to force some limitations on the class that people are going to write. We only want to allow a limited number of attributes on any class that can be defined. Say we only want people to set attribute named first and second on any class they define. Any other attributes they try to set on the class must be discarded during class creation. Say a person writes a class and defines three attributes namely first, second and third on the class. However we only want to allow two attributes namely first and second on the class. We don’t want any attribute apart from attributes named first and second to be available on the created class. So in this case we need to discard attribute named third. Also we should not be touching any attributes that start with _. Attributes that start with _ are private. Also there are few attributes that are generated by Python which start with __. An example is __module__. We should not be touching those attributes as changing them would lead to weird behaviour. Let’s write our metaclass. &gt;&gt;&gt; allowed_attributes = [&#39;first&#39;, &#39;second&#39;] We defined a list of attributes that we will allow on the class. Next comes the metaclass that will be used to create the class. &gt;&gt;&gt; class Meta(type): ... def __new__(cls, name, bases, attrs): ... print &quot;Given attributes are&quot;, attrs ... attrs_list = list(attrs) ... for each_attr in attrs_list: ... if not each_attr.startswith(&#39;_&#39;) and each_attr not in allowed_attributes: ... del attrs[each_attr] ... print &quot;Attributes after deleting non allowed attributes&quot;, attrs ... return type.__new__(cls, name, bases, attrs) ... ###What all happens in this metaclass? First line prints the dictionary that we get in __new__. If we don’t make any manipulation in this dictionary, all the keys defined in this dictionary will be available as attributes on the class that is created using this metaclass. We create a list from this dictionary in line 2 of __new__. Reason is that we we want to manipulate the dictionary while looping over the contents of dictionary. But changing dictionary size during iterating over the dictionary is not allowed in Python. So, we create a list from this dictionary on which we can iterate and while iterating we make changes to the dictionary from which this list was created. We loop over the created list. We first check that the attribute does not start with _. Then we check whether the attribute should be allowed for the class. If the attribute does not start with _ and also if it should not be allowed as an attribute, in such case our condition evaluates to True and we reach the next line. Here we delete this attribute from the dictionary if the condition in last statement evaluates to True. We print the attributes after we are done manipulating the dictionary. Actual class creation happens at this line. Let’s use the metaclass that we just wrote to create some class. &gt;&gt;&gt; class C(object): __metaclass__ = Meta first = 1 second = 2 third = 3 ... Given attributes are {&#39;__module__&#39;: &#39;__main__&#39;, &#39;__metaclass__&#39;: &lt;class &#39;__main__.Meta&#39;&gt;, &#39;second&#39;: 2, &#39;third&#39;: 3, &#39;first&#39;: 1} #output Attributes after deleting non allowed attributes {&#39;__module__&#39;: &#39;__main__&#39;, &#39;__metaclass__&#39;: &lt;class &#39;__main__.Meta&#39;&gt;, &#39;second&#39;: 2, &#39;first&#39;: 1} #output We tried setting three attributes on class C. Compare the two lines of output. In the second line of output, it can be seen that key named ‘third’ has been removed. So when we passed this dictionary during actual class creation, key ‘third’ was not present in attrs and hence attribute ‘third’ will not be available on class C. Let’s confirm that. &gt;&gt;&gt; C.first 1 #output &gt;&gt;&gt; C.second 2 #output &gt;&gt;&gt; C.third Traceback (most recent call last): File &quot;&lt;ipython-input-55-b760afd6f6d5&gt;&quot;, line 1, in &lt;module&gt; C.third AttributeError: type object &#39;C&#39; has no attribute &#39;third&#39; That was all about Metaclasses. Hope you liked the post. P.S : I never had to write any metaclass in my project and i believe one would never need to write it unless one is writing a framework. Quoting Tim Peters Metaclasses are deeper magic than 99% of users should ever worry about. If you wonder whether you need them, you don’t (the people who actually need them know with certainty that they need them, and don’t need an explanation about why). You may also like to read The magic of metaclasses in Python","author":{"@type":"Person","name":"akshar"},"@type":"BlogPosting","url":"http://localhost:4000/metaclass/2012/07/02/metaclass-python.html","headline":"Metaclass in Python","dateModified":"2012-07-02T08:11:46+05:30","datePublished":"2012-07-02T08:11:46+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/metaclass/2012/07/02/metaclass-python.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Agiliq Blogs" /></head>
-<body><header class="site-header" role="banner">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Agiliq Blogs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/assets/js/respond.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script>
+    	function onPageLoad() {
+    		var element = document.getElementById("content");
+    		var childNodes = element.childElementCount;
+    		if(childNodes > 0) {
+    		 	element.scrollIntoView(); 
+    	 	}
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/forms.html">Forms</a><a class="page-link" href="/categories/interviews.html">Interviews</a><a class="page-link" href="/categories/marketing.html">Marketing</a><a class="page-link" href="/categories/paypal.html">Paypal</a><a class="page-link" href="/categories/python.html">Python</a><a class="page-link" href="/categories/search.html">Search</a><a class="page-link" href="/categories/startup.html">Startup</a><a class="page-link" href="/categories/uncategorized.html">Uncategorized</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    	}
+    </script>
+    
+  </head>
+  <body onload="onPageLoad()"> 
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="">View On GitHub</a></li>
+          <!-- 
+            <li class="downloads"><a href="">ZIP</a></li>
+            <li class="downloads"><a href="">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+           -->
+        </nav>
+      </div><!-- end header -->
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Metaclass in Python</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2012-07-02T08:11:46+05:30" itemprop="datePublished">Jul 2, 2012
-      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">akshar</span></span></p>
-  </header>
+    <div class="wrapper">
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p>In this post we will be talking about Metaclass in python. If you are reading some code which uses metaclass, you will probably come across <code class="highlighter-rouge">__new__</code>. If you are not familiar with what __new__ does, i suggest you first read about __new__.</p>
+      <section>
+        <div id="title">
+          <h1>Agiliq Blogs</h1>
+          <!-- <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p> -->
+          <hr>
+          <span class="credits left">Project maintained by <a href="">Agiliq</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          <ul>
+		  
+		  <li>
+		    <a href="/python/2018/01/21/prime-number-binary-trex.html" >Finding a prime number whose binary representation is a giraffe (or a T-Rex)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-listview.html" >When and how to use Django ListView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-templateview.html" >When and how to use Django TemplateView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/11/adventures-in-advanced-django-orm-with-hyperloglog.html" >Adventures in advanced Django ORM with HyperLogLog</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/06/django-20-window-expressions-tutorial.html" >Django 2.0 Window expressions tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/02/configure-django-log-exceptions-production.html" >Configure Django to log exceptions in production</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2017/11/15/how-performant-your-python-web-application.html" >How performant is your Python web application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/11/01/how-python-generators-are-similar-iterators.html" >How Python generators are similar to iterators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/18/real-world-usage-iterators-and-iterables.html" >Real world usage of __iter__ and next</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/12/iterators-and-iterables.html" >Iterators and Iterables</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/appengine/2017/09/04/getting-started-webapp2-and-gae.html" >Getting started with webapp2 and GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/30/why-angularjs-services-arent-available-configurati.html" >Why AngularJS services aren't available in configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/27/what-when-and-how-angularjs-configuration-blocks.html" >What, when and how of AngularJS configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2017/04/26/trsfer-files-amzon-s3-using-browser-instead-server.html" >Transfer files to amazon s3 using browser instead of server</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/25/angularjs-injectors-internals.html" >AngularJS injectors internals</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/21/how-script-ordering-works-angular-app.html" >How script ordering works in an Angular app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/scrapy/2016/04/02/getting-started-with-python-scrapy.html" >Getting started with python scrapy</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/celery/2015/08/03/retrying-celery-failed-tasks.html" >Retrying celery failed tasks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/profiling-django-middlewares.html" >Profiling Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/understanding-django-middlewares.html" >Understanding Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/07/06/getting-started-with-celery-and-redis.html" >Getting started with Celery and Redis</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/29/tastypie-with-foreignkey.html" >Tastypie with ForeignKey</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/03/26/getting-started-with-redis-py.html" >Getting started with redis-py</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/23/getting-started-with-django-tastypie.html" >Getting started with Django tastypie</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2015/03/04/building-chrome-extensions.html" >Building Chrome Extensions</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2015/01/16/importing-your-old-comments-to-disqus-site.html" >Importing your old comments to Disqus site</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/how-not-knowing-encoding-can-trip-you.html" >How not knowing encoding can trip you</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/understanding-python-unicode-str-unicodeencodeerro.html" >Understanding Python unicode, str, UnicodeEncodeError and UnicodeDecodeError</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2014/12/04/building-a-restful-api-with-django-rest-framework.html" >Building a RESTful API with Django-rest-framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/encoding/2014/11/19/character-encoding-and-unicode.html" >Character encoding and Unicode</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2014/11/17/disqus-and-disqus-sso.html" >Disqus and Disqus SSO</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/http/client/2014/09/08/using-postman.html" >Using a Postman http client for efficient HTTP testing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/02/advanced-functional-testing-with-selenium.html" >Advanced functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/01/selenium-testing.html" >Introduction to functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coveralls.io/2014/08/22/travis-and-coveralls-for-private-repo.html" >Travis and coveralls for private repo</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/20/django-timezones.html" >Django timezones</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/app/deployment/2014/08/06/deploying-a-django-app-on-amazon-ec2-instance.html" >Deploying a Django app on Amazon EC2 instance.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/05/passing-parameters-to-django-admin-action.html" >Passing parameters to Django admin action</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/07/15/method-decorators-in-python.html" >Method decorators in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2014/06/05/minimal-gunicorn-configuration.html" >Minimal Gunicorn configuration</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/heroku/2014/06/05/heroku-django-s3-for-serving-media-files.html" >Heroku Django S3 for serving Media files</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysqltopostgres/2014/05/27/migrating-django-app-from-mysql-to-postgres.html" >Migrating django app from MySQL to Postgres</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2014/05/09/google-diff-match-patch-library.html" >Google diff match patch library</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/supervisor/2014/05/09/supervisor-with-django-and-gunicorn.html" >Supervisor with Django and Gunicorn</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/05/python-requests.html" >Python-requests</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/01/three-underutilized-python-commands.html" >Three underutilized python commands</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/travis/2014/05/01/continuous-integration-with-travis-and-coverallsio.html" >Continuous integration with travis and coveralls.io for Django apps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/04/28/django-backward-relationship-lookup.html" >Django backward relationship lookup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/10/17/producer-consumer-problem-in-python.html" >Producer-consumer problem in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/design/pattern/2013/10/14/state-pattern-with-ui-code.html" >State pattern with UI Code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/09/17/understanding-threads-in-python.html" >Understanding Threads in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/process/2013/09/11/process-and-threads-for-beginners.html" >Process and Threads for Beginners</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/nginx/2013/08/26/minimal-nginx-and-gunicorn-configuration-for-djang.html" >Minimal Nginx and Gunicorn configuration for Django projects</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/08/21/writing-thread-safe-django-code.html" >Writing thread-safe django - get_or_create</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/12/accept-bitcoins-using-python.html" >Accept bitcoins using python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/01/basics-wsgi.html" >Basics of WSGI</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/28/self-testing-fabfile-using-docker.html" >Self-testing fabfile using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/14/deploying-django-using-docker.html" >Deploying django using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/testing/2013/04/28/common-testing-scenarios-for-django-app.html" >Common testing scenarios for Django app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/static/2013/03/21/serving-static-files-in-django.html" >Serving static files in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2013/02/11/two-scoops-of-django-review.html" >Two Scoops of Django: Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/training/2013/02/08/introduction-to-python-workshop-on-february-15th-2.html" >Introduction to Python Workshop on February 15th, 2013</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2013/02/07/easy-client-side-form-validations-for-django-djang.html" >Easy client side form validations for Django: Django Parsley</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/21/moreapps-android-library-project-open-sourced.html" >MoreApps - Android Library Project: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/15/password-generetor-app-open-sourced.html" >Password Generator App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/14/todo-list-app-open-sourced.html" >Todo List App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2013/01/01/android-fragments-101.html" >Android Fragments 101</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/function/as/objects/2012/11/17/understanding-decorators-2.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2012/11/07/not-exactly-not-exactly-tim-the-enchanter.html" >Not exactly, not exactly tim the enchanter</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/internals/2012/11/01/the-missing-documentation-for-djangoutilsdatastruc.html" >The missing documentation for django.utils.datastructures</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2012/09/06/dissecting-phonegaps-architecture.html" >Dissecting Phonegaps Architecture</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2012/07/17/dropbox-file-upload-handler-for-django.html" >Dropbox file upload handler for django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/07/16/using-ubuntu-cloud-images-in-kvm.html" >Using Ubuntu cloud images in KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/metaclass/2012/07/02/metaclass-python.html" >Metaclass in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/06/25/libvirt-and-kvm.html" >Libvirt and KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/__new__/2012/06/10/__new__-python.html" >__new__() in python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/kwargs/2012/06/03/understanding-args-and-kwargs.html" >Understanding '*', '*args', '**' and '**kwargs'</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/provisioning/2012/05/29/provisioning-made-easy-with-chef.html" >Provisioning Made Easy With Chef</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/development/2012/05/02/test-driven-development-python.html" >Test Driven Development in Python </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/terminal/2012/03/20/developing-android-applications-from-command-line.html" >Developing android applications from command line</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vps/2012/02/23/deploy-django-app-5-easy-steps.html" >Deploy Django App in 5 Easy Steps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/22/deploying-django-apps-on-heroku.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/site_id/prefix/2012/02/05/dynamically-attaching-site_id-django-caching.html" > Dynamically attaching SITE_ID to Django Caching</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/04/deploying-django-apps-on-heroku-2.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/03/how-to-use-pep8py-to-write-better-django-code.html" >How to use pep8.py to write better Django code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/02/how-and-why-to-use-pyflakes-to-write-better-python.html" >How and why to use pyflakes to write better Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/south/2012/01/09/south.html" >Getting started with South for Django DB migrations</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2012/01/06/writing-jquery-plugins-using-coffeescript.html" >Writing jQuery plugins using Coffeescript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/response/2012/01/02/behind-the-scenes-request-to-response.html" >Request to Response</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/12/28/using-sqlite-database-with-android.html" >Using SQLite Database with Android</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2011/12/25/haml-for-django-developers.html" >Haml for Django developers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2011/12/24/coffeescript-for-python-programmers.html" >Coffeescript for Python programmers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/treeview/2011/10/12/how-use-jstree.html" >How to use jsTree</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2011/09/21/behind-the-scenes-from-html-form-to-storage.html" >From HTML Form to Storage</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2011/07/01/setting-your-system-start-django-development-ubunt.html" >Setting up your system to start with Django development on Ubuntu:</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/05/writing-an-e-mail-application-with-lamson-ii.html" >Writing an e-mail application with Lamson - II</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/01/writing-an-e-mail-application-with-lamson-i.html" >Writing an e-mail application with Lamson - I</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/jobs/2011/03/15/jobs.html" >Jobs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/08/comparision-iphone-android-phonegap-titanium.html" >Comparison of mobile app frameworks: Iphone, Java, Phonegap and Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/iphone/2011/02/08/getting-started-with-titanium-development.html" >Getting started with Titanium development for Android and Iphone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2011/02/06/getting-started-with-phonegap-using-xcode-for-mobi.html" >Getting started with PhoneGap using Xcode for Mobile app development</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/06/starting-android-app-developement-from-zero-to-app.html" >Starting Android app developement: From zero to app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mobile/applications/2011/02/03/iphoneandroid-application-development-using-titani.html" >iPhone and Android application development using Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/21/link-roundup-10.html" >Link roundup 10</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/07/link-roundup-9.html" >Link roundup 9</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/31/book-review-the-principles-of-beautiful-web-design.html" >Book Review: The Principles Of Beautiful Web Design</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/31/link-roundup-8.html" >Link roundup 8</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/emacs/2010/12/27/django-emacs-setup.html" >Django emacs setup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/26/book-review-pragmatic-guide-to-javascript.html" >Book Review: Pragmatic Guide to JavaScript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/25/the-principles-of-successful-freelancing.html" >Book review: The Principles of Successful Freelancing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-the-principles-of-project-management.html" >Book review: The Principles of Project Management</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-outsourcing-web-projects.html" >Book Review: Outsourcing Web Projects.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/23/link-roundup-for-week-ending-24122010.html" >Link roundup for week ending 24/12/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/%0A2010-12-22-real-time-applications-with-django-xmpp-and-stroph.markdown/xmpp/2010/12/22/real-time-applications-with-django-xmpp-and-stroph.html" >Real time applications with Django, XMPP and StropheJS</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2010/12/04/the-unfuddle-tutorial.html" >The Unfuddle Tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/12/04/experiments-in-url-design.html" >Experiments in URL design.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/26/link-roundup-for-week-ending-26112010.html" >Link roundup for week ending 26/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/19/link-roundup-for-week-ending-19112010.html" >Link Roundup for week ending 19/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/12/link-roundup-for-week-ending-12112010.html" >Link Roundup for week ending 12/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2010/11/07/i-am-so-starving-same-web-app-in-various-python-we.html" >I am so starving: Web app in python frameworks.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vim/2010/11/03/seven-reasons-why-you-should-switch-to-vim-for-dja.html" >Seven reasons why you should switch to Vim</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/03/link-roundup-for-week-ending-5112011.html" >Link Roundup for week ending 5/11/2011</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/wordpress/2010/10/28/importing-wordpress.html" >Importing wordpress</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2010/10/25/getting-trending-github-projects-via.html" >Getting trending Github projects via YQL</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/22/link-roundup-for-week-ending-2.html" >Link Roundup for week ending 22/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2010/10/18/essential-web-apps-to-run-a.html" >Essential web-apps to run a software business.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/opinion/2010/10/17/django-is-not-flexible.html" >Django is not flexible</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/15/link-roundup-for-week-ending.html" >Link Roundup for week ending 15/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/06/08/moving-home.html" >Moving home</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2010/03/20/rails-and-django-commands-comparison-and-conversio.html" >Rails and Django commands : comparison  and conversion</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rails/2010/03/20/the-rails-and-django-models-layer-rosseta-stone.html" >The Rails and Django models layer Rosseta stone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/models/2010/01/18/doing-things-with-django-models-aka-django-models.html" >Doing things with Django models - aka - Django models tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/01/17/wordpress-and-django-best-buddies.html" >Wordpress and Django: best buddies</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2010/01/14/doing-things-with-django-forms.html" >Doing things with Django forms</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/01/07/django-forum.html" >django-forum</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/12/13/django-buzz.html" >Django-buzz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/12/using-bpython-shell-with-django-and-some-ipython-f.html" >Using bpython shell with django (and some Ipython features you should know)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/india/2009/12/10/fossin-2009-the-best-fossin-ever.html" >Foss.in 2009: The best foss.in. Ever. </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/03/python-metaclasses-and-how-django-uses-them.html" >Python metaclasses and how Django uses them</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/12/03/django-quiz.html" >Django quiz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/11/26/django-for-a-rails-developer.html" >Django for a Rails Developer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/11/21/the-magic-of-metaclasses-in-python.html" >The magic of metaclasses in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/21/writing-your-own-template-loaders.html" >Writing your own template loaders</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/11/django-gotchas.html" >Django gotchas </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/10/02/pycon-india-2009-a-review.html" >Pycon India 2009 : A Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/09/18/beginning-python.html" >Beginning python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/08/27/django-socialauth-login-via-twitter-facebook-openi.html" >Django-SocialAuth - Login via twitter, facebook, openid, yahoo, google using a single app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rambling/2009/08/20/a-response-to-dropping-django.html" >A response to Dropping Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/aggreagtion/2009/08/18/django-aggregation-tutorial.html" >Django aggregation tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2009/07/16/on-captcha.html" >On Captcha</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2009/07/03/django-design-patterns.html" >Django design patterns</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/07/02/remote-debugging-debugging-pesky-server-only-bugs.html" >Remote debugging - debugging pesky server only bugs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/06/25/django-request-response-processing.html" >Django Request Response processing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/24/better-python-package-management-using-source-and.html" >Better Python package management using source and version control systems</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/23/understanding-decorators.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/06/16/generating-pseudo-random-text-with-markov-chains-u.html" >Generating pseudo random text with Markov chains using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/06/14/yahoo-boss-python-api.html" >Yahoo BOSS python api</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2009/06/10/python-wrapper-on-bing-api.html" >Python Wrapper on Bing API</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/ecommerce/2009/03/31/exploring-authorizenet-payment-gateway-options-and.html" >Exploring Authorize.net Payment Gateway Options and integrating it with django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/satchmo/2009/03/26/create-your-own-online-store-in-few-hours-using-sa.html" >Create your own online store in few hours using satchmo (django)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/pinax/2009/03/18/create-a-new-social-networking-site-in-few-hours-u.html" >Create a new social networking site in few hours using pinax platform (django).</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/03/11/uswaretech-whitepapers.html" >Uswaretech whitepapers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/products/2009/03/11/django-subdomains-easily-create-subscription-based.html" >Django-subdomains - Easily create subscription based subdomains enabled webapps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/09/finding-keywords-using-python.html" >Finding keywords using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2009/03/09/web-development-companies-working-with-django.html" >Web development companies working with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/presentations/2009/03/08/developing-a-web-application-live-in-15-min-in-dja.html" > Developing a Web Application Live in 15 min, in django framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/06/constraint-programming-in-python.html" >Constraint programming in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2009/03/06/django-with-mysql-and-apache-on-ec2.html" >Django with Mysql and Apache on EC2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/facebook/2009/02/20/how-to-build-a-facebook-app-in-django.html" >How to build a Facebook app in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/web2.0/2009/02/19/how-we-built-a-twitter-application.html" >How we built a Twitter Application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/paypal/2008/11/12/using-paypal-with-django.html" >Using Paypal with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/10/using-subdomains-with-django.html" >Using subdomains with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2008/10/10/dynamic-forms-with-django.html" >Dynamic forms with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/07/generating-pdfs-with-django.html" >Generating PDFs with Django </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html" >An Interview with Adrian Holovaty - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/05/30/an-interview-with-jacob-kaplan-moss-creator-of-dja.html" >An Interview with Jacob Kaplan-Moss - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/14/an-idea-a-day-a-geographical-wiki.html" >An idea a day - A geographical wiki</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/13/an-idea-a-day-alternative-to-gae.html" >An idea a day - Alternative to GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/12/an-idea-a-day-remotely-hosted-analytics-solution.html" >An idea a day - Remotely hosted Analytics solution</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2008/05/12/popularising-django-part-2.html" >Popularising Django - Part 2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/11/an-idea-a-day-recomendation-system-based-ad-networ.html" >An idea a day - Recomendation system based ad network</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/10/an-idea-a-day-an-automated-adwords-optimizer.html" >An idea a day - An automated Adwords optimizer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/05/08/parable-of-the-single-sheep-or-how-google-is-destr.html" >Parable of the single sheep - Or How Google is destroying the internet, and nobody seems to know.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/an-interview-with-michael-trier.html" >An interview with Michael Trier</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/popularizing-django-or-reusable-apps-considered-ha.html" >Popularizing Django -- Or Reusable apps considered harmful.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html" >Interview with James Bennett - Django release manager</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/04/22/parable-of-the-nofollow.html" >Parable of the nofollow</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/22/why-people-start-startups.html" >Why people start startups.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/04/21/marketing-lessons-from-google.html" >Marketing lessons from Google</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/18/five-things-i-hate-about-django.html" >Five Things I Hate About Django.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/12/first-step-to-startup-getting-your-pitch.html" >First step to startup - Getting your pitch</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/11/two-djangoappengine-tutorials.html" >Two Django+Appengine Tutorials</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/using-appengine-with-django-why-it-is-pretty-much.html" >Using Appengine with Django, why it is pretty much unusable</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/google-appengine-first-impressions.html" >Google Appengine - First Impressions</a>
+		  </li>
+		  
+		</ul>
+        </div>
+        
+        
+        
+      </section>
+      <div id="content">
+     	<p>In this post we will be talking about Metaclass in python. If you are reading some code which uses metaclass, you will probably come across <code class="highlighter-rouge">__new__</code>. If you are not familiar with what __new__ does, i suggest you first read about __new__.</p>
 
 <p>You can read about <code class="highlighter-rouge">__new__</code> in our last to <a href="http://agiliq.com/blog/2012/06/__new__-python/">last post</a></p>
 
@@ -429,34 +1231,10 @@ AttributeError: type object 'C' has no attribute 'third'
 <p>You may also like to read <a href="http://agiliq.com/blog/2009/11/the-magic-of-metaclasses-in-python/">The magic of metaclasses in Python</a></p>
 
 
-  </div><a class="u-url" href="/metaclass/2012/07/02/metaclass-python.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Agiliq Blogs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Agiliq Blogs</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-      </div>
+       </div>
     </div>
 
-  </div>
-
-</footer>
-</body>
-
+    
+  </body>
 </html>
+

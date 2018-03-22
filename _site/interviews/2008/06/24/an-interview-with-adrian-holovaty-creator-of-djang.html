@@ -1,8 +1,10 @@
-<!DOCTYPE html>
-<html lang="en"><head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.4.0 -->
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+<!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>An Interview with Adrian Holovaty - Creator of Django | Agiliq Blogs</title>
 <meta name="generator" content="Jekyll v3.7.3" />
 <meta property="og:title" content="An Interview with Adrian Holovaty - Creator of Django" />
@@ -18,37 +20,837 @@
 <script type="application/ld+json">
 {"description":"Adrian Holovaty is the co-creator of Django, author of the Django book and is currently the BDFL of Django along with Jacob Kaplan-Moss. He studied journalism at University of Missouriâ€“Columbia and has worked with many news sites including Lawrence Journal World and Washington Post. He currently works at EveryBlock, a startup he founded. Shabda: Would you tell a little about yourself? You majored in Journalism, how did you move to Programming? Adrian: Sure! I have a dual background in journalism and computer science. I intended to get a degree in journalism and a minor in computer science, but things got a little off track. I heard from a professional colleague that a certain Web site would probably hire me if I graduated a semester early, so I hurriedly dropped my CS minor and got special permission to graduate early – but once the time came to ask for that job, the company was in the middle of a hiring freeze and didn’t have a position for me. So, in hindsight, I should’ve stuck with the minor, but things ended up working out OK. Because journalism and computer science don’t normally go together, I’ve had some success in this silly little niche of employing Web development in news organizations – “journalism via computer programming.” Professionally, I’ve always worked as a Web developer at news organizations, up until my current gig, which is to run EveryBlock. But in its own way, it’s a news organization as well. Aside from all of that, I’m quite into music, particularly gypsy jazz, which is the music of Django Reinhardt (hence the name of the Web framework). I just recently attended a week-long gypsy jazz guitar camp in Massachusetts and had a tremendous time staying up until early hours of the morning jamming with great musicians from various parts of the world. If money were no object, I would love to play music full time. In the meantime, I’ll settle for posting YouTube videos of my guitar playing, for an audience that seems to be comprised mostly of 16-year-old boys who constantly pester me for transcriptions of my arrangements. I live with my wife in the beautiful city of Chicago. Shabda: What are your current roles and responsibilities at Django? Adrian: Well, I co-created Django back in 2003 with my friend Simon Willison while we were working together. Now, along with Jacob Kaplan-Moss, I’m Benevolent Dictator For Life of the project – a title we shamelessly ripped off from Guido/Python. This means that I have a hand in all sorts of things, from high-level API design to checking in patches and fixing bugs. I’ve touched probably every bit of the framework over the years, including implementing the initial ORM (back when it was a code generator!), pair-programming the original Django template system and URLconf/view framework with Simon and building the original admin application with design help from Wilson Miner. One of the things I enjoy the most is writing documentation – both because I like technical writing and because I cannot stand bad open-source documentation. Shabda: Can you describe the philosophy behind Django. What are its overarching goals? Adrian: A couple of years ago, I wrote the “Design philosophies” document, which sums up the main points nicely. Generally, the goal is to make Web development fast, fun and easy for the developer, while keeping performance as fast as possible and code as easy to understand as possible. Shabda: How did the move at WorldOnline from PHP to Python happen? Why did you start from scratch (which finally lead to creation of Django), instead of using something like Zope? Adrian: Simon and I had been big fans of Mark Pilgrim (and still are!), and we’d read his online book “Dive Into Python.” This was around the same time that the PHP “infrastructure” I’d developed had begun to feel really, really crufty, so…one day we just decided to start using Python! It’s quite nice working at a small organization with a very loose management structure; our boss, Rob Curley, was cool enough to let the developers themselves decide which technologies to use, as long as the work got done. “I don’t care how the sausage is made,” he always used to say. We looked at the existing Python Web frameworks/libraries, but none of them felt 100% right to us. Simon and I are both quite into best practices, such as clean URLs, proper use of GET vs. POST, etc., so we were very picky in our analysis of those existing tools. Shabda: Can you tell us about Everyblock? Why did you choose to create your own mapping engine instead of using something like Google Maps? How hard has it been creating a new mapping engine? Adrian: EveryBlock is the project I lead for my day job. It’s funded by a two-year grant from the Knight Foundation, and the goal is to experiment with block-specific news – that is, the site lets you enter an address (currently only in Chicago, New York City and San Francisco) and view recent news within a very tight radius of that address. I’m pretty confident it’s the most granular attempt at local news ever attempted on the Web. Nobody else is crazy enough to do it, I guess! We do a TON of work collecting local information, normalizing it and pulling it together for people in one place. A large part of what we publish is government data such as crime reports, restaurant inspections, building permits, business licenses…and even local movie filmings. Much of this stuff either is buried in “deep Web” government databases or has never before been available online. A second part of what we do is detecting addresses and locations in news articles and blog entries. Plus, we pull in various other geographic Web stuff like Flickr photos and Yelp reviews. All in all, our goal is to show you recent, geographically relevant stuff that you might not have heard about. Say the local newspaper wrote something about your neighborhood on page B-23 – would you really have noticed that article? Say there was an aggravated assault on your block – would you really have remembered to check your police department’s crime-reports Web site on a daily basis? That’s the basic philosophy. Regarding our custom mapping engine…Let’s face it: Google Maps is so passe. As one of the original Google Maps mashup guys (I developed chicagocrime.org by reverse-engineering Google’s JavaScript, before the API was released), I have all the respect in the world for what Google has done to invigorate the world of Web maps. But it’s time to take the next step. The Google Maps API doesn’t give you any control over the colors of the map tiles, or change the fonts in street labels, or disable building footprints, or hide one-way street markers or subway stations or bus stops or any of the other stuff that’s essentially hard-coded in the map. So, at EveryBlock, we rolled our own maps so we could have much, much more fine-grained control over all of these things. Not to mention it’s a great way to differentiate ourselves from the 2.5 million boring, same-old-yellow-blue-orange Google Maps mashups out there. Paul Smith from the EveryBlock team has written an article at A List Apart with more of the technical specifics. Shabda: As per the Knight grant rules, you would be releasing the code for Everyblock next year. Would you not be giving away your secret sauce? How do you plan to maintain competitive advantage once that code is freely avaliable under a permissive license? Adrian: Our competitive advantage is that we’re an incredible team, and I’m sure we’ll come up with a way to feed our families. Shabda: What problems would you like Django to tackle after 1.0? What big features would you be most interested in having in Django, after it hits 1.0? Adrian: Generally I’d like to add higher and higher levels of abstraction to the framework. The Django admin application is a good example of that – it’s not just an abstraction of an HTTP request; it’s an abstraction of an entire Web application! We should do more of those. Shabda: What is one thing about Django which you absolutely love, and one thing which you think Django should do differently? Adrian: I love the way URLconfs work – like a table of contents for your Web app. I also love template inheritance. I don’t love the fact that we’re generally slow in keeping up with tickets and feature requests. Shabda: A lot of people these days have to evaluate between Django and ROR. How can they make this decision? When should Adrian Holovaty use ROR? When should DHH use Django? Adrian: My answer is simple: Try out both frameworks and see which one you like better. Shabda: Does Django need to market itself differently? What can Django community do for this? Adrian: I’m comfortable with the amount of attention (or lack thereof, depending on your perspective) that our project gets. I’m comfortable with the size of the community. I’m comfortable with the fact that the right people have found out about it through word of mouth, books, blogs, Google App Engine or wherever else. If things continue at their current rate, we’ll continue to do just fine, as a healthy open-source project. The one thing I’d ask the community to do is to continue staying civil, polite and approachable. Shabda: What does the phrase ‘journalism via computer programming’ mean? How can these two divergent fields be tied together? Adrian: “Journalism via computer programming,” in my opinion, is when a journalist writes code to tell a story. Instead of talking on the phone with sources to gather facts, this could involve screen-scraping Web sites to gather raw data. Instead of writing a newspaper article, this could involve building a database-driven Web site. Journalism has several subdisciplines – photography, information graphics, video. I advocate that computer programming should be another one of those subdisciplines. Just as a newspaper employs photographers and graphic artists, it should employ programmers who help gather information and tell stories with it. Shabda: How can traditional journalists do more ‘journalism via computer programming’? How can programmers do more ‘journalism via computer programming’? Is it easier for Programmers to move to this field, or for Journalists? Adrian: I believe it’s easier for programmers to become journalists than it is for journalists to become programmers, but both sides need to gain an appreciation for the other in order for this sort of thing to happen more often. Fortunately, some news organizations are starting to hire developers with this in mind, and some geeks are realizing journalism is a great, (mostly) pure field that lets you improve the world through information. One concrete thing programmers can do is to look for jobs at news organizations, which desperately need technical talent. Developers, you will be loved, you will be treated like geniuses, and your non-techie coworkers will be very easily impressed! Another route programmers can take is to get training in journalism – in fact, Northwestern University’s journalism school is giving out full-tuition scholarships for programmers who want to learn journalism. Shabda: Thanks Adrian. This was Adrian’s interview, the last in django-interviews series. But we have a lot of interesting things coming up, so stay tuned.","author":{"@type":"Person","name":"shabda"},"@type":"BlogPosting","url":"http://localhost:4000/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html","headline":"An Interview with Adrian Holovaty - Creator of Django","dateModified":"2008-06-24T03:36:06+05:30","datePublished":"2008-06-24T03:36:06+05:30","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html"},"@context":"http://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/assets/main.css"><link type="application/atom+xml" rel="alternate" href="http://localhost:4000/feed.xml" title="Agiliq Blogs" /></head>
-<body><header class="site-header" role="banner">
 
-  <div class="wrapper"><a class="site-title" rel="author" href="/">Agiliq Blogs</a><nav class="site-nav">
-        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
-        <label for="nav-trigger">
-          <span class="menu-icon">
-            <svg viewBox="0 0 18 15" width="18px" height="15px">
-              <path fill="#424242" d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.031C17.335,0,18,0.665,18,1.484L18,1.484z"/>
-              <path fill="#424242" d="M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0c0-0.82,0.665-1.484,1.484-1.484 h15.031C17.335,6.031,18,6.696,18,7.516L18,7.516z"/>
-              <path fill="#424242" d="M18,13.516C18,14.335,17.335,15,16.516,15H1.484C0.665,15,0,14.335,0,13.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.031C17.335,12.031,18,12.696,18,13.516L18,13.516z"/>
-            </svg>
-          </span>
-        </label>
+    <link rel="stylesheet" href="/assets/css/style.css?v=">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="/assets/js/respond.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="/assets/css/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script>
+    	function onPageLoad() {
+    		var element = document.getElementById("content");
+    		var childNodes = element.childElementCount;
+    		if(childNodes > 0) {
+    		 	element.scrollIntoView(); 
+    	 	}
 
-        <div class="trigger"><a class="page-link" href="/about/">About</a><a class="page-link" href="/categories/forms.html">Forms</a><a class="page-link" href="/categories/interviews.html">Interviews</a><a class="page-link" href="/categories/marketing.html">Marketing</a><a class="page-link" href="/categories/paypal.html">Paypal</a><a class="page-link" href="/categories/python.html">Python</a><a class="page-link" href="/categories/search.html">Search</a><a class="page-link" href="/categories/startup.html">Startup</a><a class="page-link" href="/categories/uncategorized.html">Uncategorized</a></div>
-      </nav></div>
-</header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+    	}
+    </script>
+    
+  </head>
+  <body onload="onPageLoad()"> 
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="">View On GitHub</a></li>
+          <!-- 
+            <li class="downloads"><a href="">ZIP</a></li>
+            <li class="downloads"><a href="">TAR</a></li>
+            <li class="title">DOWNLOADS</li>
+           -->
+        </nav>
+      </div><!-- end header -->
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">An Interview with Adrian Holovaty - Creator of Django</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="2008-06-24T03:36:06+05:30" itemprop="datePublished">Jun 24, 2008
-      </time>• <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">shabda</span></span></p>
-  </header>
+    <div class="wrapper">
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <p><a href="http://www.holovaty.com/">Adrian Holovaty</a> is the co-creator of Django, author of the Django book and is currently the BDFL of Django along with Jacob Kaplan-Moss. He studied journalism at <a href="http://www.missouri.edu/about/mufacts.php">University of Missouriâ€“Columbia</a> and has worked with many news sites including <a href="http://www2.ljworld.com/">Lawrence Journal World</a> and <a href="http://www.washingtonpost.com/">Washington Post</a>. He currently works at <a href="http://everyblock.com/">EveryBlock</a>, a startup he founded.</p>
+      <section>
+        <div id="title">
+          <h1>Agiliq Blogs</h1>
+          <!-- <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p> -->
+          <hr>
+          <span class="credits left">Project maintained by <a href="">Agiliq</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+          <ul>
+		  
+		  <li>
+		    <a href="/python/2018/01/21/prime-number-binary-trex.html" >Finding a prime number whose binary representation is a giraffe (or a T-Rex)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-listview.html" >When and how to use Django ListView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/29/when-and-how-use-django-templateview.html" >When and how to use Django TemplateView</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/11/adventures-in-advanced-django-orm-with-hyperloglog.html" >Adventures in advanced Django ORM with HyperLogLog</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/06/django-20-window-expressions-tutorial.html" >Django 2.0 Window expressions tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2017/12/02/configure-django-log-exceptions-production.html" >Configure Django to log exceptions in production</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2017/11/15/how-performant-your-python-web-application.html" >How performant is your Python web application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/11/01/how-python-generators-are-similar-iterators.html" >How Python generators are similar to iterators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/18/real-world-usage-iterators-and-iterables.html" >Real world usage of __iter__ and next</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2017/10/12/iterators-and-iterables.html" >Iterators and Iterables</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/appengine/2017/09/04/getting-started-webapp2-and-gae.html" >Getting started with webapp2 and GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/30/why-angularjs-services-arent-available-configurati.html" >Why AngularJS services aren't available in configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/27/what-when-and-how-angularjs-configuration-blocks.html" >What, when and how of AngularJS configuration blocks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2017/04/26/trsfer-files-amzon-s3-using-browser-instead-server.html" >Transfer files to amazon s3 using browser instead of server</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/25/angularjs-injectors-internals.html" >AngularJS injectors internals</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/angularjs/2017/04/21/how-script-ordering-works-angular-app.html" >How script ordering works in an Angular app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/scrapy/2016/04/02/getting-started-with-python-scrapy.html" >Getting started with python scrapy</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/celery/2015/08/03/retrying-celery-failed-tasks.html" >Retrying celery failed tasks</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/profiling-django-middlewares.html" >Profiling Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/middlewares/2015/07/17/understanding-django-middlewares.html" >Understanding Django Middlewares</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/07/06/getting-started-with-celery-and-redis.html" >Getting started with Celery and Redis</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/29/tastypie-with-foreignkey.html" >Tastypie with ForeignKey</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/redis/2015/03/26/getting-started-with-redis-py.html" >Getting started with redis-py</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django-tastypie/2015/03/23/getting-started-with-django-tastypie.html" >Getting started with Django tastypie</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2015/03/04/building-chrome-extensions.html" >Building Chrome Extensions</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2015/01/16/importing-your-old-comments-to-disqus-site.html" >Importing your old comments to Disqus site</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/how-not-knowing-encoding-can-trip-you.html" >How not knowing encoding can trip you</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/12/08/understanding-python-unicode-str-unicodeencodeerro.html" >Understanding Python unicode, str, UnicodeEncodeError and UnicodeDecodeError</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2014/12/04/building-a-restful-api-with-django-rest-framework.html" >Building a RESTful API with Django-rest-framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/encoding/2014/11/19/character-encoding-and-unicode.html" >Character encoding and Unicode</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/disqus/2014/11/17/disqus-and-disqus-sso.html" >Disqus and Disqus SSO</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/http/client/2014/09/08/using-postman.html" >Using a Postman http client for efficient HTTP testing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/02/advanced-functional-testing-with-selenium.html" >Advanced functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/functional-testing/2014/09/01/selenium-testing.html" >Introduction to functional testing with Selenium in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coveralls.io/2014/08/22/travis-and-coveralls-for-private-repo.html" >Travis and coveralls for private repo</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/20/django-timezones.html" >Django timezones</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/app/deployment/2014/08/06/deploying-a-django-app-on-amazon-ec2-instance.html" >Deploying a Django app on Amazon EC2 instance.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/08/05/passing-parameters-to-django-admin-action.html" >Passing parameters to Django admin action</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/07/15/method-decorators-in-python.html" >Method decorators in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/gunicorn/2014/06/05/minimal-gunicorn-configuration.html" >Minimal Gunicorn configuration</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/heroku/2014/06/05/heroku-django-s3-for-serving-media-files.html" >Heroku Django S3 for serving Media files</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysqltopostgres/2014/05/27/migrating-django-app-from-mysql-to-postgres.html" >Migrating django app from MySQL to Postgres</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/google/2014/05/09/google-diff-match-patch-library.html" >Google diff match patch library</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/supervisor/2014/05/09/supervisor-with-django-and-gunicorn.html" >Supervisor with Django and Gunicorn</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/05/python-requests.html" >Python-requests</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2014/05/01/three-underutilized-python-commands.html" >Three underutilized python commands</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/travis/2014/05/01/continuous-integration-with-travis-and-coverallsio.html" >Continuous integration with travis and coveralls.io for Django apps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2014/04/28/django-backward-relationship-lookup.html" >Django backward relationship lookup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/10/17/producer-consumer-problem-in-python.html" >Producer-consumer problem in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/design/pattern/2013/10/14/state-pattern-with-ui-code.html" >State pattern with UI Code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/09/17/understanding-threads-in-python.html" >Understanding Threads in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/process/2013/09/11/process-and-threads-for-beginners.html" >Process and Threads for Beginners</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/nginx/2013/08/26/minimal-nginx-and-gunicorn-configuration-for-djang.html" >Minimal Nginx and Gunicorn configuration for Django projects</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/threads/2013/08/21/writing-thread-safe-django-code.html" >Writing thread-safe django - get_or_create</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/12/accept-bitcoins-using-python.html" >Accept bitcoins using python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2013/07/01/basics-wsgi.html" >Basics of WSGI</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/28/self-testing-fabfile-using-docker.html" >Self-testing fabfile using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/docker/2013/06/14/deploying-django-using-docker.html" >Deploying django using docker</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/testing/2013/04/28/common-testing-scenarios-for-django-app.html" >Common testing scenarios for Django app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/static/2013/03/21/serving-static-files-in-django.html" >Serving static files in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2013/02/11/two-scoops-of-django-review.html" >Two Scoops of Django: Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/training/2013/02/08/introduction-to-python-workshop-on-february-15th-2.html" >Introduction to Python Workshop on February 15th, 2013</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2013/02/07/easy-client-side-form-validations-for-django-djang.html" >Easy client side form validations for Django: Django Parsley</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/21/moreapps-android-library-project-open-sourced.html" >MoreApps - Android Library Project: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/15/password-generetor-app-open-sourced.html" >Password Generator App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/open-source/2013/01/14/todo-list-app-open-sourced.html" >Todo List App: Open Sourced</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2013/01/01/android-fragments-101.html" >Android Fragments 101</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/function/as/objects/2012/11/17/understanding-decorators-2.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2012/11/07/not-exactly-not-exactly-tim-the-enchanter.html" >Not exactly, not exactly tim the enchanter</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/internals/2012/11/01/the-missing-documentation-for-djangoutilsdatastruc.html" >The missing documentation for django.utils.datastructures</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/2012/09/06/dissecting-phonegaps-architecture.html" >Dissecting Phonegaps Architecture</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2012/07/17/dropbox-file-upload-handler-for-django.html" >Dropbox file upload handler for django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/07/16/using-ubuntu-cloud-images-in-kvm.html" >Using Ubuntu cloud images in KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/metaclass/2012/07/02/metaclass-python.html" >Metaclass in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/virtualization/2012/06/25/libvirt-and-kvm.html" >Libvirt and KVM</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/__new__/2012/06/10/__new__-python.html" >__new__() in python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/kwargs/2012/06/03/understanding-args-and-kwargs.html" >Understanding '*', '*args', '**' and '**kwargs'</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/provisioning/2012/05/29/provisioning-made-easy-with-chef.html" >Provisioning Made Easy With Chef</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/development/2012/05/02/test-driven-development-python.html" >Test Driven Development in Python </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/terminal/2012/03/20/developing-android-applications-from-command-line.html" >Developing android applications from command line</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vps/2012/02/23/deploy-django-app-5-easy-steps.html" >Deploy Django App in 5 Easy Steps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/22/deploying-django-apps-on-heroku.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/site_id/prefix/2012/02/05/dynamically-attaching-site_id-django-caching.html" > Dynamically attaching SITE_ID to Django Caching</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2012/02/04/deploying-django-apps-on-heroku-2.html" >Deploying Django apps on Heroku</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/03/how-to-use-pep8py-to-write-better-django-code.html" >How to use pep8.py to write better Django code</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/screencasts/2012/02/02/how-and-why-to-use-pyflakes-to-write-better-python.html" >How and why to use pyflakes to write better Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/south/2012/01/09/south.html" >Getting started with South for Django DB migrations</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2012/01/06/writing-jquery-plugins-using-coffeescript.html" >Writing jQuery plugins using Coffeescript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/response/2012/01/02/behind-the-scenes-request-to-response.html" >Request to Response</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/12/28/using-sqlite-database-with-android.html" >Using SQLite Database with Android</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2011/12/25/haml-for-django-developers.html" >Haml for Django developers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/coffeescript/2011/12/24/coffeescript-for-python-programmers.html" >Coffeescript for Python programmers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/treeview/2011/10/12/how-use-jstree.html" >How to use jsTree</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/upload/2011/09/21/behind-the-scenes-from-html-form-to-storage.html" >From HTML Form to Storage</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2011/07/01/setting-your-system-start-django-development-ubunt.html" >Setting up your system to start with Django development on Ubuntu:</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/05/writing-an-e-mail-application-with-lamson-ii.html" >Writing an e-mail application with Lamson - II</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/e-mail/2011/04/01/writing-an-e-mail-application-with-lamson-i.html" >Writing an e-mail application with Lamson - I</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/jobs/2011/03/15/jobs.html" >Jobs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/08/comparision-iphone-android-phonegap-titanium.html" >Comparison of mobile app frameworks: Iphone, Java, Phonegap and Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/iphone/2011/02/08/getting-started-with-titanium-development.html" >Getting started with Titanium development for Android and Iphone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/android/2011/02/06/getting-started-with-phonegap-using-xcode-for-mobi.html" >Getting started with PhoneGap using Xcode for Mobile app development</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/java/2011/02/06/starting-android-app-developement-from-zero-to-app.html" >Starting Android app developement: From zero to app</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mobile/applications/2011/02/03/iphoneandroid-application-development-using-titani.html" >iPhone and Android application development using Titanium</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/21/link-roundup-10.html" >Link roundup 10</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2011/01/07/link-roundup-9.html" >Link roundup 9</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/31/book-review-the-principles-of-beautiful-web-design.html" >Book Review: The Principles Of Beautiful Web Design</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/31/link-roundup-8.html" >Link roundup 8</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/emacs/2010/12/27/django-emacs-setup.html" >Django emacs setup</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/26/book-review-pragmatic-guide-to-javascript.html" >Book Review: Pragmatic Guide to JavaScript</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/25/the-principles-of-successful-freelancing.html" >Book review: The Principles of Successful Freelancing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-the-principles-of-project-management.html" >Book review: The Principles of Project Management</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/reviews/2010/12/24/book-review-outsourcing-web-projects.html" >Book Review: Outsourcing Web Projects.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/12/23/link-roundup-for-week-ending-24122010.html" >Link roundup for week ending 24/12/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/%0A2010-12-22-real-time-applications-with-django-xmpp-and-stroph.markdown/xmpp/2010/12/22/real-time-applications-with-django-xmpp-and-stroph.html" >Real time applications with Django, XMPP and StropheJS</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2010/12/04/the-unfuddle-tutorial.html" >The Unfuddle Tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/12/04/experiments-in-url-design.html" >Experiments in URL design.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/26/link-roundup-for-week-ending-26112010.html" >Link roundup for week ending 26/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/19/link-roundup-for-week-ending-19112010.html" >Link Roundup for week ending 19/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/12/link-roundup-for-week-ending-12112010.html" >Link Roundup for week ending 12/11/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2010/11/07/i-am-so-starving-same-web-app-in-various-python-we.html" >I am so starving: Web app in python frameworks.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/vim/2010/11/03/seven-reasons-why-you-should-switch-to-vim-for-dja.html" >Seven reasons why you should switch to Vim</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/11/03/link-roundup-for-week-ending-5112011.html" >Link Roundup for week ending 5/11/2011</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/wordpress/2010/10/28/importing-wordpress.html" >Importing wordpress</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2010/10/25/getting-trending-github-projects-via.html" >Getting trending Github projects via YQL</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/22/link-roundup-for-week-ending-2.html" >Link Roundup for week ending 22/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2010/10/18/essential-web-apps-to-run-a.html" >Essential web-apps to run a software business.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/opinion/2010/10/17/django-is-not-flexible.html" >Django is not flexible</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/linkroundup/2010/10/15/link-roundup-for-week-ending.html" >Link Roundup for week ending 15/10/2010</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/06/08/moving-home.html" >Moving home</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2010/03/20/rails-and-django-commands-comparison-and-conversio.html" >Rails and Django commands : comparison  and conversion</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rails/2010/03/20/the-rails-and-django-models-layer-rosseta-stone.html" >The Rails and Django models layer Rosseta stone</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/models/2010/01/18/doing-things-with-django-models-aka-django-models.html" >Doing things with Django models - aka - Django models tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/about/2010/01/17/wordpress-and-django-best-buddies.html" >Wordpress and Django: best buddies</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2010/01/14/doing-things-with-django-forms.html" >Doing things with Django forms</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/apps/2010/01/07/django-forum.html" >django-forum</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/12/13/django-buzz.html" >Django-buzz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/12/using-bpython-shell-with-django-and-some-ipython-f.html" >Using bpython shell with django (and some Ipython features you should know)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/india/2009/12/10/fossin-2009-the-best-fossin-ever.html" >Foss.in 2009: The best foss.in. Ever. </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/12/03/python-metaclasses-and-how-django-uses-them.html" >Python metaclasses and how Django uses them</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/12/03/django-quiz.html" >Django quiz</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/11/26/django-for-a-rails-developer.html" >Django for a Rails Developer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/11/21/the-magic-of-metaclasses-in-python.html" >The magic of metaclasses in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/21/writing-your-own-template-loaders.html" >Writing your own template loaders</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/11/11/django-gotchas.html" >Django gotchas </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/10/02/pycon-india-2009-a-review.html" >Pycon India 2009 : A Review</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tutorial/2009/09/18/beginning-python.html" >Beginning python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/08/27/django-socialauth-login-via-twitter-facebook-openi.html" >Django-SocialAuth - Login via twitter, facebook, openid, yahoo, google using a single app.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/rambling/2009/08/20/a-response-to-dropping-django.html" >A response to Dropping Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/aggreagtion/2009/08/18/django-aggregation-tutorial.html" >Django aggregation tutorial</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2009/07/16/on-captcha.html" >On Captcha</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/book/2009/07/03/django-design-patterns.html" >Django design patterns</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/07/02/remote-debugging-debugging-pesky-server-only-bugs.html" >Remote debugging - debugging pesky server only bugs</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/django/2009/06/25/django-request-response-processing.html" >Django Request Response processing</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/24/better-python-package-management-using-source-and.html" >Better Python package management using source and version control systems</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2009/06/23/understanding-decorators.html" >Understanding decorators</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/06/16/generating-pseudo-random-text-with-markov-chains-u.html" >Generating pseudo random text with Markov chains using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/yahoo/2009/06/14/yahoo-boss-python-api.html" >Yahoo BOSS python api</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/api/2009/06/10/python-wrapper-on-bing-api.html" >Python Wrapper on Bing API</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/ecommerce/2009/03/31/exploring-authorizenet-payment-gateway-options-and.html" >Exploring Authorize.net Payment Gateway Options and integrating it with django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/satchmo/2009/03/26/create-your-own-online-store-in-few-hours-using-sa.html" >Create your own online store in few hours using satchmo (django)</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/pinax/2009/03/18/create-a-new-social-networking-site-in-few-hours-u.html" >Create a new social networking site in few hours using pinax platform (django).</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2009/03/11/uswaretech-whitepapers.html" >Uswaretech whitepapers</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/products/2009/03/11/django-subdomains-easily-create-subscription-based.html" >Django-subdomains - Easily create subscription based subdomains enabled webapps</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/09/finding-keywords-using-python.html" >Finding keywords using Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/business/2009/03/09/web-development-companies-working-with-django.html" >Web development companies working with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/presentations/2009/03/08/developing-a-web-application-live-in-15-min-in-dja.html" > Developing a Web Application Live in 15 min, in django framework</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/algorithms/2009/03/06/constraint-programming-in-python.html" >Constraint programming in Python</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/mysql/2009/03/06/django-with-mysql-and-apache-on-ec2.html" >Django with Mysql and Apache on EC2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/facebook/2009/02/20/how-to-build-a-facebook-app-in-django.html" >How to build a Facebook app in Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/web2.0/2009/02/19/how-we-built-a-twitter-application.html" >How we built a Twitter Application</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/paypal/2008/11/12/using-paypal-with-django.html" >Using Paypal with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/10/using-subdomains-with-django.html" >Using subdomains with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/forms/2008/10/10/dynamic-forms-with-django.html" >Dynamic forms with Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/tips/2008/10/07/generating-pdfs-with-django.html" >Generating PDFs with Django </a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html" >An Interview with Adrian Holovaty - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/05/30/an-interview-with-jacob-kaplan-moss-creator-of-dja.html" >An Interview with Jacob Kaplan-Moss - Creator of Django</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/14/an-idea-a-day-a-geographical-wiki.html" >An idea a day - A geographical wiki</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/13/an-idea-a-day-alternative-to-gae.html" >An idea a day - Alternative to GAE</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/12/an-idea-a-day-remotely-hosted-analytics-solution.html" >An idea a day - Remotely hosted Analytics solution</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/uncategorized/2008/05/12/popularising-django-part-2.html" >Popularising Django - Part 2</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/11/an-idea-a-day-recomendation-system-based-ad-networ.html" >An idea a day - Recomendation system based ad network</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/05/10/an-idea-a-day-an-automated-adwords-optimizer.html" >An idea a day - An automated Adwords optimizer</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/05/08/parable-of-the-single-sheep-or-how-google-is-destr.html" >Parable of the single sheep - Or How Google is destroying the internet, and nobody seems to know.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/an-interview-with-michael-trier.html" >An interview with Michael Trier</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/05/06/popularizing-django-or-reusable-apps-considered-ha.html" >Popularizing Django -- Or Reusable apps considered harmful.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/interviews/2008/04/27/interview-with-james-bennett-django-release-manage.html" >Interview with James Bennett - Django release manager</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/search/2008/04/22/parable-of-the-nofollow.html" >Parable of the nofollow</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/22/why-people-start-startups.html" >Why people start startups.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/marketing/2008/04/21/marketing-lessons-from-google.html" >Marketing lessons from Google</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/18/five-things-i-hate-about-django.html" >Five Things I Hate About Django.</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/startup/2008/04/12/first-step-to-startup-getting-your-pitch.html" >First step to startup - Getting your pitch</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/11/two-djangoappengine-tutorials.html" >Two Django+Appengine Tutorials</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/using-appengine-with-django-why-it-is-pretty-much.html" >Using Appengine with Django, why it is pretty much unusable</a>
+		  </li>
+		  
+		  <li>
+		    <a href="/python/2008/04/09/google-appengine-first-impressions.html" >Google Appengine - First Impressions</a>
+		  </li>
+		  
+		</ul>
+        </div>
+        
+        
+        
+      </section>
+      <div id="content">
+     	<p><a href="http://www.holovaty.com/">Adrian Holovaty</a> is the co-creator of Django, author of the Django book and is currently the BDFL of Django along with Jacob Kaplan-Moss. He studied journalism at <a href="http://www.missouri.edu/about/mufacts.php">University of Missouriâ€“Columbia</a> and has worked with many news sites including <a href="http://www2.ljworld.com/">Lawrence Journal World</a> and <a href="http://www.washingtonpost.com/">Washington Post</a>. He currently works at <a href="http://everyblock.com/">EveryBlock</a>, a startup he founded.</p>
 
 <hr />
 
@@ -254,34 +1056,10 @@ journalism</a>.</p>
 <p>This was Adrian’s interview, the last in django-interviews series. But we have a lot of interesting things coming up, so <a href="http://42topics.com/blog/feed/">stay tuned</a>.</p>
 
 
-  </div><a class="u-url" href="/interviews/2008/06/24/an-interview-with-adrian-holovaty-creator-of-djang.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
-  <data class="u-url" href="/"></data>
-
-  <div class="wrapper">
-
-    <h2 class="footer-heading">Agiliq Blogs</h2>
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-1">
-        <ul class="contact-list">
-          <li class="p-name">Agiliq Blogs</li><li><a class="u-email" href="mailto:your-email@example.com">your-email@example.com</a></li></ul>
-      </div>
-
-      <div class="footer-col footer-col-2"><ul class="social-media-list"><li><a href="https://github.com/jekyll"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg> <span class="username">jekyll</span></a></li><li><a href="https://www.twitter.com/jekyllrb"><svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg> <span class="username">jekyllrb</span></a></li></ul>
-</div>
-
-      <div class="footer-col footer-col-3">
-        <p>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</p>
-      </div>
+       </div>
     </div>
 
-  </div>
-
-</footer>
-</body>
-
+    
+  </body>
 </html>
+
