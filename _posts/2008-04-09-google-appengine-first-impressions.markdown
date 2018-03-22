@@ -2,6 +2,7 @@
 layout: post
 title:  "Google Appengine - First Impressions"
 date:   2008-04-09 14:32:57+05:30
+categories:	python
 tags:	python
 author: shabda
 ---

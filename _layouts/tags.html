@@ -1,9 +1,8 @@
 ---
 layout: page
 ---
-
-{% for post in site.tags[page.tags] %}
-    <a href="{{ post.url | absolute_url }}">
-      {{ post.title }}
-    </a>
-{% endfor %}
+<ul>
+  {% for tags in page.tags %}
+    <li>{{ tags }}</li>
+  {% endfor %}
+</ul>

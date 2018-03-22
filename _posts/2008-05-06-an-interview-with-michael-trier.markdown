@@ -2,7 +2,7 @@
 layout: post
 title:  "An interview with Michael Trier"
 date:   2008-05-06 17:34:45+05:30
-tags: marketing
+categories: marketing
 author: shabda
 ---
 <img src="http://uswaretech.com/blog/wp-content/uploads/2008/05/mtrier-small.jpg" alt="" title="mtrier-small" width="154" height="205" class="right frame" />

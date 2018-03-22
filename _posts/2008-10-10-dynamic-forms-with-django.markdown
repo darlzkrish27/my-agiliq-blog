@@ -2,7 +2,7 @@
 layout: post
 title:  "Dynamic forms with Django"
 date:   2008-10-10 19:46:05+05:30
-tags: forms
+categories: forms
 author: shabda
 ---
 [Newforms](http://docs.djangoproject.com/en/dev/topics/forms/), (or forms now) are without doubt one of the coolest features of Django. (Of course after Admin, Localflavor, and many others). Here is some sample code.

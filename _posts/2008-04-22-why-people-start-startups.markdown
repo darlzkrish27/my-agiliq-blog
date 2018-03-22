@@ -2,7 +2,7 @@
 layout: post
 title:  "Why people start startups."
 date:   2008-04-22 10:34:47+05:30
-tags: startup
+categories: startup
 author: shabda
 ---
 In the glorious tradition of the internet, where we generalize from way too little data, I am going to tell you exactly why people start startups. Of course, I have no experience, on why people make this trade of security for adventure, apart from my own, and a few other very early stage startups. So yes, this is a personal story. This is why I, and everyone *I* know started a startup.

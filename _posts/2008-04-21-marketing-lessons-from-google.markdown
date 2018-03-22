@@ -2,7 +2,7 @@
 layout: post
 title:  "Marketing lessons from Google"
 date:   2008-04-21 14:01:36+05:30
-tags:	marketing
+categories:	marketing
 author: shabda
 ---
 Widely respected for their engineering talent, and amazing hacker culture, Google is never credited for the amazing marketing they do. When we look for the companies which have done a great job at marketing/branding, we think of Guiness, Apple, or Ikea. Today I want to talk about the marketing lessons we can learn from Google.

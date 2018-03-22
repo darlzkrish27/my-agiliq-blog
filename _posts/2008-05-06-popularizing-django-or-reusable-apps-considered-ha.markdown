@@ -2,7 +2,7 @@
 layout: post
 title:  "Popularizing Django -- Or Reusable apps considered harmful."
 date:   2008-05-06 10:44:54+05:30
-tags: marketing
+categories: marketing
 author: shabda
 ---
 For all its technical merits, Django is still a very [niche technology](http://google.com/trends?q=php%2C+django%2C+). It is my belief that the thing which is holding Django back the most, is due to one of its strengths.

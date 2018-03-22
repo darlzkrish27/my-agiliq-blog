@@ -2,7 +2,7 @@
 layout: post
 title:  "An Interview with Adrian Holovaty - Creator of Django"
 date:   2008-06-24 03:36:06+05:30
-tags: interviews
+categories: interviews
 author: shabda
 ---
 [Adrian Holovaty](http://www.holovaty.com/) is the co-creator of Django, author of the Django book and is currently the BDFL of Django along with Jacob Kaplan-Moss. He studied journalism at [University of Missouriâ€“Columbia](http://www.missouri.edu/about/mufacts.php) and has worked with many news sites including [Lawrence Journal World](http://www2.ljworld.com/) and [Washington Post](http://www.washingtonpost.com/). He currently works at [EveryBlock](http://everyblock.com/), a startup he founded.

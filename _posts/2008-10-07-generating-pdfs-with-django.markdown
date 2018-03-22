@@ -2,7 +2,7 @@
 layout: post
 title:  "Generating PDFs with Django "
 date:   2008-10-07 23:01:17+05:30
-tags: tips
+categories: tips
 author: shabda
 ---
 If your web app creates report chances are you also want this report in PDF form. The Django docs describe a way to generate PDFs using ReportLab. Here is some code from there.
