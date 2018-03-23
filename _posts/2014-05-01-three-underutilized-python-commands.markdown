@@ -2,7 +2,7 @@
 layout: post
 title:  "Three underutilized python commands"
 date:   2014-05-01 17:05:18+05:30
-categories: Python
+tags: Python
 author: shabda
 ---
 Today's post are three simple Python commands which should be known more widely, but are not.

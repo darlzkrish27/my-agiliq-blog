@@ -2,7 +2,7 @@
 layout: post
 title:  "Experiments in URL design."
 date:   2010-12-04 15:41:47+05:30
-categories: apps
+tags: apps
 author: shabda
 ---
 Keeping url structure sane plays a major role in user experience, by making it easy to go to specific pages

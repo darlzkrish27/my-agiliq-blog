@@ -2,7 +2,7 @@
 layout: post
 title:  "Django for a Rails Developer"
 date:   2009-11-26 20:12:21+05:30
-categories: python
+tags: python
 author: dheeru
 ---
 This is not yet another <a href="http://www.djangoproject.com/">Django</a> vs <a href="http://rubyonrails.org/">Rails</a> blog post. It is a compilation of notes I made working with Django after having worked on Rails for years.

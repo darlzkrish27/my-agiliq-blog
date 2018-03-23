@@ -2,7 +2,7 @@
 layout: post
 title:  "Metaclass in Python"
 date:   2012-07-02 08:11:46+05:30
-categories: Metaclass
+tags: Metaclass
 author: akshar
 ---
 In this post we will be talking about Metaclass in python. If you are reading some code which uses metaclass, you will probably come across `__new__`. If you are not familiar with what \_\_new\_\_ does, i suggest you first read about \_\_new\_\_.

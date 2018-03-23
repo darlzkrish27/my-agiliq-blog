@@ -2,7 +2,7 @@
 layout: post
 title:  "Doing things with Django forms"
 date:   2010-01-14 17:56:18+05:30
-categories: tutorial
+tags: tutorial
 author: shabda
 ---
 Forms are one of the best features of Django. (After models, admin, url routing etc :) ). Here is a quick tutorial describing how to do things with Django forms.

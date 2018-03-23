@@ -2,7 +2,7 @@
 layout: post
 title:  "Parable of the nofollow"
 date:   2008-04-22 14:05:47+05:30
-categories:	search
+tags:	search
 author: piyush
 ---
 ### Part 1: Webpage and the Umans

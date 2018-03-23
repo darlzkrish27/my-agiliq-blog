@@ -2,7 +2,7 @@
 layout: post
 title:  "Disqus and Disqus SSO"
 date:   2014-11-17 20:00:29+05:30
-categories: Disqus
+tags: Disqus
 author: Rakesh
 ---
 Outsourcing the comments and discussions part to a third party widget always helps us to save a lot of effort. When you feel that if it is okay to share your thoughts and discussions with someone out there who serves the capabilities of social integration and spam detection won't it be a cake walk?

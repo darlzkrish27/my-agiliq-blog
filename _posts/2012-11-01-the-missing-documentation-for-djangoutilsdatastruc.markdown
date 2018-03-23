@@ -3,7 +3,7 @@ layout: post
 title:  "The missing documentation for django.utils.datastructures"
 date:   2012-11-01 00:00:00
 author:   thejaswi
-categories:   internals
+tags:   internals
 ---
 
 ::: {.note}

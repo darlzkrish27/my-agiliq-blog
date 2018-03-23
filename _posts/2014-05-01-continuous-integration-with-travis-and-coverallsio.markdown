@@ -2,7 +2,7 @@
 layout: post
 title:  "Continuous integration with travis and coveralls.io for Django apps"
 date:   2014-05-01 16:26:46+05:30
-categories: travis
+tags: travis
 author: Rakesh
 ---
 

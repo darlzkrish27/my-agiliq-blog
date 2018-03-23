@@ -2,7 +2,7 @@
 layout: post
 title:  "Rails and Django commands : comparison  and conversion"
 date:   2010-03-20 18:35:30+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: shabda
 ---
 The most commonly used Rails commands and their Django equivalents

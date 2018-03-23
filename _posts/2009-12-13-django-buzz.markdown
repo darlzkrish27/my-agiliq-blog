@@ -2,7 +2,7 @@
 layout: post
 title:  "Django-buzz"
 date:   2009-12-13 04:01:42+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: shabda
 ---
 Note: We are not maintaining these apps anymore.

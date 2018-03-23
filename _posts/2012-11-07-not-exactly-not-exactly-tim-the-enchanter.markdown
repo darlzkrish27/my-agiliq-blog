@@ -2,7 +2,7 @@
 layout: post
 title:  "Not exactly, not exactly tim the enchanter"
 date:   2012-11-07 11:30:00+05:30
-categories: forms
+tags: forms
 author: Javed
 ---
 I've been putting off writing about my experience with django form wizard

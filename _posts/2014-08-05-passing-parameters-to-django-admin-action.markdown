@@ -2,7 +2,7 @@
 layout: post
 title:  "Passing parameters to Django admin action"
 date:   2014-08-05 21:03:06+05:30
-categories: django
+tags: django
 author: akshar
 ---
 This post will show how to pass parameters to custom Django admin actions.

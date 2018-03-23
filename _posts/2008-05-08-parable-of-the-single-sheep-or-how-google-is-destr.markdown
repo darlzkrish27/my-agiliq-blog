@@ -2,7 +2,7 @@
 layout: post
 title:  "Parable of the single sheep - Or How Google is destroying the internet, and nobody seems to know."
 date:   2008-05-08 22:01:53+05:30
-categories: search
+tags: search
 author: shabda
 ---
 This is a [parable](http://en.wikipedia.org/wiki/Parable) in two parts. <a href="#story"> Story</a> and the <a href="#moral">Moral</a>. If you are in a hurry you might want to skip ahead to the <a  href="#moral">moral</a> (But you miss the beautiful story).

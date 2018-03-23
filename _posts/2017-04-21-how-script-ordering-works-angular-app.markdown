@@ -2,7 +2,7 @@
 layout: post
 title:  "How script ordering works in an Angular app"
 date:   2017-04-21 20:32:17+05:30
-categories: angularjs
+tags: angularjs
 author: akshar
 ---
 In this post, we will understand how ordering of scripts of an angular application make difference to the app.

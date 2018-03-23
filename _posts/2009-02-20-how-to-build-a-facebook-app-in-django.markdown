@@ -2,7 +2,7 @@
 layout: post
 title:  "How to build a Facebook app in Django"
 date:   2009-02-20 14:05:14+05:30
-categories: facebook
+tags: facebook
 author: shabda
 ---
 Facebook has a simple and robust API which allows users to build applications for the Facebook platform.

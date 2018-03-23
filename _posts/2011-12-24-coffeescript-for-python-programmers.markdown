@@ -2,7 +2,7 @@
 layout: post
 title:  "Coffeescript for Python programmers"
 date:   2011-12-24 11:54:11+05:30
-categories: coffeescript
+tags: coffeescript
 author: shabda
 ---
 I just learnt Coffeescript, and as a Python programmer loved being able to write Javascript in a Python like language. Coffeescript is inspired by 

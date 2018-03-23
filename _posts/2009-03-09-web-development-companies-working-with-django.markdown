@@ -2,7 +2,7 @@
 layout: post
 title:  "Web development companies working with Django"
 date:   2009-03-09 11:54:11+05:30
-categories: business
+tags: business
 author: shabda
 ---
 At Agiliq, we work with some of the best web development agencies. I wanted a list of the other building web applications with Django, here is such a list, in no specific order.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Python Wrapper on Bing API"
 date:   2009-06-10 12:09:33+05:30
-categories: API
+tags: API
 author: lakshman
 ---
 The newly launched search engine [Bing](http://www.bing.com/) has a simple restful API. We have created a thin Python wrapper over this API, which allows to query the Bing servers in a very pythonic way.

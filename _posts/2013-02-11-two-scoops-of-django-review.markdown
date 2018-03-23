@@ -2,7 +2,7 @@
 layout: post
 title:  "Two Scoops of Django: Review"
 date:   2013-02-11 11:30:00+05:30
-categories: book
+tags: book
 author: shabda
 ---
 ![Django best practices](https://s3.amazonaws.com/twoscoops/img/tsd-cover.png)

@@ -2,7 +2,7 @@
 layout: post
 title:  "Minimal Nginx and Gunicorn configuration for Django projects"
 date:   2013-08-26 18:05:50+05:30
-categories: nginx
+tags: nginx
 author: akshar
 ---
 We will see how to deploy a Django project with nginx and gunicorn.

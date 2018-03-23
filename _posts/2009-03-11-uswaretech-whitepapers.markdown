@@ -2,7 +2,7 @@
 layout: post
 title:  "Uswaretech whitepapers"
 date:   2009-03-11 16:45:26+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: rama
 ---
 We have released some whitepapers recently, which you can get from our [whitepapers subsection](http://uswaretech.com/whitepapers/)

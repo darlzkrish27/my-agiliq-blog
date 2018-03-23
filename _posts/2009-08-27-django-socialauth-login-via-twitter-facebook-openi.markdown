@@ -2,7 +2,7 @@
 layout: post
 title:  "Django-SocialAuth - Login via twitter, facebook, openid, yahoo, google using a single app."
 date:   2009-08-27 14:50:33+05:30
-categories: yahoo
+tags: yahoo
 author: shabda
 ---
 TL;DR version: Here is an app to allow logging in via twitter, facebook, openid, yahoo, google, which should work transparently with Django authentication system. (@login_required, User and other infrastructure work as expected.) [Demo](http://socialauth.uswaretech.net/) and [Code](http://github.com/uswaretech/Django-Socialauth/tree/master).Longer version follow:

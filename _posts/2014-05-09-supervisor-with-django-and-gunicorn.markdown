@@ -2,7 +2,7 @@
 layout: post
 title:  "Supervisor with Django and Gunicorn"
 date:   2014-05-09 10:40:13+05:30
-categories: supervisor
+tags: supervisor
 author: akshar
 ---
 Supervisor with Django: A starter guide

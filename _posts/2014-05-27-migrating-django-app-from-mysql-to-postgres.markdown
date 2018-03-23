@@ -2,7 +2,7 @@
 layout: post
 title:  "Migrating django app from MySQL to Postgres"
 date:   2014-05-27 13:28:50+05:30
-categories: mysqltopostgres
+tags: mysqltopostgres
 author: manjunath
 ---
 In this tutorial, we will take a django app backed by MySQL and will convert MySQL database to postgres database.

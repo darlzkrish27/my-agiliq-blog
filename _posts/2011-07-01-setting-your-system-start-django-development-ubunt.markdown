@@ -2,7 +2,7 @@
 layout: post
 title:  "Setting up your system to start with Django development on Ubuntu:"
 date:   2011-07-01 22:30:00+05:30
-categories: mysql
+tags: mysql
 author: akshar
 ---
 1>Being a Python web framework, Django requires Python. If you are on ubuntu, you probably have python installed on your system.

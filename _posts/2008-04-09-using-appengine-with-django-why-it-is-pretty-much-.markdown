@@ -2,7 +2,7 @@
 layout: post
 title:  "Using Appengine with Django, why it is pretty much unusable"
 date:   2008-04-09 15:02:36+05:30
-categories:	python
+tags:	python
 author: shabda
 ---
 We are hard at work building [42topics.com](http://www.42topics.com/), and are looking at the best places to deploy this. So when I heard about Appengine, with out of box Django support(gasp!) I was delighted. After using it for a day, [and posting a tutorial](http://www.42topics.com/dumps/appengine/doc.html), I am so disappointed.

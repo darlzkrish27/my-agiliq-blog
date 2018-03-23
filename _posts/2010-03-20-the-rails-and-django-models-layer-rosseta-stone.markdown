@@ -2,7 +2,7 @@
 layout: post
 title:  "The Rails and Django models layer Rosseta stone"
 date:   2010-03-20 16:12:50+05:30
-categories: rails
+tags: rails
 author: shabda
 ---
 Rails Active records and Django models are more similar than they are different. This is a quick guide to converting between Rails 3 and Django 1.2, and is available on github at [http://github.com/uswaretech/Acts-as-Django](http://github.com/uswaretech/Acts-as-Django)

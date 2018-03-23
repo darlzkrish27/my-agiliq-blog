@@ -2,7 +2,7 @@
 layout: post
 title:  "Pycon India 2009 : A Review"
 date:   2009-10-02 22:54:41+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: lakshman
 ---
 [Pycon India](http://in.pycon.org/2009/displayschedule/) [concluded](http://pycon.blogspot.com/2009/09/pycon-india-receives-fantastic-response.html) last weekend at [Indian Institute of Science](http://en.wikipedia.org/wiki/Indian_Institute_of_Science), Bangalore.

@@ -2,7 +2,7 @@
 layout: post
 title:  " Developing a Web Application Live in 15 min, in django framework"
 date:   2009-03-08 16:43:08+05:30
-categories: presentations
+tags: presentations
 author: shabda
 ---
 Here is the presentation which [Lakshman](http://twitter.com/scorpion032) presented at [Bar Camp Banglore](http://barcampbangalore.org/bcb8/developing-a-web-application-live-in-15-min-in-django-framework), where he created a Web application(simple forum), and got to audience to complete the forum with him live.

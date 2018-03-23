@@ -2,7 +2,7 @@
 layout: post
 title:  "What, when and how of AngularJS configuration blocks"
 date:   2017-04-27 17:15:03+05:30
-categories: angularjs
+tags: angularjs
 author: akshar
 ---
 Two blocks of modules run during bootstrap process. By bootstrap process we mean that they are run before any directive code or before any controller code. They essentially run before any developer written code. The two blocks are:

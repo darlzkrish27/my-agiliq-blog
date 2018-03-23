@@ -3,7 +3,7 @@ layout: post
 title:  Libvirt and KVM
 date:   2012-06-25 00:00:00
 author:   thejaswi
-categories:   virtualization
+tags:   virtualization
 ---
 
 Libvirt and KVM

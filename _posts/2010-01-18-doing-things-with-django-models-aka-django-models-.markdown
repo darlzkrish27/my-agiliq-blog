@@ -2,7 +2,7 @@
 layout: post
 title:  "Doing things with Django models - aka - Django models tutorial"
 date:   2010-01-18 11:30:17+05:30
-categories: models
+tags: models
 author: shabda
 ---
 Django abstracts most of the actions you would be doing with the Database.

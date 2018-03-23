@@ -2,7 +2,7 @@
 layout: post
 title:  "An Interview with Jacob Kaplan-Moss - Creator of Django"
 date:   2008-05-30 12:03:18+05:30
-categories: python
+tags: python
 author: shabda
 ---
 <img src="http://uswaretech.com/blog/wp-content/uploads/2008/05/jacob_headshot2.png" alt="Jacob Kaplan-Moss" title="jacob_headshot2" width="225" height="232" class="right frame" />

@@ -2,7 +2,7 @@
 layout: post
 title:  "Why AngularJS services aren't available in configuration blocks"
 date:   2017-04-30 20:43:11+05:30
-categories: angularjs
+tags: angularjs
 author: akshar
 ---
 This post explains why services aren't available in configuration blocks.

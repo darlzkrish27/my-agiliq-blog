@@ -2,7 +2,7 @@
 layout: post
 title:  "The Unfuddle Tutorial"
 date:   2010-12-04 20:55:21+05:30
-categories: tips
+tags: tips
 author: shabda
 ---
 [Unfuddle](http://unfuddle.com/) is the tool we use for our non open source development. 

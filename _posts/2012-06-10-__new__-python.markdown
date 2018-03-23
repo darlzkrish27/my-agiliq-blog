@@ -2,7 +2,7 @@
 layout: post
 title:  "__new__() in python"
 date:   2012-06-10 10:30:02+05:30
-categories: __new__
+tags: __new__
 author: akshar
 ---
 Lately I started looking into Django code and wish to write about internals of Django. I started with Django models and will be writing about it soon. 

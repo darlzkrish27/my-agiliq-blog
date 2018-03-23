@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding Django Middlewares"
 date:   2015-07-17 14:26:11+05:30
-categories: middlewares
+tags: middlewares
 author: akshar
 ---
 I assume you have read <a href="https://docs.djangoproject.com/en/1.8/topics/http/middleware/" target="_blank">official Django docs on middleware</a>. I will elaborate on things mentioned in the documentation but I assume you are familiar with basics of middleware.

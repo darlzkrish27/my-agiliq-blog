@@ -2,7 +2,7 @@
 layout: post
 title:  "Python metaclasses and how Django uses them"
 date:   2009-12-03 23:59:48+05:30
-categories: tutorial
+tags: tutorial
 author: shabda
 ---
 [Foss.in](http://foss.in/2009/) is without doubt India's [largest](http://twitter.com/#search?q=fossdotin) FOSS technology conference. [Lakshman gave a talk](http://foss.in/2009/schedules/talkdetailspub.php?talkid=44) today on "Python metaclasses and how Django uses them". Here are the slides from that talk.

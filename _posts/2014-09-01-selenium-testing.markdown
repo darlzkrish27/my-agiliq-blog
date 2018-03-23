@@ -2,7 +2,7 @@
 layout: post
 title:  "Introduction to functional testing with Selenium in Django"
 date:   2014-09-01 15:40:00+05:30
-categories: functional-testing
+tags: functional-testing
 author: karambir
 ---
 In this tutorial we will learn what selenium is and how it can be used in writing functional tests for our Django projects.

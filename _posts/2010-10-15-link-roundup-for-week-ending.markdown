@@ -3,7 +3,7 @@ layout: post
 title:  "Link Roundup for week ending 15/10/2010"
 date:   2010-10-15 08:58:35
 author:   thejaswi
-categories:   linkroundup
+tags:   linkroundup
 ---
 
 This is the first in a series of posts where we share links aggregated

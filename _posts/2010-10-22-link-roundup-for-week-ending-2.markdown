@@ -3,7 +3,7 @@ layout: post
 title:  "Link Roundup for week ending 22/10/2010"
 date:   2010-10-22 02:07:27
 author:   thejaswi
-categories:   linkroundup
+tags:   linkroundup
 ---
 
 -   How DOM events work? Fantastic

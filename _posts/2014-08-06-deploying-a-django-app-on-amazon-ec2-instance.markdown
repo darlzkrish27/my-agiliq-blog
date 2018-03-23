@@ -2,7 +2,7 @@
 layout: post
 title:  "Deploying a Django app on Amazon EC2 instance."
 date:   2014-08-06 20:38:22+05:30
-categories: Django app deployment
+tags: Django app deployment
 author: Rakesh
 ---
 In this tutorial we are going to launch an EC2 instance and deploy a Django app. I am going to use nginx, gunicorn in this process.

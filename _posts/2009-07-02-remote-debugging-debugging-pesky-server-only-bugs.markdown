@@ -2,7 +2,7 @@
 layout: post
 title:  "Remote debugging - debugging pesky server only bugs"
 date:   2009-07-02 23:37:02+05:30
-categories: django
+tags: django
 author: shabda
 ---
 Here is a quick tip. (Obvious if you work with Django for any length of time, but I have seen a few people who are not aware)

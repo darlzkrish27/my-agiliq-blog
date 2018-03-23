@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with Django tastypie"
 date:   2015-03-23 17:40:53+05:30
-categories: django-tastypie
+tags: django-tastypie
 author: akshar
 ---
 Django tastypie is a library to write RESTful apis in Django.

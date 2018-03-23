@@ -2,7 +2,7 @@
 layout: post
 title:  "MoreApps - Android Library Project: Open Sourced"
 date:   2013-01-21 11:30:00+05:30
-categories: open-source
+tags: open-source
 author: shabda
 ---
 If you have a portfolio of apps, you probably want to cross promote them. 

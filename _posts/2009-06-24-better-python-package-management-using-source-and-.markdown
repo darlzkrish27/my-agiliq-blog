@@ -2,7 +2,7 @@
 layout: post
 title:  "Better Python package management using source and version control systems"
 date:   2009-06-24 22:16:13+05:30
-categories: python
+tags: python
 author: lakshman
 ---
 Thanks to awesome [django community](http://www.djangoproject.com/community/), there is plenty of open source [django](http://code.google.com/hosting/search?q=django&projectsearch=Search+projects) [code](http://bitbucket.org/repo/all/?name=django) [around](http://github.com/search?q=django&type=Everything&repo=&langOverride=&start_value=1).

@@ -2,7 +2,7 @@
 layout: post
 title:  "Django timezones"
 date:   2014-08-20 10:30:01+05:30
-categories: django
+tags: django
 author: akshar
 ---
 This post tries to clear various concepts related to Django timezones. Settings relevant to timezone are TIME_ZONE and USE_TZ. We will see various scenarios with different values for these settings and will figure out how TIME_ZONE and USE_TZ behave.

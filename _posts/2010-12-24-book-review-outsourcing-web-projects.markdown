@@ -2,7 +2,7 @@
 layout: post
 title:  "Book Review: Outsourcing Web Projects."
 date:   2010-12-24 14:43:40+05:30
-categories: reviews
+tags: reviews
 author: shabda
 ---
 [Sitepoint](http://www.sitepoint.com) had a [book sales](http://sale.sitepoint.com/) running recently where they made all their books

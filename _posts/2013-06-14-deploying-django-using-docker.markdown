@@ -2,7 +2,7 @@
 layout: post
 title:  "Deploying django using docker"
 date:   2013-06-14 19:16:51+05:30
-categories: docker
+tags: docker
 author: Javed
 ---
 In this blog post we'll take a look at [Docker](http://docker.io) and

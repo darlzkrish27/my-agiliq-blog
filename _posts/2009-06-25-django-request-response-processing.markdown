@@ -2,7 +2,7 @@
 layout: post
 title:  "Django Request Response processing"
 date:   2009-06-25 09:59:56+05:30
-categories: django
+tags: django
 author: shabda
 ---
 Have you wondered the steps a users request goes through before being responded to by Django? The answer lies in reading `django.core.handlers.base` and `django.core.handlers.wsgi`. Here is a diagram explaining what happens. ([Click to enlarge](http://uswaretech.com/blog/wp-content/uploads/2009/06/django_request_response_lifecycle.png).)

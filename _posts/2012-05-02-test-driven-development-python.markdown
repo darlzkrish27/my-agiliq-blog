@@ -2,7 +2,7 @@
 layout: post
 title:  "Test Driven Development in Python "
 date:   2012-05-02 20:41:12+05:30
-categories: Development
+tags: Development
 author: anoop
 ---
 > We can either prevent bad things from

@@ -2,7 +2,7 @@
 layout: post
 title:  "How to use jsTree"
 date:   2011-10-12 16:30:00+05:30
-categories: Treeview
+tags: Treeview
 author: akshar
 ---
 Using jsTree

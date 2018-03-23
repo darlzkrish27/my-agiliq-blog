@@ -2,7 +2,7 @@
 layout: post
 title:  "Django is not flexible"
 date:   2010-10-17 20:47:46+05:30
-categories: opinion
+tags: opinion
 author: shabda
 ---
 Django is not flexible at all because you can not do simple

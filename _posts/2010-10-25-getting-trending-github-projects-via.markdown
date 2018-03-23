@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting trending Github projects via YQL"
 date:   2010-10-25 01:57:33+05:30
-categories: API
+tags: API
 author: shabda
 ---
 [Github.com/explore](http://github.com/explore) allows you to see the trending Github topics. They use [repopular.com](http://repopular.com/) for this,

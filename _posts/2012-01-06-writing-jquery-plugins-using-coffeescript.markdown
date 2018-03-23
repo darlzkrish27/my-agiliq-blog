@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing jQuery plugins using Coffeescript"
 date:   2012-01-06 11:54:11+05:30
-categories: coffeescript
+tags: coffeescript
 author: shabda
 ---
 So you want to write a Jquery plugin. If you know jQuery and Coffeescript, this would be amazingly easy.

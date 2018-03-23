@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with webapp2 and GAE"
 date:   2017-09-04 12:45:27+05:30
-categories: appengine
+tags: appengine
 author: akshar
 ---
 Deploying a webapp2 app on Google app engine

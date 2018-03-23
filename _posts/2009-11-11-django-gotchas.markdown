@@ -2,7 +2,7 @@
 layout: post
 title:  "Django gotchas "
 date:   2009-11-11 18:57:25+05:30
-categories: tutorial
+tags: tutorial
 author: shabda
 ---
 This is announcement about our new work,  [Django Gotchas](http://djangogotchas.uswaretech.net/), a teeny tiny ebook about commonly occurring gotchas with Django. Here is the readme copied from the project.

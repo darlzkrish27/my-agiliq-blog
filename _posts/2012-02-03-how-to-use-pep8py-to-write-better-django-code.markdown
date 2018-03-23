@@ -2,7 +2,7 @@
 layout: post
 title:  "How to use pep8.py to write better Django code"
 date:   2012-02-03 11:30:01+05:30
-categories: screencasts
+tags: screencasts
 author: shabda
 ---
 <iframe width="420" height="315" src="http://www.youtube.com/embed/fYEJpq_PtDQ" frameborder="0" allowfullscreen></iframe>

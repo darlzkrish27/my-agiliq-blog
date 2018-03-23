@@ -2,7 +2,7 @@
 layout: post
 title:  "Provisioning Made Easy With Chef"
 date:   2012-05-29 13:30:00+05:30
-categories: provisioning
+tags: provisioning
 author: saket
 ---
 Managing Servers and scaling at will is hard. The bigger web players

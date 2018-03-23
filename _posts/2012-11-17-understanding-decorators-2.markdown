@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding decorators"
 date:   2012-11-17 14:43:53+05:30
-categories: Function as objects
+tags: Function as objects
 author: akshar
 ---
 Understanding decorators in Python

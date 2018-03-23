@@ -2,7 +2,7 @@
 layout: post
 title:  "Method decorators in Python"
 date:   2014-07-15 19:46:08+05:30
-categories: python
+tags: python
 author: akshar
 ---
 This post assumes you have a basic understanding of Decorators. If not, you can read our <a href="http://agiliq.com/blog/2012/11/understanding-decorators-2/" target="_blank">introductory post on Decorator</a>

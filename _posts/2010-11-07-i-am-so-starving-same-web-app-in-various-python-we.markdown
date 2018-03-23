@@ -2,7 +2,7 @@
 layout: post
 title:  "I am so starving: Web app in python frameworks."
 date:   2010-11-07 21:27:44+05:30
-categories: python
+tags: python
 author: shabda
 ---
 I have written the same web app in various web frameworks. [Get it from Github.](https://github.com/agiliq/so-starving)

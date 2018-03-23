@@ -2,7 +2,7 @@
 layout: post
 title:  "Haml for Django developers"
 date:   2011-12-25 11:54:11+05:30
-categories: django
+tags: django
 author: shabda
 ---
 Haml is taking the Ruby(and Rails) world by storm. Its not used as heavily by Python(and Django) developers as the Python solutions aren't as mature. I *finally* gave Haml a try and was pleasantly surprised how easy it was.

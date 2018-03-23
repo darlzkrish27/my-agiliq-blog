@@ -2,7 +2,7 @@
 layout: post
 title:  "The magic of metaclasses in Python"
 date:   2009-11-21 18:07:59+05:30
-categories: Uncategorized
+tags: Uncategorized
 author: shabda
 ---
 Metaclasses are a way for you to have a class act as the template for another class. They are simlar to a classfactory,

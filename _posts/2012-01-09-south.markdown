@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with South for Django DB migrations"
 date:   2012-01-09 11:30:01+05:30
-categories: south
+tags: south
 author: akshar
 ---
 South is a migration tool used with Django.There will be times when you would be adding fields to a model or changing the type of field (eg: Field was an IntegerField and you want to change it to FloatField). In such cases syncdb doesn't help and South comes to your rescue.

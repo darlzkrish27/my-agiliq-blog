@@ -2,7 +2,7 @@
 layout: post
 title:  "Foss.in 2009: The best foss.in. Ever. "
 date:   2009-12-10 23:58:31+05:30
-categories: India
+tags: India
 author: lakshman
 ---
 There are technology conferences, and then there are gatherings of passionate technology enthusiasts. You will most likely not know what I am talking about, unless you saw that someone wrote a software for controlling a toy-car, using it's blue tooth module, from an Nokia phone, at the event. You will most likely not know what I am talking about, unless you were at Nimhans Convention center at Bangalore between 1st to 5th December 2009.

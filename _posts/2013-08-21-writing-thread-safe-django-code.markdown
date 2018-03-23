@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing thread-safe django - get_or_create"
 date:   2013-08-21 19:34:24+05:30
-categories: threads
+tags: threads
 author: Javed
 ---
 In this blog post, we'll discuss thread-safety, why it's important and how to

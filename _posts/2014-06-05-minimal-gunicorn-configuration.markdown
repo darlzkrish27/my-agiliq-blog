@@ -2,7 +2,7 @@
 layout: post
 title:  "Minimal Gunicorn configuration"
 date:   2014-06-05 11:17:33+05:30
-categories: gunicorn
+tags: gunicorn
 author: akshar
 ---
 <a href="http://gunicorn.org/" target="_blank">Gunicorn</a> is an http server written in Python. It is a WSGI compliant server and can serve web applications which are compliant with WSGI. <a href="http://agiliq.com/blog/2013/07/basics-wsgi/" target="_blank">This would help</a> if you aren't comfortable with WSGI.

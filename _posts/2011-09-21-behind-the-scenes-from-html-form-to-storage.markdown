@@ -3,7 +3,7 @@ layout: post
 title: "From HTML Form to Storage"
 date:   2011-09-21 17:00:00
 author:   thejaswi
-categories:   upload
+tags:   upload
 ---
 
 In this post, we are going to see what happens behind the scenes when a

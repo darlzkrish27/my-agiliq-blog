@@ -2,7 +2,7 @@
 layout: post
 title:  "Starting Android app developement: From zero to app"
 date:   2011-02-06 17:30:21+05:30
-categories: java
+tags: java
 author: shabda
 ---
 We recently started with Mobile Application development. I am learning Android using the [Commonsware book](http://Commonsware.com/), and highly recommend it.

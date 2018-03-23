@@ -2,6 +2,7 @@
 layout: post
 title: "Transfer files to amazon s3 using browser instead of server"
 date: 2017-04-26 02:29:55+05:30
+tags:  aws
 draft: true
 ---
 So basically when we try to upload a file to amazon s3, we will do it in a regular way of 

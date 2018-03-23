@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing your own template loaders"
 date:   2009-11-21 17:11:17+05:30
-categories: tutorial
+tags: tutorial
 author: shabda
 ---
 Django has three builtin template loaders which are used to get the templates for rendering.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Google diff match patch library"
 date:   2014-05-09 16:29:34+05:30
-categories: google
+tags: google
 author: manjunath
 ---
 

@@ -2,7 +2,7 @@
 layout: post
 title:  "State pattern with UI Code"
 date:   2013-10-14 16:39:27+05:30
-categories: design pattern
+tags: design pattern
 author: akshar
 ---
 This blog tells how I used state pattern in my UI code, and explains state pattern with JavaScript and jQuery.

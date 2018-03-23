@@ -2,7 +2,7 @@
 layout: post
 title:  "Django design patterns"
 date:   2009-07-03 19:41:46+05:30
-categories: book
+tags: book
 author: shabda
 ---
 This is announcement about our new work, [Django design patterns](http://djangodesignpatterns.uswaretech.net/), a ebook about, well, Django design patterns. (Well imagine that!). Here is the readme copied from there.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Comparison of mobile app frameworks: Iphone, Java, Phonegap and Titanium"
 date:   2011-02-08 23:59:16+05:30
-categories: java
+tags: java
 author: shabda
 ---
 I recently built the same app with the common mobile technologies, [Obj-C](https://github.com/agiliq/TaxCalculatorIndia), [Android:Java](https://github.com/agiliq/TaxCalculatorAndroid), [Phonegap](https://github.com/agiliq/TaxCalculatorPhonegap), and [Titanium](https://github.com/agiliq/TaxCalculatorTitanium) .

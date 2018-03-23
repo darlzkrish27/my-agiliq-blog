@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with python scrapy"
 date:   2016-04-02 21:04:43+05:30
-categories: scrapy
+tags: scrapy
 author: manjunath
 ---
 Sometimes you may want to extract data from website. What if the website don't provide an API? don't worry scrapy comes to your rescue.

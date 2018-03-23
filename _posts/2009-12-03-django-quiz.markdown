@@ -2,7 +2,7 @@
 layout: post
 title:  "Django quiz"
 date:   2009-12-03 21:56:31+05:30
-categories: django
+tags: django
 author: shabda
 ---
 A quick django quiz. Answers available tomorrow. Get it as a text file <a href='http://dl.dropbox.com/u/271935/django-quiz.txt'>(django-quiz)</a> or on [google docs](http://docs.google.com/Doc?docid=0AYLjHVQq0A8aZGZ0NTRxOXBfMGhxY2g2ZDhk&hl=en) or read below.

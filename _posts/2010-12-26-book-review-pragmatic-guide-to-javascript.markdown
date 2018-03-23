@@ -2,7 +2,7 @@
 layout: post
 title:  "Book Review: Pragmatic Guide to JavaScript"
 date:   2010-12-26 11:40:11+05:30
-categories: reviews
+tags: reviews
 author: shabda
 ---
 [Pragmatic Guide to JavaScript](http://www.pragprog.com/titles/pg_js/pragmatic-guide-to-javascript) is the [Pragprog's book](http://www.pragprog.com/) by [Christophe Porteneuve](http://www.thebungeebook.net/) which I have

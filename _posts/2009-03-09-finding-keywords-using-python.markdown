@@ -2,7 +2,7 @@
 layout: post
 title:  "Finding keywords using Python"
 date:   2009-03-09 23:49:56+05:30
-categories: algorithms
+tags: algorithms
 author: lakshman
 ---
 Update: keywords2.txt is Pride and Prejudice from Project Gutenberg. <a href='http://uswaretech.com/blog/wp-content/uploads/2009/03/keywords2.txt'>Attached for convenience.</a>

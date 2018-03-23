@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding decorators"
 date:   2009-06-23 19:34:57+05:30
-categories: python
+tags: python
 author: shabda
 ---
 If you used Django for any length of time, you would have come across the

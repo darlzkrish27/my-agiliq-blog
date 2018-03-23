@@ -2,7 +2,7 @@
 layout: post
 title:  "Using SQLite Database with Android"
 date:   2011-12-28 11:30:00+05:30
-categories: java
+tags: java
 author: balu
 ---
 Android embeds an Open Source Database called SQLite, which supports standard relational database features like SQL syntax, transactions and prepared statements. In addition it requires only little memory at runtime (approx. 250 KB). In this post I would like to show how to work with a simple pragmatic example : Baby Names App.

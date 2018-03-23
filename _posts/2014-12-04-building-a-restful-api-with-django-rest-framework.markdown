@@ -2,7 +2,7 @@
 layout: post
 title:  "Building a RESTful API with Django-rest-framework"
 date:   2014-12-04 21:26:02+05:30
-categories: API
+tags: API
 author: Rakesh
 ---
 API's turned to be the heart of every application in our time. With the rise of social media, API's are being developed at a faster pace and gaining a lot of attention. Gone are the days where RPC architectures like CORBA and XML-RPC are used to enable the exchange of information and REST has taken its place making its mark in getting the things pretty straight forward.

@@ -2,7 +2,7 @@
 layout: post
 title:  "Essential web-apps to run a software business."
 date:   2010-10-18 00:53:28+05:30
-categories: business
+tags: business
 author: shabda
 ---
 We work on a variety of products and with people. We work in a highly distributed environment,

@@ -3,7 +3,7 @@ layout: post
 title:  "Django emacs setup"
 date:   2010-12-26 23:11:25
 author:   thejaswi
-categories:   emacs
+tags:   emacs
 ---
 
 My colleague Javed had written a fantastic article a short while back on

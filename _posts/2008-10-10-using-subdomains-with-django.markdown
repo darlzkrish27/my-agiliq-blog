@@ -2,7 +2,7 @@
 layout: post
 title:  "Using subdomains with Django"
 date:   2008-10-10 20:31:57+05:30
-categories: tips
+tags: tips
 author: shabda
 ---
 Django makes using beautiful urls a snap. However using subdomains with Django is not so obvious. Here is an article explaining this.

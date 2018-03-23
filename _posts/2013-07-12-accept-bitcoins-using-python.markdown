@@ -2,7 +2,7 @@
 layout: post
 title:  "Accept bitcoins using python"
 date:   2013-07-12 18:32:44+05:30
-categories: python
+tags: python
 author: Javed
 ---
 In this blog post we'll talk about bitcoins and look at an overview of how to

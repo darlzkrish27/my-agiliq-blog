@@ -3,7 +3,7 @@ layout: post
 title:  "Using Ubuntu cloud images in KVM"
 date:   2012-07-16 00:00:00
 author:   thejaswi
-categories:   virtualization
+tags:   virtualization
 ---
 
 Quite a few of our clients are powered by Amazon EC2 or Rackspace and we

@@ -2,7 +2,7 @@
 layout: post
 title:  "Building Chrome Extensions"
 date:   2015-03-04 11:40:38+05:30
-categories: google
+tags: google
 author: karambir
 ---
 In this blog post, we will look at how to build a chrome extension that can work with multiple online services. Specifically we will see how to update Trello web pages with relevant content from Google Drive. For a particular Trello board, we will update trello cards with data from Google Drive document.

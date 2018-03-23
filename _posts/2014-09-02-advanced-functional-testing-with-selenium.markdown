@@ -2,7 +2,7 @@
 layout: post
 title:  "Advanced functional testing with Selenium in Django"
 date:   2014-09-02 15:17:48+05:30
-categories: functional-testing
+tags: functional-testing
 author: karambir
 ---
 In the [previous post](http://agiliq.com/blog/2014/09/selenium-testing/), we introduced Selenium and how it can be used to write functional tests in Django Projects. In this post, we will look into some more advanced features of selenium, handling javascript heavy sites and integrate our functional tests with travis, saucelabs and browserstack.

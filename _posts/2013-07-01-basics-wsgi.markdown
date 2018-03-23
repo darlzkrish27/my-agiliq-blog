@@ -2,7 +2,7 @@
 layout: post
 title:  "Basics of WSGI"
 date:   2013-07-01 11:45:22+05:30
-categories: python
+tags: python
 author: akshar
 ---
 In this post we will write a web app which will serve few urls. We will not use any Python framework for it. It's only to illustrate how things work under the hood.

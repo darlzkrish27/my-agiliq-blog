@@ -2,7 +2,7 @@
 layout: post
 title:  "Beginning python"
 date:   2009-09-18 17:16:43+05:30
-categories: tutorial
+tags: tutorial
 author: shabda
 ---
 [Slides](http://www.slideshare.net/uswaretech/beginning-python) and [code](http://bit.ly/pytalk) from my talk at [twincling](http://twincling.org/node/725). 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Django aggregation tutorial"
 date:   2009-08-18 18:08:29+05:30
-categories: aggreagtion
+tags: aggreagtion
 author: shabda
 ---
 One of the new and most awaited features with Django 1.1 was aggregation. As usual,

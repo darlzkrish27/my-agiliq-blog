@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with PhoneGap using Xcode for Mobile app development"
 date:   2011-02-06 21:48:33+05:30
-categories: android
+tags: android
 author: shabda
 ---
 This is next in the series of apps I am building using various mobile technologies.

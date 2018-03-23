@@ -3,7 +3,7 @@ layout: post
 title:	"Dissecting Phonegap\'s architecture"
 date:   2012-09-06 00:00:00
 author:   thejaswi
-categories:   ios
+tags:   ios
 
 [Apache Cordova](http://incubator.apache.org/cordova/) is a open source
 cross-platform framework for building native mobile applications using

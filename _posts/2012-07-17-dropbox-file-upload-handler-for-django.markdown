@@ -3,7 +3,7 @@ layout: post
 title: "Dropbox file upload handler for django"
 date:   2012-07-17 00:00:00
 author:   thejaswi
-categories:   upload
+tags:   upload
 ---
 Dropbox
 [announced](http://blog.dropbox.com/index.php/new-dropbox-pro-plans/)

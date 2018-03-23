@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with Titanium development for Android and Iphone"
 date:   2011-02-08 11:54:11+05:30
-categories: iphone
+tags: iphone
 author: shabda
 ---
 This is the third post in our mobile app development series. ( You may want to read [Phonegap](http://agiliq.com/blog/2011/02/getting-started-with-phonegap-using-xcode-for-mobi/) and [Android with Java](http://agiliq.com/blog/2011/02/starting-android-app-developement-from-zero-to-app/).)

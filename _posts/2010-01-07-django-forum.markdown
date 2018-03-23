@@ -2,7 +2,7 @@
 layout: post
 title:  "django-forum"
 date:   2010-01-07 17:49:03+05:30
-categories: apps
+tags: apps
 author: shabda
 ---
 ### twitter ready version:

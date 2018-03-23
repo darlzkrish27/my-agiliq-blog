@@ -2,7 +2,7 @@
 layout: post
 title:  "Process and Threads for Beginners"
 date:   2013-09-11 12:33:39+05:30
-categories: process
+tags: process
 author: akshar
 ---
 We will cover this post in following sequence:

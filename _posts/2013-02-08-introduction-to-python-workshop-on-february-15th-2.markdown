@@ -3,7 +3,7 @@ layout: post
 title:  Introduction to Python Workshop on February 15th, 2013
 date:   2013-02-08 00:00:00
 author:   thejaswi
-categories:   training
+tags:   training
 ---
 
 We are conducting an \"Introduction to Python\" workshop at our office on February 15th, 2013 between 5-8PM IST. This workshop

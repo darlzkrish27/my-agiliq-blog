@@ -2,7 +2,7 @@
 layout: post
 title:  " Dynamically attaching SITE_ID to Django Caching"
 date:   2012-02-05 23:56:52+05:30
-categories: SITE_ID prefix
+tags: SITE_ID prefix
 author: anoop
 ---
 It would be useful and convenient, if you have an automatic way to add the SITE_ID, especially, when you have multiple sites running on the same deployment. Django provides a cache prefix function KEY_FUNCTION in settings which can be used to achieve this.

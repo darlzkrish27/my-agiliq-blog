@@ -2,7 +2,7 @@
 layout: post
 title:  "Understanding Threads in Python"
 date:   2013-09-17 23:53:01+05:30
-categories: threads
+tags: threads
 author: akshar
 ---
 We will see some examples of using threads in Python and how to avoid race conditions:

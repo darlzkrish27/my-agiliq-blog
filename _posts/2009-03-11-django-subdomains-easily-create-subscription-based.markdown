@@ -2,7 +2,7 @@
 layout: post
 title:  "Django-subdomains - Easily create subscription based subdomains enabled webapps"
 date:   2009-03-11 16:29:02+05:30
-categories: products
+tags: products
 author: shabda
 ---
 A common goal in web application development is creating subscription based application, where users can use their domains.

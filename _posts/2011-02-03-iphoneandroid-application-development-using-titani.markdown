@@ -2,7 +2,7 @@
 layout: post
 title:  "iPhone and Android application development using Titanium"
 date:   2011-02-03 20:52:06+05:30
-categories: mobile applications
+tags: mobile applications
 author: dheeru
 ---
 [Titanium Mobile](http://www.appcelerator.com/products/titanium-mobile-application-development/) is [Appcelerator's](http://www.appcelerator.com/) development platform for developing cross-platform native mobile applications. In this article we will be introducing you to installation and developing applications using Titanium.

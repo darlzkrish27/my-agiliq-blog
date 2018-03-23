@@ -2,7 +2,7 @@
 layout: post
 title:  "Tastypie with ForeignKey"
 date:   2015-03-29 13:06:51+05:30
-categories: django-tastypie
+tags: django-tastypie
 author: akshar
 ---
 ## Tastypie with ForeignKeys

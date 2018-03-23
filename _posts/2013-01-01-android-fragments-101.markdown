@@ -2,7 +2,7 @@
 layout: post
 title:  "Android Fragments 101"
 date:   2013-01-01 11:30:00+05:30
-categories: android
+tags: android
 author: ikram
 ---
 _**Prerequisite**: You are already aware of the [basics of building a HelloWorld](http://developer.android.com/training/index.html) in Android and know [how to use the APIs provided in the support library](http://developer.android.com/training/basics/fragments/support-lib.html)._

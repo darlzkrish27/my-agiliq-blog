@@ -2,7 +2,7 @@
 layout: post
 title:  "How performant is your Python web application"
 date:   2017-11-15 12:26:01+05:30
-categories: gunicorn
+tags: gunicorn
 author: akshar
 ---
 This post tries to explain web application performance. **Performance** means the **number of requests per second** that can be served by a deployed application. 

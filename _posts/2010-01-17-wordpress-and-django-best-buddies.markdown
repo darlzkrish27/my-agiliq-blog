@@ -2,7 +2,7 @@
 layout: post
 title:  "Wordpress and Django: best buddies"
 date:   2010-01-17 20:55:29+05:30
-categories: about
+tags: about
 author: shabda
 ---
 Summary:

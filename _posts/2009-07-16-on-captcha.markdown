@@ -2,7 +2,7 @@
 layout: post
 title:  "On Captcha"
 date:   2009-07-16 14:05:35+05:30
-categories: tips
+tags: tips
 author: shabda
 ---
 When building public facing websites, spam is a real problem. Captcha has been teated as the first line of defence aginst this problem. If you must use captcha, here are some best practices working with them.

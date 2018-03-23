@@ -2,7 +2,7 @@
 layout: post
 title:  "Finding a prime number whose binary representation is a giraffe (or a T-Rex)"
 date:   2018-01-21 19:41:32+05:30
-categories: python
+tags: python
 author: shabda
 ---
 ![Odd Number Theorists](https://raw.githubusercontent.com/shabda/experiments/master/prime_dinos/odd-number-theorists.jpg)

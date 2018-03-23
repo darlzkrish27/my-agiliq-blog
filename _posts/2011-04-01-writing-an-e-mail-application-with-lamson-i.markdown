@@ -3,7 +3,7 @@ layout: post
 title:  "Writing an e-mail application with Lamson - I"
 date:   2011-04-01 09:08:15
 author:   thejaswi
-categories:   e-mail
+tags:   e-mail
 --- 
 Shabda suggested we open a Off late, we\'ve been slightly busy with a \'lot\' of new developments
 on our end and we\'ve not been able to devote attention to the blog. In

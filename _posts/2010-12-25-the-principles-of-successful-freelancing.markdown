@@ -2,7 +2,7 @@
 layout: post
 title:  "Book review: The Principles of Successful Freelancing"
 date:   2010-12-25 13:21:21+05:30
-categories: reviews
+tags: reviews
 author: shabda
 ---
 [The Principles of Successful Freelancing](http://www.sitepoint.com/books/freelancer1/) 

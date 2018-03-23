@@ -2,7 +2,7 @@
 layout: post
 title:  "Python-requests"
 date:   2014-05-05 15:28:08+05:30
-categories: python
+tags: python
 author: Rakesh
 ---
 

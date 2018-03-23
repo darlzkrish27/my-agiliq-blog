@@ -2,7 +2,7 @@
 layout: post
 title:  "Importing your old comments to Disqus site"
 date:   2015-01-16 19:42:08+05:30
-categories: Disqus
+tags: Disqus
 author: Rakesh
 ---
 In one of my latest [blogpost](http://agiliq.com/blog/2014/11/disqus-and-disqus-sso/) on disqus I covered topics on integrating Disqus to the website and disqus SSO. In this post, I will let you know how to migrate the older comments to Disqus. 

@@ -2,7 +2,7 @@
 layout: post
 title:  "Exploring Authorize.net Payment Gateway Options and integrating it with django"
 date:   2009-03-31 19:54:33+05:30
-categories: ecommerce
+tags: ecommerce
 author: lakshman
 ---
 <a href="http://authorize.net/" target="_blank">Authorize.net</a> has a user base of over 200k merchants making it the largest <a class="zem_slink" title="Payment gateway" rel="wikipedia" href="http://en.wikipedia.org/wiki/Payment_gateway">payment gateway</a> service provider. Most e-commerce solutions already integrate with Authorize.net, including our favorite e-commerce store <a href="http://www.satchmoproject.com/" target="_blank">Satchmo</a>, developed in django, that <a href="http://uswaretech.com/blog/2009/03/create-your-own-online-store-in-few-hours-using-satchmo-django/">we have covered earlier.</a>

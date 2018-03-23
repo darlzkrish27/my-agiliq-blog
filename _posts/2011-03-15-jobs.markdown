@@ -3,7 +3,7 @@ layout: post
 title: "Jobs"
 date:   2011-03-15 05:22:12
 author:   shabda
-categories:   jobs
+tags:   jobs
 ---
 
 We are a small software company building web facing applications for a

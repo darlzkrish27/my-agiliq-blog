@@ -2,7 +2,7 @@
 layout: post
 title:  "Retrying celery failed tasks"
 date:   2015-08-03 10:53:19+05:30
-categories: celery
+tags: celery
 author: akshar
 ---
 I assume you have a basic understanding of celery. If you want to learn about basics of celery, you can check our <a href="http://agiliq.com/blog/2015/07/getting-started-with-celery-and-redis/" target="_blank">last blog</a>.

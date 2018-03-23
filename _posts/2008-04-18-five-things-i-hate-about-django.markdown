@@ -2,7 +2,7 @@
 layout: post
 title:  "Five Things I Hate About Django."
 date:   2008-04-18 11:48:38+05:30
-categories:	python
+tags:	python
 author: shabda
 ---
 The [five](http://www.jacobian.org/writing/2007/mar/04/hate-python/) [things](http://ivory.idyll.org/blog/mar-07/five-things-I-hate-about-python) [I hate](http://use.perl.org/~brian_d_foy/journal/32556?from=rss) [about *](http://adam.gomaa.us/blog/five-things-i-hate-about-django/) meme seems have died down, and memes, should not be allowed to die.

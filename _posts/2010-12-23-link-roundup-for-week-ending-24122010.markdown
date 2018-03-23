@@ -3,7 +3,7 @@ layout: post
 title:  "Link roundup for week ending 24/12/2010"
 date:   2010-12-23 07:10:32
 author:   thejaswi
-categories:   linkroundup
+tags:   linkroundup
 ---
 
 It\'s been a while since we posted a link roundup. With holidays

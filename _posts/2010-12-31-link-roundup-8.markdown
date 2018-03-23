@@ -3,7 +3,7 @@ layout: post
 title:  "Link roundup 8"
 date:   2010-12-31 06:29:44
 author:   thejaswi
-categories:   linkroundup
+tags:   linkroundup
 ---
 
 -   Django Dose community catchup episode \#32 is out. Listen to it

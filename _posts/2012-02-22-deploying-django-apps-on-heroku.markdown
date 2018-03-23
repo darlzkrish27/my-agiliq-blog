@@ -2,7 +2,7 @@
 layout: post
 title:  "Deploying Django apps on Heroku"
 date:   2012-02-22 02:06:10+05:30
-categories: django
+tags: django
 author: shabda
 ---
 Deploying Django apps on Heroku:

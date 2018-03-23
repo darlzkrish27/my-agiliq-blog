@@ -3,7 +3,7 @@ layout: post
 title: Request to Response
 date:   2012-01-02 18:00:00
 author:   thejaswi
-categories:   response
+tags:   response
 
 summary:   In the previous installment of \"Behind the Scenes\", we saw how the
     control flows from [Form to File

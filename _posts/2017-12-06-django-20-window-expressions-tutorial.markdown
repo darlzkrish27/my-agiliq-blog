@@ -4,7 +4,7 @@ title: "Django 2.0 Window expressions tutorial"
 date:   2017-12-06 05:22:38
 modified:   2017-12-06 16:52:38+05:30
 author:   shabda
-categories:   django
+tags:   django
 ---
 
 Django 2.0 was [released

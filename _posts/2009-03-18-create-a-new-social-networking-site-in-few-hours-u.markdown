@@ -2,7 +2,7 @@
 layout: post
 title:  "Create a new social networking site in few hours using pinax platform (django)."
 date:   2009-03-18 17:03:20+05:30
-categories: pinax
+tags: pinax
 author: rama
 ---
 if you are excited to see how such a social networking site would like.Just follow the below link

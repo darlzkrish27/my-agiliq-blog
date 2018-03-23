@@ -2,7 +2,7 @@
 layout: post
 title:  "Getting started with redis-py"
 date:   2015-03-26 17:43:25+05:30
-categories: redis
+tags: redis
 author: akshar
 ---
 This post explains how to interface with Redis from Python and how to use different Redis commands from Python using redis-py.
