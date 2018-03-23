@@ -52,7 +52,7 @@
           <ul>
 		  {% for post in site.posts %}
 		  <li>
-		    <a href="{{site.baseurl}}/{{ post.url }}" >{{ post.title }}</a>
+		    <a href="{{site.baseurl}}/{{ post.url }}" >{{ post.title }}  By {{post.author}}   tags {{post.tags}}</a>
 		  </li>
 		  {% endfor %}
 		</ul>
@@ -62,8 +62,8 @@
         
       </section>
       <div id="content">
-      	<p>By {{post.author}}</p>
-      	<p align="right"> Tags {{post.tags}}</p>
+      	<!-- <p>By {{post.author}}</p>
+      	<p align="right"> Tags {{post.tags}}</p> -->
      	{{content}}
        </div>
     </div>
